@@ -7,7 +7,7 @@ struct HomeView: View {
     
     var body: some View {
         TabView {
-            LibraryAnalysisView()
+            PhotoLibraryView()
                 .tabItem {
                     Label("Analysis", systemImage: "eye.slash")
                 }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LibraryAnalysisView: View {
+struct PhotoLibraryView: View {
     @State private var vm = PhotoLibraryVM()
     
     var body: some View {
@@ -40,5 +40,5 @@ struct LibraryAnalysisView: View {
 }
 
 #Preview {
-    LibraryAnalysisView()
+    PhotoLibraryView()
 }
