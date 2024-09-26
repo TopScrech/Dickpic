@@ -1,9 +1,6 @@
 import SwiftUI
-import Photos
 
 struct ImageRow: View {
-    @State private var analyzer = SensitivityAnalyzer()
-    
     private let image: CGImage
     
     init(_ image: CGImage) {

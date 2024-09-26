@@ -11,10 +11,18 @@ struct LibraryAnalysisView: View {
                     .navigationTitle("Photo Library")
             } else {
                 Text("Total Photos: \(vm.totalPhotos) (\(vm.processedPhotos) processed)")
+                    .animation(.default, value: vm.totalPhotos)
+                    .animation(.default, value: vm.processedPhotos)
+                    .contentTransition(.numericText())
                 
-                ProgressView("Progress", value: vm.progress)
+                let progress = String(format: "Progress: %.0f%%", vm.progress * 100)
                 
-                Text(String(format: "Progress: %.0f%%", vm.progress * 100))
+                ProgressView(value: vm.progress) {
+                    Text("Progress \(progress)")
+                        .padding(.bottom, 8)
+                }
+                .animation(.default, value: vm.progress)
+                .padding(.vertical, 5)
                 
                 Section {
                     Button("Analyse") {

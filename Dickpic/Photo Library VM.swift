@@ -53,6 +53,9 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     func fetchPhotos() {
+        progress = 0
+        processedPhotos = 0
+        
         let fetchOptions = PHFetchOptions()
         
         fetchOptions.sortDescriptors = [

@@ -48,14 +48,14 @@ struct IntroScreen2: View {
                 .secondary()
                 .padding(.horizontal)
                 
-                HStack {
-                    Text("👨🏿‍💻")
-                        .fontSize(32)
-                    
-                    Text("Open-source distribution allows independent parties to audit [the code](https://github.com/topscrech/SwiftUI-Intro) and contribute to the project")
-                }
-                .secondary()
-                .padding(.horizontal)
+                //                HStack {
+                //                    Text("👨🏿‍💻")
+                //                        .fontSize(32)
+                //
+                //                    Text("Open-source distribution allows independent parties to audit [the code](https://github.com/topscrech/SwiftUI-Intro) and contribute to the project")
+                //                }
+                //                .secondary()
+                //                .padding(.horizontal)
             }
             
             Spacer()
