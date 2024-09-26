@@ -81,12 +81,12 @@ final class PhotoLibraryVM: ObservableObject {
         options.deliveryMode = .highQualityFormat
         //        options.deliveryMode = .fastFormat
         options.isSynchronous = false
-        options.resizeMode = .fast
+        options.resizeMode = .none
         options.isNetworkAccessAllowed = true
         
         manager.requestImage(
             for: asset,
-            targetSize: CGSize(width: 100, height: 100),
+            targetSize: CGSize(width: 200, height: 200),
             contentMode: .aspectFill,
             options: options
         ) { result, _ in
@@ -108,7 +108,9 @@ final class PhotoLibraryVM: ObservableObject {
             let isSensitive = await checkImage(cgImage)
             
             if isSensitive {
-                sensitiveAssets.append(cgImage)
+                main {
+                    self.sensitiveAssets.append(cgImage)
+                }
             }
             
             incrementProgress()

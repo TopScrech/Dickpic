@@ -3,8 +3,12 @@ import SwiftUI
 struct PhotoLibraryView: View {
     @State private var vm = PhotoLibraryVM()
     
+    private static let initialColumns = 3
+    @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
+    
     var body: some View {
-        List {
+        //        List {
+        VStack {
             if vm.deniedAccess {
                 Text("Access to the photo library has been denied. Please enable access in settings.")
                     .padding()
@@ -24,8 +28,12 @@ struct PhotoLibraryView: View {
                 .animation(.default, value: vm.progress)
                 .padding(.vertical, 5)
                 
-                ForEach(vm.sensitiveAssets, id: \.self) { asset in
-                    ImageRow(asset)
+                ScrollView {
+                    LazyVGrid(columns: gridColumns) {
+                        ForEach(vm.sensitiveAssets, id: \.self) { asset in
+                            ImageRow(asset)
+                        }
+                    }
                 }
             }
         }

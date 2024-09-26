@@ -2,6 +2,8 @@ import SwiftUI
 import QuickLooking
 
 struct ImageRow: View {
+    @State private var vm = ImageRowVM()
+    
     private let image: CGImage
     
     init(_ image: CGImage) {
@@ -13,40 +15,40 @@ struct ImageRow: View {
     }
     
     @State private var isHidden = true
-    @State private var showPreview = false
-    @State private var url: URL?
     
     var body: some View {
         Menu {
             Button("Preview") {
                 do {
-                    url = try saveImageToTemporaryDirectory(uiImage)
+                    try vm.saveImageToTemporaryDirectory(uiImage)
                 } catch {
-                    print("Saving fauled: \(error.localizedDescription)")
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    showPreview = true
+                    print("Saving failed: \(error.localizedDescription)")
                 }
             }
         } label: {
-            Image(uiImage: uiImage)
-                .resizable()
-                .frame(width: 100, height: 100)
-                .scaledToFit()
-                .clipped()
+            Rectangle()
+                .aspectRatio(1, contentMode: .fit) // Квадратная рамка
+                .foregroundColor(.clear) // Прозрачный прямоугольник, если не нужен фон
+                .overlay(
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFill()
+                        .clipped()
+                        .cornerRadius(8)
+                )
+                .cornerRadius(8)
                 .blur(radius: isHidden ? 5 : 0)
                 .animation(.default, value: isHidden)
-                .overlay(alignment: .bottomTrailing) {
-                    Image(systemName: "eye.slash")
-                }
         } primaryAction: {
             isHidden.toggle()
         }
-        .sheet($showPreview) {
-            if let url {
-                QuickLookView(url)
-            }
+        .sheet($vm.showPreview) {
+            QuickLookFile(vm.url)
+//            if let url = vm.url {
+//                NavigationView {
+//                    QuickLookView(url)
+//                }
+//            }
         }
     }
 }
