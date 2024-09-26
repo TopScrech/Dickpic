@@ -4,69 +4,24 @@ import Photos
 struct ImageRow: View {
     @State private var analyzer = SensitivityAnalyzer()
     
-    private let asset: PHAsset
+    private let image: CGImage
     
-    init(_ asset: PHAsset) {
-        self.asset = asset
+    init(_ image: CGImage) {
+        self.image = image
     }
     
-    @State private var image: UIImage? = nil
-    @State private var isSensitive: Bool?
+    private var uiImage: UIImage {
+        UIImage(cgImage: image)
+    }
     
     var body: some View {
-        Group {
-            if let image {
-                Image(uiImage: image)
-                    .resizable()
-                    .frame(width: 100, height: 100)
-                    .scaledToFit()
-                    .clipped()
-            } else {
-                Color.gray
+        Image(uiImage: uiImage)
+            .resizable()
+            .frame(width: 100, height: 100)
+            .scaledToFit()
+            .clipped()
+            .overlay(alignment: .bottomTrailing) {
+                Image(systemName: "eye.slash")
             }
-        }
-        .onAppear(perform: fetchImage)
-        .overlay(alignment: .bottomTrailing) {
-            if let isSensitive {
-                Image(systemName: isSensitive ? "eye.slash" : "eye")
-            } else {
-                Button {
-                    analyse(image)
-                } label: {
-                    Image(systemName: "questionmark.circle.dashed")
-                }
-            }
-        }
-    }
-    
-    private func fetchImage() {
-        let manager = PHImageManager.default()
-        let options = PHImageRequestOptions()
-        
-        options.deliveryMode = .opportunistic
-        options.isSynchronous = false
-        options.resizeMode = .fast
-        options.isNetworkAccessAllowed = true
-        
-        manager.requestImage(
-            for: asset,
-            targetSize: CGSize(width: 100, height: 100),
-            contentMode: .aspectFill,
-            options: options
-        ) { result, _ in
-            if let result {
-                self.image = result
-            }
-        }
-    }
-    
-    private func analyse(_ image: UIImage?) {
-        Task {
-            if let cgImage = image?.cgImage {
-                await analyzer.checkImage(cgImage) { result in
-                    isSensitive = result
-                }
-            }
-        }
     }
 }
