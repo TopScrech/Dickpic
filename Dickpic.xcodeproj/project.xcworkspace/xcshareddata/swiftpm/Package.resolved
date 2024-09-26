@@ -1,6 +1,15 @@
 {
-  "originHash" : "fe0e4f745e80a39791f1b8ef36548292381488f2cde2c7d12cd93483d64241da",
+  "originHash" : "056e993c18795153f8f4ebd9fd521978169477c2cd70b5da9bcc0f9acc9691ab",
   "pins" : [
+    {
+      "identity" : "quicklooking",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/TopScrech/QuickLooking",
+      "state" : {
+        "branch" : "main",
+        "revision" : "83b4dc673af60a9068aca150e8a474f9036f80bc"
+      }
+    },
     {
       "identity" : "screchkit",
       "kind" : "remoteSourceControl",
