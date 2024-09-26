@@ -3,8 +3,6 @@ import SwiftUI
 struct HomeView: View {
     @State private var vm = PhotoLibraryVM()
     
-//    @State private var isSensitive: Bool?
-    
     var body: some View {
         List {
             if vm.deniedAccess {
@@ -12,13 +10,14 @@ struct HomeView: View {
                     .padding()
                     .navigationTitle("Photo Library")
             } else {
-                //            LazyVStack {
-                //                ScrollView {
-                //                    ForEach(vm.assets, id: \.self) { asset in
-                //                        ImageRow(asset)
-                //                    }
-                //                }
-                //            }
+                Text("Total Photos: \(vm.totalPhotos)")
+                Text("Processed Photos: \(vm.processedPhotos)")
+                
+                ProgressView(value: vm.progress)
+                
+                Text(vm.progress)
+                
+                Text(String(format: "Progress: %.0f%%", vm.progress * 100))
                 
                 Section {
                     Button("Analyse") {

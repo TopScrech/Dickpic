@@ -1,6 +1,7 @@
 import ScrechKit
 import Photos
 import SensitiveContentAnalysis
+import Combine
 
 @Observable
 final class PhotoLibraryVM: ObservableObject {
@@ -8,6 +9,11 @@ final class PhotoLibraryVM: ObservableObject {
     
     var sensitiveAssets: [CGImage] = []
     var deniedAccess = false
+    var totalPhotos = 0
+    var progress = 0.0
+    var processedPhotos = 0
+    
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
         checkPermission()
@@ -24,17 +30,19 @@ final class PhotoLibraryVM: ObservableObject {
             print("Limited")
             
         case .denied, .restricted:
-            DispatchQueue.main.async {
+            main {
                 self.deniedAccess = true
             }
             
         case .notDetermined:
-            PHPhotoLibrary.requestAuthorization { [weak self] newStatus in
+            print("Not determined")
+            
+            PHPhotoLibrary.requestAuthorization { newStatus in
                 main {
                     if newStatus == .authorized || newStatus == .limited {
-                        self?.fetchPhotos()
+                        self.fetchPhotos()
                     } else {
-                        self?.deniedAccess = true
+                        self.deniedAccess = true
                     }
                 }
             }
@@ -46,14 +54,20 @@ final class PhotoLibraryVM: ObservableObject {
     
     func fetchPhotos() {
         let fetchOptions = PHFetchOptions()
+        
         fetchOptions.sortDescriptors = [
             NSSortDescriptor(key: "creationDate", ascending: false)
         ]
         
         let allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        totalPhotos = allPhotos.count
         
-        allPhotos.enumerateObjects { [weak self] asset, _, _ in
-            self?.fetchImage(asset)
+        guard totalPhotos > 0 else {
+            return
+        }
+        
+        allPhotos.enumerateObjects { asset, _, _ in
+            self.fetchImage(asset)
         }
     }
     
@@ -61,7 +75,8 @@ final class PhotoLibraryVM: ObservableObject {
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
         
-        options.deliveryMode = .opportunistic
+        options.deliveryMode = .highQualityFormat
+//        options.deliveryMode = .fastFormat
         options.isSynchronous = false
         options.resizeMode = .fast
         options.isNetworkAccessAllowed = true
@@ -72,21 +87,35 @@ final class PhotoLibraryVM: ObservableObject {
             contentMode: .aspectFill,
             options: options
         ) { result, _ in
-            if let result {
-                self.analyse(result)
+            guard let result else {
+                return
             }
+            
+            self.analyse(result)
         }
     }
     
     private func analyse(_ image: UIImage?) {
         Task {
-            if let cgImage = image?.cgImage {
-                await checkImage(cgImage) { isSensitive in
-                    if isSensitive {
-                        self.sensitiveAssets.append(cgImage)
-                    }
-                }
+            guard let cgImage = image?.cgImage else {
+//                incrementProgress()
+                return
             }
+            
+            let isSensitive = await checkImage(cgImage)
+            
+            if isSensitive {
+                sensitiveAssets.append(cgImage)
+            }
+            
+            incrementProgress()
+        }
+    }
+    
+    private func incrementProgress() {
+        main {
+            self.processedPhotos += 1
+            self.progress = Double(self.processedPhotos / self.totalPhotos)
         }
     }
     
@@ -96,24 +125,28 @@ final class PhotoLibraryVM: ObservableObject {
             completion(handler.isSensitive)
         } catch {
             print(error.localizedDescription)
+            completion(false)
         }
     }
     
-    func checkImage(_ image: CGImage, completion: @escaping (Bool) -> Void) async {
+    func checkImage(_ image: CGImage) async -> Bool {
         do {
             let handler = try await analyzer.analyzeImage(image)
-            completion(handler.isSensitive)
+            return handler.isSensitive
         } catch {
             print(error.localizedDescription)
+            return false
         }
     }
     
     func checkVideo(_ url: URL, completion: @escaping (Bool) -> Void) async {
         do {
             let handler = analyzer.videoAnalysis(forFileAt: url)
-            completion(try await handler.hasSensitiveContent().isSensitive)
+            let hasSensitive = try await handler.hasSensitiveContent().isSensitive
+            completion(hasSensitive)
         } catch {
             print(error.localizedDescription)
+            completion(false)
         }
     }
     
