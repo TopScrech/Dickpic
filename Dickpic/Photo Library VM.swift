@@ -46,7 +46,9 @@ final class PhotoLibraryVM: ObservableObject {
     
     func fetchPhotos() {
         let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        fetchOptions.sortDescriptors = [
+            NSSortDescriptor(key: "creationDate", ascending: false)
+        ]
         
         let allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         
