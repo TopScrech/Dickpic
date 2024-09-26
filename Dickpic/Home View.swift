@@ -19,7 +19,7 @@ struct HomeView: View {
         }
         .fullScreenCover(isPresented: $fullScreenCover) {
             NavigationView {
-                IntroScreen()
+                IntroScreen($fullScreenCover)
             }
         }
         .task {
