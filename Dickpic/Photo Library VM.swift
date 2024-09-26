@@ -76,7 +76,7 @@ final class PhotoLibraryVM: ObservableObject {
         let options = PHImageRequestOptions()
         
         options.deliveryMode = .highQualityFormat
-//        options.deliveryMode = .fastFormat
+        //        options.deliveryMode = .fastFormat
         options.isSynchronous = false
         options.resizeMode = .fast
         options.isNetworkAccessAllowed = true
@@ -98,7 +98,7 @@ final class PhotoLibraryVM: ObservableObject {
     private func analyse(_ image: UIImage?) {
         Task {
             guard let cgImage = image?.cgImage else {
-//                incrementProgress()
+                incrementProgress()
                 return
             }
             
@@ -119,16 +119,6 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    func checkImage(_ url: URL, completion: @escaping (Bool) -> Void) async {
-        do {
-            let handler = try await analyzer.analyzeImage(at: url)
-            completion(handler.isSensitive)
-        } catch {
-            print(error.localizedDescription)
-            completion(false)
-        }
-    }
-    
     func checkImage(_ image: CGImage) async -> Bool {
         do {
             let handler = try await analyzer.analyzeImage(image)
@@ -136,28 +126,6 @@ final class PhotoLibraryVM: ObservableObject {
         } catch {
             print(error.localizedDescription)
             return false
-        }
-    }
-    
-    func checkVideo(_ url: URL, completion: @escaping (Bool) -> Void) async {
-        do {
-            let handler = analyzer.videoAnalysis(forFileAt: url)
-            let hasSensitive = try await handler.hasSensitiveContent().isSensitive
-            completion(hasSensitive)
-        } catch {
-            print(error.localizedDescription)
-            completion(false)
-        }
-    }
-    
-    func checkPolicy() -> Bool {
-        let policy = analyzer.analysisPolicy
-        
-        if policy == .disabled {
-            print("Analysis is disabled")
-            return false
-        } else {
-            return true
         }
     }
 }
