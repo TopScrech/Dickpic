@@ -1,11 +1,12 @@
-import SwiftUI
+import ScrechKit
 import Photos
 import SensitiveContentAnalysis
 
 @Observable
 final class PhotoLibraryVM: ObservableObject {
+    private let analyzer = SCSensitivityAnalyzer()
+    
     var sensitiveAssets: [CGImage] = []
-//    var sensitiveAssets: [PHAsset] = []
     var deniedAccess = false
     
     init() {
@@ -14,6 +15,7 @@ final class PhotoLibraryVM: ObservableObject {
     
     private func checkPermission() {
         let status = PHPhotoLibrary.authorizationStatus()
+        
         switch status {
         case .authorized:
             print("Authorized")
@@ -28,12 +30,10 @@ final class PhotoLibraryVM: ObservableObject {
             
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization { [weak self] newStatus in
-                if newStatus == .authorized || newStatus == .limited {
-                    DispatchQueue.main.async {
+                main {
+                    if newStatus == .authorized || newStatus == .limited {
                         self?.fetchPhotos()
-                    }
-                } else {
-                    DispatchQueue.main.async {
+                    } else {
                         self?.deniedAccess = true
                     }
                 }
@@ -52,7 +52,6 @@ final class PhotoLibraryVM: ObservableObject {
         
         allPhotos.enumerateObjects { [weak self] asset, _, _ in
             self?.fetchImage(asset)
-//            self?.sensitiveAssets.append(asset)
         }
     }
     
@@ -88,8 +87,6 @@ final class PhotoLibraryVM: ObservableObject {
             }
         }
     }
-    
-    private let analyzer = SCSensitivityAnalyzer()
     
     func checkImage(_ url: URL, completion: @escaping (Bool) -> Void) async {
         do {
@@ -128,5 +125,4 @@ final class PhotoLibraryVM: ObservableObject {
             return true
         }
     }
-
 }

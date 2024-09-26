@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F37F0AB32CA5A2E800FD99F2 /* ScrechKit in Frameworks */ = {isa = PBXBuildFile; productRef = F37F0AB22CA5A2E800FD99F2 /* ScrechKit */; };
 		F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3ECFE652CA58A8000E72D41 /* Assets.xcassets */; };
 		F3ECFE6C2CA58A8000E72D41 /* Home View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Home View.swift */; };
 		F3ECFE6D2CA58A8000E72D41 /* Dickpic App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic App.swift */; };
@@ -34,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F37F0AB32CA5A2E800FD99F2 /* ScrechKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +91,7 @@
 			);
 			name = Dickpic;
 			packageProductDependencies = (
+				F37F0AB22CA5A2E800FD99F2 /* ScrechKit */,
 			);
 			productName = Dickpic;
 			productReference = F3ECFE512CA58A7100E72D41 /* Dickpic.app */;
@@ -118,6 +121,9 @@
 			);
 			mainGroup = F3ECFE482CA58A7100E72D41;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F37F0AB12CA5A2E800FD99F2 /* XCRemoteSwiftPackageReference "ScrechKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F3ECFE522CA58A7100E72D41 /* Products */;
 			projectDirPath = "";
@@ -376,6 +382,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F37F0AB12CA5A2E800FD99F2 /* XCRemoteSwiftPackageReference "ScrechKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TopScrech/ScrechKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F37F0AB22CA5A2E800FD99F2 /* ScrechKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F37F0AB12CA5A2E800FD99F2 /* XCRemoteSwiftPackageReference "ScrechKit" */;
+			productName = ScrechKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F3ECFE492CA58A7100E72D41 /* Project object */;
 }
