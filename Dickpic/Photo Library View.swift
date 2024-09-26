@@ -15,20 +15,14 @@ struct PhotoLibraryView: View {
                     .animation(.default, value: vm.processedPhotos)
                     .contentTransition(.numericText())
                 
-                let progress = String(format: "Progress: %.0f%%", vm.progress * 100)
+                let progress = String(format: "%.0f%%", vm.progress * 100)
                 
                 ProgressView(value: vm.progress) {
-                    Text("Progress \(progress)")
+                    Text("Progress: \(progress)")
                         .padding(.bottom, 8)
                 }
                 .animation(.default, value: vm.progress)
                 .padding(.vertical, 5)
-                
-                Section {
-                    Button("Analyse") {
-                        vm.fetchPhotos()
-                    }
-                }
                 
                 ForEach(vm.sensitiveAssets, id: \.self) { asset in
                     ImageRow(asset)
@@ -36,6 +30,14 @@ struct PhotoLibraryView: View {
             }
         }
         .navigationTitle("Photo Library")
+        .safeAreaInset(edge: .bottom) {
+            if vm.totalPhotos == 0 {
+                BigButton("Analyse") {
+                    vm.fetchPhotos()
+                }
+                .padding(.bottom, 5)
+            }
+        }
     }
 }
 
