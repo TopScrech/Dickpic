@@ -17,7 +17,6 @@ struct PhotoLibraryView: View {
                 Text("Total Photos: \(vm.totalPhotos) (\(vm.processedPhotos) processed)")
                     .animation(.default, value: vm.totalPhotos)
                     .animation(.default, value: vm.processedPhotos)
-                    .contentTransition(.numericText())
                 
                 let progress = String(format: "%.0f%%", vm.progress * 100)
                 
