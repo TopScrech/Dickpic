@@ -43,9 +43,7 @@ struct ImageRow: View {
             isHidden.toggle()
         }
         .sheet($vm.showPreview) {
-            NavigationView {
-                QuickLookFile(vm.url)
-            }
+            QuickLookFile(vm.url)
         }
     }
 }

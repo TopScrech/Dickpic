@@ -1,5 +1,4 @@
 import SwiftUI
-import AVFoundation
 
 struct VideoRow: View {
     @State private var vm = VideoRowVM()
@@ -22,7 +21,7 @@ struct VideoRow: View {
                 .aspectRatio(1, contentMode: .fit)
                 .foregroundColor(.clear)
                 .overlay {
-                    VideoThumbnail(url: videoURL)
+                    VideoThumbnail(videoURL)
                         .scaledToFill()
                         .clipped()
                         .cornerRadius(8)
@@ -34,41 +33,7 @@ struct VideoRow: View {
             isHidden.toggle()
         }
         .sheet($vm.showPreview) {
-            NavigationView {
-                QuickLookFile(vm.url)
-            }
-        }
-    }
-}
-
-struct VideoThumbnail: View {
-    let url: URL
-    @State private var thumbnail: UIImage? = nil
-    
-    var body: some View {
-        Group {
-            if let thumbnail {
-                Image(uiImage: thumbnail)
-                    .resizable()
-            } else {
-                Color.gray
-                    .onAppear {
-                        generateThumbnail()
-                    }
-            }
-        }
-    }
-    
-    private func generateThumbnail() {
-        let asset = AVAsset(url: url)
-        
-        let generator = AVAssetImageGenerator(asset: asset)
-        generator.appliesPreferredTrackTransform = true
-        
-        let time = CMTime(seconds: 1, preferredTimescale: 60)
-        
-        if let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) {
-            thumbnail = UIImage(cgImage: cgImage)
+            QuickLookFile(vm.url)
         }
     }
 }
