@@ -58,12 +58,17 @@ final class PhotoLibraryVM: ObservableObject {
         sensitiveVideos.removeAll()
         
         let fetchOptions = PHFetchOptions()
-        
+        fetchOptions.includeHiddenAssets = SettingsStorage().includeHiddenAssets
         fetchOptions.sortDescriptors = [
             NSSortDescriptor(key: "creationDate", ascending: false)
         ]
+        let allPhotos: PHFetchResult<PHAsset>
         
-        let allPhotos = PHAsset.fetchAssets(with: fetchOptions)
+        if SettingsStorage().analyzeVideos {
+            allPhotos = PHAsset.fetchAssets(with: fetchOptions)
+        } else {
+            allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        }
         totalPhotos = allPhotos.count
         
         guard totalPhotos > 0 else {

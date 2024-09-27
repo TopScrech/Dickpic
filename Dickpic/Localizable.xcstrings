@@ -43,6 +43,9 @@
     "Analyze concurrently" : {
 
     },
+    "Analyze videos" : {
+
+    },
     "Assets from the **hidden** folder are not scanned unless you explicitly opt-in" : {
 
     },
@@ -63,6 +66,9 @@
       }
     },
     "In case the images are offloaded to iCloud" : {
+
+    },
+    "Include hidden assets" : {
 
     },
     "No need to waste your time sifting through thousands of media library assets" : {

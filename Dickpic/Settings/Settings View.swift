@@ -11,14 +11,22 @@ struct SettingsView: View {
     
     var body: some View {
         List {
-            Toggle(isOn: $storage.analyzeConcurrently) {
-                Text("Analyze concurrently")
-                Text("Speeds up the analysis")
+            Toggle(isOn: $storage.analyzeVideos) {
+                Text("Analyze videos")
+            }
+            
+            Toggle(isOn: $storage.includeHiddenAssets) {
+                Text("Include hidden assets")
             }
             
             Toggle(isOn: $storage.downloadOriginals) {
                 Text("Download original images")
                 Text("In case the images are offloaded to iCloud")
+            }
+            
+            Toggle(isOn: $storage.analyzeConcurrently) {
+                Text("Analyze concurrently")
+                Text("Speeds up the analysis")
             }
 #if DEBUG
             Section {
