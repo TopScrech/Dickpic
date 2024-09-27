@@ -6,7 +6,6 @@ import Combine
 @Observable
 final class PhotoLibraryVM: ObservableObject {
     private let maxConcurrentTasks = ProcessInfo.processInfo.activeProcessorCount
-    private let semaphore: DispatchSemaphore
     private let analyzer = SCSensitivityAnalyzer()
     
     var sensitiveAssets: [CGImage] = []
@@ -18,7 +17,6 @@ final class PhotoLibraryVM: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        self.semaphore = DispatchSemaphore(value: maxConcurrentTasks)
         checkPermission()
     }
     
@@ -42,11 +40,12 @@ final class PhotoLibraryVM: ObservableObject {
             
             PHPhotoLibrary.requestAuthorization { newStatus in
                 main {
-                    if newStatus == .authorized || newStatus == .limited {
-                        self.fetchPhotos()
-                    } else {
+                    guard newStatus == .authorized || newStatus == .limited else {
                         self.deniedAccess = true
+                        return
                     }
+                    
+                    self.fetchPhotos()
                 }
             }
             
@@ -56,7 +55,11 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     func fetchPhotos() {
+        progress = 0
+        processedPhotos = 0
+        
         let fetchOptions = PHFetchOptions()
+        
         fetchOptions.sortDescriptors = [
             NSSortDescriptor(key: "creationDate", ascending: false)
         ]
@@ -73,27 +76,36 @@ final class PhotoLibraryVM: ObservableObject {
             assets.append(asset)
         }
         
-        processAssetsInParallel(assets)
+        Task {
+            await processAssetsInParallel(assets)
+        }
     }
     
-    private func processAssetsInParallel(_ assets: [PHAsset]) {
-        Task {
-            for asset in assets {
-                // Wait for the semaphore before starting a new task
-                semaphore.wait()
-                
-                Task.detached {
-                    await self.fetchAndAnalyze(asset)
-                    // Signal the semaphore after the task is complete
-                    self.semaphore.signal()
+    private func processAssetsInParallel(_ assets: [PHAsset]) async {
+        await withTaskGroup(of: Void.self) { group in
+            var iterator = assets.makeIterator()
+            
+            // Start initial tasks up to the concurrency limit
+            for _ in 0..<maxConcurrentTasks {
+                if let asset = iterator.next() {
+                    group.addTask(priority: .userInitiated) { [weak self] in
+                        await self?.fetchAndAnalyze(asset)
+                    }
                 }
             }
             
-            // Wait until all tasks are finished
-            // This ensures that the Task doesn't complete until all assets are processed
-            for _ in 0..<self.maxConcurrentTasks {
-                self.semaphore.wait()
+            // As each task completes, add a new one
+            while let asset = iterator.next() {
+                // Wait for any task to complete
+                await group.next()
+                
+                // Add the next asset to the group
+                group.addTask(priority: .userInitiated) { [weak self] in
+                    await self?.fetchAndAnalyze(asset)
+                }
             }
+            
+            // The group will automatically wait for all remaining tasks to complete
         }
     }
     
@@ -131,7 +143,7 @@ final class PhotoLibraryVM: ObservableObject {
                 contentMode: .aspectFit,
                 options: options
             ) { result, info in
-                if let info = info, let error = info[PHImageErrorKey] as? Error {
+                if let info, let error = info[PHImageErrorKey] as? Error {
                     continuation.resume(throwing: error)
                     return
                 }
@@ -146,8 +158,6 @@ final class PhotoLibraryVM: ObservableObject {
             return
         }
         
-        await incrementProcessedPhotos()
-        
         let isSensitive = await checkImage(cgImage)
         
         if isSensitive {
@@ -155,6 +165,8 @@ final class PhotoLibraryVM: ObservableObject {
                 self.sensitiveAssets.append(cgImage)
             }
         }
+        
+        await incrementProcessedPhotos()
     }
     
     private func incrementProcessedPhotos() async {
@@ -163,7 +175,7 @@ final class PhotoLibraryVM: ObservableObject {
             self.progress = Double(self.processedPhotos) / Double(self.totalPhotos)
         }
     }
-        
+    
     func checkImage(_ image: CGImage) async -> Bool {
         do {
             let handler = try await analyzer.analyzeImage(image)
@@ -173,92 +185,4 @@ final class PhotoLibraryVM: ObservableObject {
             return false
         }
     }
-    
-    
-    //    func fetchPhotos() {
-    //        progress = 0
-    //        processedPhotos = 0
-    //
-    //        let fetchOptions = PHFetchOptions()
-    //
-    //        fetchOptions.sortDescriptors = [
-    //            NSSortDescriptor(key: "creationDate", ascending: false)
-    //        ]
-    //
-    //        let allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-    //        totalPhotos = allPhotos.count
-    //
-    //        guard totalPhotos > 0 else {
-    //            return
-    //        }
-    //
-    //        allPhotos.enumerateObjects { asset, _, _ in
-    //            self.fetchImage(asset)
-    //        }
-    //    }
-    //
-    //    private func fetchImage(_ asset: PHAsset) {
-    //        let manager = PHImageManager.default()
-    //        let options = PHImageRequestOptions()
-    //        options.deliveryMode = .highQualityFormat
-    //        options.isSynchronous = false
-    //        options.resizeMode = .none
-    //        options.isNetworkAccessAllowed = true
-    //
-    //        // Используйте PHImageManagerMaximumSize для получения изображения в оригинальном размере
-    //        manager.requestImage(
-    //            for: asset,
-    //            targetSize: PHImageManagerMaximumSize,
-    //            contentMode: .aspectFit,
-    //            options: options
-    //        ) { [weak self] result, info in
-    //            if let info, let error = info[PHImageErrorKey] as? Error {
-    //                print("Ошибка загрузки изображения: \(error.localizedDescription)")
-    //                return
-    //            }
-    //
-    //            guard let result else {
-    //                print("Не удалось получить изображение.")
-    //                return
-    //            }
-    //
-    //            self?.analyse(result)
-    //        }
-    //    }
-    //
-    //    private func analyse(_ image: UIImage?) {
-    //        Task {
-    //            guard let cgImage = image?.cgImage else {
-    //                incrementProgress()
-    //                return
-    //            }
-    //
-    //            let isSensitive = await checkImage(cgImage)
-    //
-    //            if isSensitive {
-    //                main {
-    //                    self.sensitiveAssets.append(cgImage)
-    //                }
-    //            }
-    //
-    //            incrementProgress()
-    //        }
-    //    }
-    //
-    //    private func incrementProgress() {
-    //        main {
-    //            self.processedPhotos += 1
-    //            self.progress = Double(self.processedPhotos / self.totalPhotos)
-    //        }
-    //    }
-    //
-    //    func checkImage(_ image: CGImage) async -> Bool {
-    //        do {
-    //            let handler = try await analyzer.analyzeImage(image)
-    //            return handler.isSensitive
-    //        } catch {
-    //            print(error.localizedDescription)
-    //            return false
-    //        }
-    //    }
 }

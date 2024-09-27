@@ -33,8 +33,6 @@ final class ImageRowVM {
         
         url = fileURL
         
-        if let url {
-            showPreview = true
-        }
+        showPreview = true
     }
 }
