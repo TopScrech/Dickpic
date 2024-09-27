@@ -21,6 +21,7 @@
 		F37F0ACE2CA6AA2B00FD99F2 /* Progress Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACD2CA6AA2B00FD99F2 /* Progress Button.swift */; };
 		F37F0AD02CA6B3B300FD99F2 /* Video Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACF2CA6B3B300FD99F2 /* Video Row.swift */; };
 		F37F0AD42CA6FAFF00FD99F2 /* Video Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD32CA6FAFF00FD99F2 /* Video Thumbnail.swift */; };
+		F37F0AD62CA758A400FD99F2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */; };
 		F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3ECFE652CA58A8000E72D41 /* Assets.xcassets */; };
 		F3ECFE6C2CA58A8000E72D41 /* Photo Library View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */; };
 		F3ECFE6D2CA58A8000E72D41 /* Dickpic App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic App.swift */; };
@@ -43,6 +44,7 @@
 		F37F0ACD2CA6AA2B00FD99F2 /* Progress Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Progress Button.swift"; sourceTree = "<group>"; };
 		F37F0ACF2CA6B3B300FD99F2 /* Video Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video Row.swift"; sourceTree = "<group>"; };
 		F37F0AD32CA6FAFF00FD99F2 /* Video Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video Thumbnail.swift"; sourceTree = "<group>"; };
+		F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3ECFE652CA58A8000E72D41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				F3ECFE6E2CA58CFB00E72D41 /* Info.plist */,
 				F3ECFE652CA58A8000E72D41 /* Assets.xcassets */,
 				F3ECFE672CA58A8000E72D41 /* Dickpic.entitlements */,
+				F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */,
 				F37F0ABB2CA5CD9100FD99F2 /* Home View.swift */,
 				F37F0AB62CA5B7F400FD99F2 /* Intro */,
 				F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */,
@@ -173,6 +176,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = F3ECFE482CA58A7100E72D41;
 			minimizedProjectReferenceProxies = 1;
@@ -195,6 +199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F37F0AD62CA758A400FD99F2 /* Localizable.xcstrings in Resources */,
 				F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +292,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -341,6 +347,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};

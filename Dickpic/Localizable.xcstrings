@@ -1,0 +1,110 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "⏳" : {
+      "shouldTranslate" : false
+    },
+    "🌧️" : {
+      "shouldTranslate" : false
+    },
+    "🍏" : {
+      "shouldTranslate" : false
+    },
+    "👙" : {
+      "shouldTranslate" : false
+    },
+    "🔞" : {
+      "shouldTranslate" : false
+    },
+    "🤓" : {
+      "shouldTranslate" : false
+    },
+    "😌" : {
+      "shouldTranslate" : false
+    },
+    "🙈" : {
+      "shouldTranslate" : false
+    },
+    "A single scan that ensures your peace of mind" : {
+
+    },
+    "Access to the photo library has been denied. Please enable access in settings." : {
+
+    },
+    "Alright" : {
+
+    },
+    "Analysis" : {
+
+    },
+    "Analyze" : {
+
+    },
+    "Analyze concurrently" : {
+
+    },
+    "Assets from the **hidden** folder are not scanned unless you explicitly opt-in" : {
+
+    },
+    "Dickpic utilizes **offline on-device** processing, ensuring that no data is transmitted to the cloud" : {
+
+    },
+    "Download original images" : {
+
+    },
+    "Gotcha!" : {
+
+    },
+    "In case the images are offloaded to iCloud" : {
+
+    },
+    "No need to waste your time sifting through thousands of media library assets" : {
+
+    },
+    "Oops, this could be sensitive! Let's avoid unpleasant situations" : {
+
+    },
+    "Photo Library" : {
+
+    },
+    "Preview" : {
+
+    },
+    "Settings" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настройки"
+          }
+        }
+      }
+    },
+    "Show intro" : {
+
+    },
+    "Speeds up the analysis" : {
+
+    },
+    "The app employs an official Apple-developed [framework](https://developer.apple.com/documentation/sensitivecontentanalysis) to identify sensitive images" : {
+
+    },
+    "Total Photos: `%lld` (`%lld` processed)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Total Photos: `%1$lld` (`%2$lld` processed)"
+          }
+        }
+      }
+    },
+    "Why would I trust this app?" : {
+
+    },
+    "Your true beauty is a personal attribute that belongs solely to you" : {
+
+    }
+  },
+  "version" : "1.0"
+}
