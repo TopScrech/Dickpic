@@ -23,6 +23,10 @@ struct QuickLookFile: View {
         .blur(radius: isHidden ? 10 : 0)
         .ignoresSafeArea(edges: .bottom)
         .toolbar {
+            if let url {
+                ShareLink(item: url)
+            }
+            
             if isHidden {
                 Button {
                     withAnimation {
