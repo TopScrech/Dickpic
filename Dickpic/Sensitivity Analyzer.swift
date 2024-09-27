@@ -3,13 +3,10 @@ import SensitiveContentAnalysis
 final class SensitivityAnalyzer {
     private let analyzer = SCSensitivityAnalyzer()
     
-    func checkImage(_ url: URL, completion: @escaping (Bool) -> Void) async {
-        do {
-            let handler = try await analyzer.analyzeImage(at: url)
-            completion(handler.isSensitive)
-        } catch {
-            print(error.localizedDescription)
-        }
+    func checkImage(_ url: URL) async throws -> Bool {
+        let handler = try await analyzer.analyzeImage(at: url)
+        
+        return handler.isSensitive
     }
     
     func checkImage(_ image: CGImage) async throws -> Bool {
