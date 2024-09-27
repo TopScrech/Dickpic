@@ -14,18 +14,13 @@ struct PhotoLibraryView: View {
                     .padding()
                     .navigationTitle("Photo Library")
             } else {
-                Text("Total Photos: \(vm.totalPhotos) (\(vm.processedPhotos) processed)")
+                Text("Total Photos: `\(vm.totalPhotos)` (`\(vm.processedPhotos)` processed)")
                     .animation(.default, value: vm.totalPhotos)
                     .animation(.default, value: vm.processedPhotos)
                 
-                let progress = String(format: "%.0f%%", vm.progress * 100)
-                
-                ProgressView(value: vm.progress) {
-                    Text("Progress: \(progress)")
-                        .padding(.bottom, 8)
-                }
-                .animation(.default, value: vm.progress)
-                .padding(.vertical, 5)
+                ProgressView(value: vm.progress)
+                    .animation(.default, value: vm.progress)
+                    .padding(.vertical, 5)
                 
                 ScrollView {
                     LazyVGrid(columns: gridColumns) {
