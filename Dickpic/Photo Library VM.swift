@@ -138,7 +138,7 @@ final class PhotoLibraryVM: ObservableObject {
             options.deliveryMode = .highQualityFormat
             options.isSynchronous = false
             options.resizeMode = .none
-            options.isNetworkAccessAllowed = false
+            options.isNetworkAccessAllowed = SettingsStorage().downloadOriginals
             
             manager.requestImage(
                 for: asset,
