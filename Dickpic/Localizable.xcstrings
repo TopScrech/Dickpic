@@ -53,7 +53,14 @@
 
     },
     "Gotcha!" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поехали!"
+          }
+        }
+      }
     },
     "In case the images are offloaded to iCloud" : {
 
@@ -103,7 +110,14 @@
 
     },
     "Your true beauty is a personal attribute that belongs solely to you" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваша истинная красота - это личный атрибут, который принадлежит исключительно вам"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

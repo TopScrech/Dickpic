@@ -5,8 +5,6 @@ import Photos
 final class PhotoLibraryVM: ObservableObject {
     private let analyzer = SensitivityAnalyzer()
     
-    private let maxConcurrentTasks = ProcessInfo.processInfo.activeProcessorCount
-    
     var sensitiveAssets: [CGImage] = []
     var sensitiveVideos: [URL] = []
     var deniedAccess = false
@@ -86,6 +84,14 @@ final class PhotoLibraryVM: ObservableObject {
     private func processAssetsInParallel(_ assets: [PHAsset]) async {
         await withTaskGroup(of: Void.self) { group in
             var iterator = assets.makeIterator()
+            
+            let maxConcurrentTasks: Int
+            
+            if SettingsStorage().analyzeConcurrently {
+                maxConcurrentTasks = ProcessInfo.processInfo.activeProcessorCount
+            } else {
+                maxConcurrentTasks = 1
+            }
             
             for _ in 0..<maxConcurrentTasks {
                 if let asset = iterator.next() {
