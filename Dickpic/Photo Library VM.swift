@@ -104,8 +104,6 @@ final class PhotoLibraryVM: ObservableObject {
                     await self?.fetchAndAnalyze(asset)
                 }
             }
-            
-            // The group will automatically wait for all remaining tasks to complete
         }
     }
     
@@ -135,7 +133,7 @@ final class PhotoLibraryVM: ObservableObject {
             options.deliveryMode = .highQualityFormat
             options.isSynchronous = false
             options.resizeMode = .none
-            options.isNetworkAccessAllowed = false // If true, and the requested image is not stored on the local device, Photos downloads the image from iCloud
+            options.isNetworkAccessAllowed = false
             
             manager.requestImage(
                 for: asset,

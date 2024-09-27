@@ -12,13 +12,9 @@ struct PhotoLibraryView: View {
             if vm.deniedAccess {
                 Text("Access to the photo library has been denied. Please enable access in settings.")
             } else {
-                Text("Total Photos: `\(vm.totalPhotos)` (`\(vm.processedPhotos)` processed)")
-                    .animation(.default, value: vm.totalPhotos)
-                    .animation(.default, value: vm.processedPhotos)
-                
-                ProgressView(value: vm.progress)
-                    .animation(.default, value: vm.progress)
-                    .padding(.vertical, 5)
+                //                Text("Total Photos: `\(vm.totalPhotos)` (`\(vm.processedPhotos)` processed)")
+                //                    .animation(.default, value: vm.totalPhotos)
+                //                    .animation(.default, value: vm.processedPhotos)
                 
                 ScrollView {
                     LazyVGrid(columns: gridColumns) {
@@ -31,12 +27,17 @@ struct PhotoLibraryView: View {
         }
         .navigationTitle("Photo Library")
         .safeAreaInset(edge: .bottom) {
-            if vm.totalPhotos == 0 {
-                BigButton("Analyse") {
-                    vm.fetchPhotos()
-                }
-                .padding(.bottom, 5)
+            ProgressButton("Analyze", progress: vm.progress) {
+                vm.fetchPhotos()
             }
+            .padding(.bottom, 5)
+            
+            //            if vm.totalPhotos == 0 {
+            //                BigButton("Analyse") {
+            //                    vm.fetchPhotos()
+            //                }
+            //                .padding(.bottom, 5)
+            //            }
         }
     }
 }

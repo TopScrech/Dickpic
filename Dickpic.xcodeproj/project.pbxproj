@@ -18,6 +18,7 @@
 		F37F0AC82CA5DBA700FD99F2 /* Image Row VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AC72CA5DBA700FD99F2 /* Image Row VM.swift */; };
 		F37F0ACA2CA5F4FE00FD99F2 /* Quick Look File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AC92CA5F4FE00FD99F2 /* Quick Look File.swift */; };
 		F37F0ACC2CA6821800FD99F2 /* Settings Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACB2CA6821800FD99F2 /* Settings Storage.swift */; };
+		F37F0ACE2CA6AA2B00FD99F2 /* Progress Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACD2CA6AA2B00FD99F2 /* Progress Button.swift */; };
 		F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3ECFE652CA58A8000E72D41 /* Assets.xcassets */; };
 		F3ECFE6C2CA58A8000E72D41 /* Photo Library View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */; };
 		F3ECFE6D2CA58A8000E72D41 /* Dickpic App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic App.swift */; };
@@ -37,6 +38,7 @@
 		F37F0AC72CA5DBA700FD99F2 /* Image Row VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image Row VM.swift"; sourceTree = "<group>"; };
 		F37F0AC92CA5F4FE00FD99F2 /* Quick Look File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quick Look File.swift"; sourceTree = "<group>"; };
 		F37F0ACB2CA6821800FD99F2 /* Settings Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings Storage.swift"; sourceTree = "<group>"; };
+		F37F0ACD2CA6AA2B00FD99F2 /* Progress Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Progress Button.swift"; sourceTree = "<group>"; };
 		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3ECFE652CA58A8000E72D41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				F37F0AB42CA5B7E900FD99F2 /* Intro Screen.swift */,
 				F37F0AB72CA5BFF500FD99F2 /* Intro Screen 2.swift */,
 				F37F0AB92CA5C58400FD99F2 /* Big Button.swift */,
+				F37F0ACD2CA6AA2B00FD99F2 /* Progress Button.swift */,
 				F37F0ABF2CA5D13200FD99F2 /* Big Link.swift */,
 			);
 			path = Intro;
@@ -205,6 +208,7 @@
 				F37F0ACC2CA6821800FD99F2 /* Settings Storage.swift in Sources */,
 				F3ECFE742CA5967C00E72D41 /* App Container.swift in Sources */,
 				F37F0ABC2CA5CD9100FD99F2 /* Home View.swift in Sources */,
+				F37F0ACE2CA6AA2B00FD99F2 /* Progress Button.swift in Sources */,
 				F37F0ABE2CA5CDF000FD99F2 /* Settings View.swift in Sources */,
 				F37F0AB82CA5BFF500FD99F2 /* Intro Screen 2.swift in Sources */,
 				F3ECFE6D2CA58A8000E72D41 /* Dickpic App.swift in Sources */,
