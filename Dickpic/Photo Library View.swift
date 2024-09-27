@@ -11,7 +11,6 @@ struct PhotoLibraryView: View {
         VStack {
             if vm.deniedAccess {
                 Text("Access to the photo library has been denied. Please enable access in settings.")
-                    .padding()
             } else {
                 Text("Total Photos: `\(vm.totalPhotos)` (`\(vm.processedPhotos)` processed)")
                     .animation(.default, value: vm.totalPhotos)
