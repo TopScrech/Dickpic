@@ -12,7 +12,6 @@ struct PhotoLibraryView: View {
             if vm.deniedAccess {
                 Text("Access to the photo library has been denied. Please enable access in settings.")
                     .padding()
-                    .navigationTitle("Photo Library")
             } else {
                 Text("Total Photos: `\(vm.totalPhotos)` (`\(vm.processedPhotos)` processed)")
                     .animation(.default, value: vm.totalPhotos)
