@@ -27,15 +27,15 @@ struct ImageRow: View {
             }
         } label: {
             Rectangle()
-                .aspectRatio(1, contentMode: .fit) // Квадратная рамка
-                .foregroundColor(.clear) // Прозрачный прямоугольник, если не нужен фон
-                .overlay(
+                .aspectRatio(1, contentMode: .fit)
+                .foregroundColor(.clear)
+                .overlay {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFill()
                         .clipped()
                         .cornerRadius(8)
-                )
+                }
                 .cornerRadius(8)
                 .blur(radius: isHidden ? 5 : 0)
                 .animation(.default, value: isHidden)
@@ -43,12 +43,9 @@ struct ImageRow: View {
             isHidden.toggle()
         }
         .sheet($vm.showPreview) {
-            QuickLookFile(vm.url)
-//            if let url = vm.url {
-//                NavigationView {
-//                    QuickLookView(url)
-//                }
-//            }
+            NavigationView {
+                QuickLookFile(vm.url)
+            }
         }
     }
 }
