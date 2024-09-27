@@ -22,6 +22,8 @@ struct PhotoLibraryView: View {
                             VideoRow(videoURL)
                         }
                     }
+                    .animation(.default, value: vm.sensitiveAssets)
+                    .animation(.default, value: vm.sensitiveVideos)
                 }
             }
         }

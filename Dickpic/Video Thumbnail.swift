@@ -37,3 +37,7 @@ struct VideoThumbnail: View {
         }
     }
 }
+
+//#Preview {
+//    VideoThumbnail()
+//}

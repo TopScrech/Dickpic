@@ -32,6 +32,12 @@ struct VideoRow: View {
         } primaryAction: {
             isHidden.toggle()
         }
+        .overlay(alignment: .bottomTrailing) {
+            Image(systemName: "film")
+                .padding(5)
+                .background(.ultraThinMaterial, in: .rect(cornerRadius: 10))
+                .padding(5)
+        }
         .sheet($vm.showPreview) {
             QuickLookFile(vm.url)
         }

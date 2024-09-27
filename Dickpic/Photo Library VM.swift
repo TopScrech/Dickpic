@@ -1,7 +1,5 @@
 import ScrechKit
 import Photos
-import SensitiveContentAnalysis
-import Combine
 
 @Observable
 final class PhotoLibraryVM: ObservableObject {
@@ -15,8 +13,6 @@ final class PhotoLibraryVM: ObservableObject {
     var processedPhotos = 0
     var totalPhotos = 0
     var progress = 0.0
-    
-    private var cancellables = Set<AnyCancellable>()
     
     init() {
         checkPermission()
@@ -58,7 +54,10 @@ final class PhotoLibraryVM: ObservableObject {
     
     func fetchPhotos() {
         progress = 0
+        totalPhotos = 0
         processedPhotos = 0
+        sensitiveAssets.removeAll()
+        sensitiveVideos.removeAll()
         
         let fetchOptions = PHFetchOptions()
         

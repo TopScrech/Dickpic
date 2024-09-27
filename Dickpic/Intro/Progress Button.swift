@@ -20,9 +20,7 @@ struct ProgressButton: View {
     
     var body: some View {
         Button {
-            if progress < 1 {
-                action()
-            }
+            action()
         } label: {
             ZStack(alignment: .leading) {
                 // Фон кнопки с пониженной прозрачностью
@@ -48,7 +46,7 @@ struct ProgressButton: View {
             }
             .padding(.horizontal)
         }
-        .disabled(progress != 0 || progress >= 1)
+        .disabled(progress != 0 && progress != 1)
     }
 }
 
