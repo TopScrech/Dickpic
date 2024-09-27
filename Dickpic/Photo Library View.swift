@@ -12,14 +12,13 @@ struct PhotoLibraryView: View {
             if vm.deniedAccess {
                 Text("Access to the photo library has been denied. Please enable access in settings.")
             } else {
-                //                Text("Total Photos: `\(vm.totalPhotos)` (`\(vm.processedPhotos)` processed)")
-                //                    .animation(.default, value: vm.totalPhotos)
-                //                    .animation(.default, value: vm.processedPhotos)
-                
                 ScrollView {
                     LazyVGrid(columns: gridColumns) {
                         ForEach(vm.sensitiveAssets, id: \.self) { asset in
                             ImageRow(asset)
+                        }
+                        ForEach(vm.sensitiveVideos, id: \.self) { videoURL in
+                            VideoRow(videoURL)
                         }
                     }
                 }
@@ -31,13 +30,6 @@ struct PhotoLibraryView: View {
                 vm.fetchPhotos()
             }
             .padding(.bottom, 5)
-            
-            //            if vm.totalPhotos == 0 {
-            //                BigButton("Analyse") {
-            //                    vm.fetchPhotos()
-            //                }
-            //                .padding(.bottom, 5)
-            //            }
         }
     }
 }
