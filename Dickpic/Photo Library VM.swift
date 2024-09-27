@@ -77,11 +77,11 @@ final class PhotoLibraryVM: ObservableObject {
         }
         
         Task {
-            await processAssetsInParallel(assets)
+            await processAssets(assets)
         }
     }
     
-    private func processAssetsInParallel(_ assets: [PHAsset]) async {
+    private func processAssets(_ assets: [PHAsset]) async {
         await withTaskGroup(of: Void.self) { group in
             var iterator = assets.makeIterator()
             
