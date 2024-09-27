@@ -23,7 +23,6 @@ struct VideoRow: View {
                 .foregroundColor(.clear)
                 .overlay {
                     VideoThumbnail(url: videoURL)
-//                        .resizable()
                         .scaledToFill()
                         .clipped()
                         .cornerRadius(8)
@@ -62,18 +61,22 @@ struct VideoThumbnail: View {
     
     private func generateThumbnail() {
         let asset = AVAsset(url: url)
+        
         let generator = AVAssetImageGenerator(asset: asset)
         generator.appliesPreferredTrackTransform = true
+        
         let time = CMTime(seconds: 1, preferredTimescale: 60)
+        
         if let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) {
             thumbnail = UIImage(cgImage: cgImage)
         }
     }
 }
 
-final class VideoRowVM: ObservableObject {
-    @Published var showPreview: Bool = false
-    var url: URL = URL(fileURLWithPath: "")
+@Observable
+final class VideoRowVM {
+    var showPreview = false
+    var url: URL?
     
     func previewVideo(_ videoURL: URL) {
         url = videoURL

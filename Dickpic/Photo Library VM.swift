@@ -5,8 +5,9 @@ import Combine
 
 @Observable
 final class PhotoLibraryVM: ObservableObject {
+    private let analyzer = SensitivityAnalyzer()
+    
     private let maxConcurrentTasks = ProcessInfo.processInfo.activeProcessorCount
-    private let analyzer = SCSensitivityAnalyzer()
     
     var sensitiveAssets: [CGImage] = []
     var sensitiveVideos: [URL] = []
@@ -73,6 +74,7 @@ final class PhotoLibraryVM: ObservableObject {
         }
         
         var assets: [PHAsset] = []
+        
         allPhotos.enumerateObjects { asset, _, _ in
             assets.append(asset)
         }
@@ -113,17 +115,21 @@ final class PhotoLibraryVM: ObservableObject {
             } catch {
                 print("Error fetching image: \(error.localizedDescription)")
             }
+            
         case .video:
             await analyzeVideo(asset)
+            
         default:
             await incrementProcessedPhotos()
         }
     }
     
+    // MARK: Image
     private func fetchImage(for asset: PHAsset) async throws -> UIImage? {
         return try await withCheckedThrowingContinuation { continuation in
             let manager = PHImageManager.default()
             let options = PHImageRequestOptions()
+            
             options.deliveryMode = .highQualityFormat
             options.isSynchronous = false
             options.resizeMode = .none
@@ -141,50 +147,6 @@ final class PhotoLibraryVM: ObservableObject {
                 }
                 
                 continuation.resume(returning: result)
-            }
-        }
-    }
-    
-    private func analyzeVideo(_ asset: PHAsset) async {
-        do {
-            let url = try await fetchVideoURL(for: asset)
-            
-#if targetEnvironment(simulator)
-            let isSensitive = true
-#else
-            let isSensitive = await checkVideo(url)
-#endif
-            
-            if isSensitive {
-                await MainActor.run {
-                    self.sensitiveVideos.append(url)
-                }
-            }
-        } catch {
-            print("Error fetching video: \(error.localizedDescription)")
-        }
-        
-        await incrementProcessedPhotos()
-    }
-    
-    private func fetchVideoURL(for asset: PHAsset) async throws -> URL {
-        return try await withCheckedThrowingContinuation { continuation in
-            let manager = PHImageManager.default()
-            let options = PHVideoRequestOptions()
-            options.isNetworkAccessAllowed = false
-            options.version = .original
-            
-            manager.requestAVAsset(forVideo: asset, options: options) { avAsset, _, info in
-                if let info, let error = info[PHImageErrorKey] as? Error {
-                    continuation.resume(throwing: error)
-                    return
-                }
-                
-                if let urlAsset = avAsset as? AVURLAsset {
-                    continuation.resume(returning: urlAsset.url)
-                } else {
-                    continuation.resume(throwing: NSError(domain: "Invalid AVAsset", code: -1, userInfo: nil))
-                }
             }
         }
     }
@@ -210,55 +172,75 @@ final class PhotoLibraryVM: ObservableObject {
         await incrementProcessedPhotos()
     }
     
+    func checkImage(_ image: CGImage) async -> Bool {
+        do {
+            return try await analyzer.checkImage(image)
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    // MARK: Video
+    private func analyzeVideo(_ asset: PHAsset) async {
+        do {
+            let url = try await fetchVideoURL(asset)
+            
+#if targetEnvironment(simulator)
+            let isSensitive = true
+#else
+            let isSensitive = await checkVideo(url)
+#endif
+            
+            if isSensitive {
+                await MainActor.run {
+                    self.sensitiveVideos.append(url)
+                }
+            }
+        } catch {
+            print("Error fetching video: \(error.localizedDescription)")
+        }
+        
+        await incrementProcessedPhotos()
+    }
+    
+    private func fetchVideoURL(_ asset: PHAsset) async throws -> URL {
+        try await withCheckedThrowingContinuation { continuation in
+            let manager = PHImageManager.default()
+            let options = PHVideoRequestOptions()
+            
+            options.isNetworkAccessAllowed = false
+            options.version = .current
+            
+            manager.requestAVAsset(forVideo: asset, options: options) { avAsset, _, info in
+                if let info, let error = info[PHImageErrorKey] as? Error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+                
+                if let urlAsset = avAsset as? AVURLAsset {
+                    continuation.resume(returning: urlAsset.url)
+                } else {
+                    continuation.resume(throwing: NSError(domain: "Invalid AVAsset", code: -1, userInfo: nil))
+                }
+            }
+        }
+    }
+    
+    func checkVideo(_ url: URL) async -> Bool {
+        do {
+            let isSensitive = try await analyzer.checkVideo(url)
+            return isSensitive
+        } catch {
+            print("Failed to check video: \(error.localizedDescription)")
+            return false
+        }
+    }
+    
     private func incrementProcessedPhotos() async {
         await MainActor.run {
             self.processedPhotos += 1
             self.progress = Double(self.processedPhotos) / Double(self.totalPhotos)
         }
     }
-    
-    func checkImage(_ image: CGImage) async -> Bool {
-        do {
-            let handler = try await analyzer.analyzeImage(image)
-            return handler.isSensitive
-        } catch {
-            print(error.localizedDescription)
-            return false
-        }
-    }
-    
-    func checkVideo(_ url: URL) async -> Bool {
-        do {
-            let handler = try await analyzer.analyzeVideo( url)
-            return handler.isSensitive
-        } catch {
-            print(error.localizedDescription)
-            return false
-        }
-    }
-}
-
-extension SCSensitivityAnalyzer {
-    func analyzeVideo(_ url: URL) async throws -> VideoSensitivityHandler {
-        // Example implementation: Analyze video frames for sensitivity
-        let asset = AVAsset(url: url)
-        
-        let generator = AVAssetImageGenerator(asset: asset)
-        generator.appliesPreferredTrackTransform = true
-        
-        let time = CMTime(seconds: 1, preferredTimescale: 60)
-        
-        guard let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) else {
-            return VideoSensitivityHandler(isSensitive: false)
-        }
-        
-        let uiImage = UIImage(cgImage: cgImage)
-        let isSensitive = try await self.analyzeImage(uiImage.cgImage!)
-        
-        return VideoSensitivityHandler(isSensitive: isSensitive.isSensitive)
-    }
-}
-
-struct VideoSensitivityHandler {
-    let isSensitive: Bool
 }

@@ -17,6 +17,7 @@ struct PhotoLibraryView: View {
                         ForEach(vm.sensitiveAssets, id: \.self) { asset in
                             ImageRow(asset)
                         }
+                        
                         ForEach(vm.sensitiveVideos, id: \.self) { videoURL in
                             VideoRow(videoURL)
                         }
@@ -26,8 +27,16 @@ struct PhotoLibraryView: View {
         }
         .navigationTitle("Photo Library")
         .safeAreaInset(edge: .bottom) {
-            ProgressButton("Analyze", progress: vm.progress) {
-                vm.fetchPhotos()
+            VStack {
+#if DEBUG
+                Text("Total Photos: `\(vm.totalPhotos)` (`\(vm.processedPhotos)` processed)")
+                    .animation(.default, value: vm.totalPhotos)
+                    .animation(.default, value: vm.processedPhotos)
+#endif
+                
+                ProgressButton("Analyze", progress: vm.progress) {
+                    vm.fetchPhotos()
+                }
             }
             .padding(.bottom, 5)
         }

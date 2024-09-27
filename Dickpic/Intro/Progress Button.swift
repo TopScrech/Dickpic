@@ -48,7 +48,7 @@ struct ProgressButton: View {
             }
             .padding(.horizontal)
         }
-        .disabled(progress >= 1)
+        .disabled(progress != 0 || progress >= 1)
     }
 }
 
