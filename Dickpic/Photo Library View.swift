@@ -37,7 +37,7 @@ struct PhotoLibraryView: View {
 #endif
                 
                 ProgressButton("Analyze", progress: vm.progress) {
-                    vm.fetchPhotos()
+                    vm.fetchAssets()
                 }
             }
             .padding(.bottom, 5)

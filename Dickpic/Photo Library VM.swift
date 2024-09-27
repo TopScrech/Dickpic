@@ -43,7 +43,7 @@ final class PhotoLibraryVM: ObservableObject {
                         return
                     }
                     
-                    self.fetchPhotos()
+                    self.fetchAssets()
                 }
             }
             
@@ -52,7 +52,7 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    func fetchPhotos() {
+    func fetchAssets() {
         progress = 0
         totalPhotos = 0
         processedPhotos = 0
