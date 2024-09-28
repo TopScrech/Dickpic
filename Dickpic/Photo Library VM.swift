@@ -49,14 +49,7 @@ final class PhotoLibraryVM: ObservableObject {
             break
         }
     }
-    
-    func fetchHiddenAlbum() -> PHAssetCollection? {
-        // Fetch smart albums with subtype .smartAlbumHidden
-        let hiddenAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
         
-        return hiddenAlbums.firstObject
-    }
-    
     func fetchAssets() {
         progress = 0
         totalPhotos = 0
