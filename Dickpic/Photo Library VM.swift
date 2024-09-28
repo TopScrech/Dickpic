@@ -48,8 +48,6 @@ final class PhotoLibraryVM: ObservableObject {
                     self.deniedAccess = true
                     return
                 }
-                
-                self.fetchAssets()
             }
         }
     }
