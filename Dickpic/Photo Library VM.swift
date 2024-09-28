@@ -49,7 +49,7 @@ final class PhotoLibraryVM: ObservableObject {
             break
         }
     }
-        
+    
     func fetchAssets() {
         progress = 0
         totalPhotos = 0
