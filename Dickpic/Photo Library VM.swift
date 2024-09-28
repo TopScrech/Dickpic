@@ -148,7 +148,7 @@ final class PhotoLibraryVM: ObservableObject {
     
     // MARK: Image
     private func fetchImage(for asset: PHAsset) async throws -> UIImage? {
-        return try await withCheckedThrowingContinuation { continuation in
+        try await withCheckedThrowingContinuation { continuation in
             let manager = PHImageManager.default()
             let options = PHImageRequestOptions()
             
