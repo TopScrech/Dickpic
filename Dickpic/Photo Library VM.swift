@@ -79,10 +79,6 @@ final class PhotoLibraryVM: ObservableObject {
         }
         
         allPhotos.enumerateObjects { asset, _, _ in
-            if asset.isHidden {
-                print("HIDDENEFNEFJEN")
-            }
-            
             assets.append(asset)
         }
         
