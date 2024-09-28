@@ -34,19 +34,23 @@ final class PhotoLibraryVM: ObservableObject {
         case .notDetermined:
             print("Not determined")
             
-            PHPhotoLibrary.requestAuthorization { newStatus in
-                main {
-                    guard newStatus == .authorized || newStatus == .limited else {
-                        self.deniedAccess = true
-                        return
-                    }
-                    
-                    self.fetchAssets()
-                }
-            }
+            requestPermission()
             
         default:
             break
+        }
+    }
+    
+    private func requestPermission() {
+        PHPhotoLibrary.requestAuthorization { newStatus in
+            main {
+                guard newStatus == .authorized || newStatus == .limited else {
+                    self.deniedAccess = true
+                    return
+                }
+                
+                self.fetchAssets()
+            }
         }
     }
     
