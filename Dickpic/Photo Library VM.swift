@@ -8,6 +8,7 @@ final class PhotoLibraryVM: ObservableObject {
     var sensitiveAssets: [CGImage] = []
     var sensitiveVideos: [URL] = []
     var deniedAccess = false
+    var sheetEnablePolicy = false
     var processedPhotos = 0
     var totalPhotos = 0
     var progress = 0.0
@@ -53,6 +54,11 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     func fetchAssets() {
+        guard analyzer.checkPolicy() else {
+            sheetEnablePolicy = true
+            return
+        }
+        
         progress = 0
         totalPhotos = 0
         processedPhotos = 0

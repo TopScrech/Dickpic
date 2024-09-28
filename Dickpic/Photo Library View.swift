@@ -28,6 +28,9 @@ struct PhotoLibraryView: View {
             }
         }
         .navigationTitle("Photo Library")
+        .sheet($vm.sheetEnablePolicy) {
+            SheetEnablePolicy()
+        }
         .safeAreaInset(edge: .bottom) {
             VStack {
 #if DEBUG

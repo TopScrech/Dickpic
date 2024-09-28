@@ -22,6 +22,7 @@
 		F37F0AD02CA6B3B300FD99F2 /* Video Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACF2CA6B3B300FD99F2 /* Video Row.swift */; };
 		F37F0AD42CA6FAFF00FD99F2 /* Video Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD32CA6FAFF00FD99F2 /* Video Thumbnail.swift */; };
 		F37F0AD62CA758A400FD99F2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */; };
+		F37F0AD82CA7FFDE00FD99F2 /* Sheet Enable Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */; };
 		F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3ECFE652CA58A8000E72D41 /* Assets.xcassets */; };
 		F3ECFE6C2CA58A8000E72D41 /* Photo Library View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */; };
 		F3ECFE6D2CA58A8000E72D41 /* Dickpic App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic App.swift */; };
@@ -45,6 +46,7 @@
 		F37F0ACF2CA6B3B300FD99F2 /* Video Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video Row.swift"; sourceTree = "<group>"; };
 		F37F0AD32CA6FAFF00FD99F2 /* Video Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video Thumbnail.swift"; sourceTree = "<group>"; };
 		F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sheet Enable Policy.swift"; sourceTree = "<group>"; };
 		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3ECFE652CA58A8000E72D41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				F37F0ABB2CA5CD9100FD99F2 /* Home View.swift */,
 				F37F0AB62CA5B7F400FD99F2 /* Intro */,
 				F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */,
+				F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */,
 				F3ECFE712CA5961400E72D41 /* Photo Library VM.swift */,
 				F37F0ACB2CA6821800FD99F2 /* Settings Storage.swift */,
 				F3ECFE6F2CA5960200E72D41 /* Image Row.swift */,
@@ -228,6 +231,7 @@
 				F3ECFE702CA5960200E72D41 /* Image Row.swift in Sources */,
 				F3ECFE762CA5976000E72D41 /* Sensitivity Analyzer.swift in Sources */,
 				F37F0AB52CA5B7E900FD99F2 /* Intro Screen.swift in Sources */,
+				F37F0AD82CA7FFDE00FD99F2 /* Sheet Enable Policy.swift in Sources */,
 				F37F0ABA2CA5C58400FD99F2 /* Big Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,7 +393,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Debug;
@@ -432,7 +436,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Release;

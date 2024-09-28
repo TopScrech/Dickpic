@@ -25,6 +25,15 @@
     "🙈" : {
       "shouldTranslate" : false
     },
+    "1. " : {
+
+    },
+    "2. Navigate to **Privacy & Security**, scroll down and select **Sensetive Content Warning**" : {
+
+    },
+    "3. Turn on the switch and return to the app" : {
+
+    },
     "A single scan that ensures your peace of mind" : {
 
     },
@@ -52,6 +61,9 @@
     "Dickpic utilizes **offline on-device** processing, ensuring that no data is transmitted to the cloud" : {
 
     },
+    "Dismiss" : {
+
+    },
     "Download original images" : {
 
     },
@@ -74,10 +86,16 @@
     "Oops, this could be sensitive! Let's avoid unpleasant situations" : {
 
     },
+    "Open Settings" : {
+
+    },
     "Photo Library" : {
 
     },
     "Preview" : {
+
+    },
+    "Sensitive Content Warnings are disabled" : {
 
     },
     "Settings" : {
@@ -97,6 +115,9 @@
 
     },
     "The app employs an official Apple-developed [framework](https://developer.apple.com/documentation/sensitivecontentanalysis) to identify sensitive images" : {
+
+    },
+    "To enable this feature, follow these steps:" : {
 
     },
     "Total Photos: `%lld` (`%lld` processed)" : {
