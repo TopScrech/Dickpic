@@ -50,6 +50,13 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
+    func fetchHiddenAlbum() -> PHAssetCollection? {
+        // Fetch smart albums with subtype .smartAlbumHidden
+        let hiddenAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+        
+        return hiddenAlbums.firstObject
+    }
+    
     func fetchAssets() {
         progress = 0
         totalPhotos = 0
@@ -58,26 +65,31 @@ final class PhotoLibraryVM: ObservableObject {
         sensitiveVideos.removeAll()
         
         let fetchOptions = PHFetchOptions()
-        fetchOptions.includeHiddenAssets = SettingsStorage().includeHiddenAssets
         fetchOptions.sortDescriptors = [
             NSSortDescriptor(key: "creationDate", ascending: false)
         ]
-        let allPhotos: PHFetchResult<PHAsset>
+        
+        var allPhotos: PHFetchResult<PHAsset>
         
         if SettingsStorage().analyzeVideos {
             allPhotos = PHAsset.fetchAssets(with: fetchOptions)
         } else {
             allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         }
+        
+        var assets: [PHAsset] = []
+        
         totalPhotos = allPhotos.count
         
         guard totalPhotos > 0 else {
             return
         }
         
-        var assets: [PHAsset] = []
-        
         allPhotos.enumerateObjects { asset, _, _ in
+            if asset.isHidden {
+                print("HIDDENEFNEFJEN")
+            }
+            
             assets.append(asset)
         }
         

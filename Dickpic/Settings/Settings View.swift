@@ -15,9 +15,10 @@ struct SettingsView: View {
                 Text("Analyze videos")
             }
             
-            Toggle(isOn: $storage.includeHiddenAssets) {
-                Text("Include hidden assets")
-            }
+            // Doesn't work
+            //            Toggle(isOn: $storage.includeHiddenAssets) {
+            //                Text("Include hidden assets")
+            //            }
             
             Toggle(isOn: $storage.downloadOriginals) {
                 Text("Download original images")
