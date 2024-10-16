@@ -23,6 +23,10 @@
 		F37F0AD42CA6FAFF00FD99F2 /* Video Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD32CA6FAFF00FD99F2 /* Video Thumbnail.swift */; };
 		F37F0AD62CA758A400FD99F2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */; };
 		F37F0AD82CA7FFDE00FD99F2 /* Sheet Enable Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */; };
+		F3B25EAB2CBFD9BB000C8795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */; };
+		F3B25EAC2CBFD9BB000C8795 /* Content View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B25EA62CBFD9BB000C8795 /* Content View.swift */; };
+		F3B25EAD2CBFD9BB000C8795 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B25EA82CBFD9BB000C8795 /* Dickpic.swift */; };
+		F3B25EB02CBFD9F2000C8795 /* ScrechKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3B25EAF2CBFD9F2000C8795 /* ScrechKit */; };
 		F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3ECFE652CA58A8000E72D41 /* Assets.xcassets */; };
 		F3ECFE6C2CA58A8000E72D41 /* Photo Library View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */; };
 		F3ECFE6D2CA58A8000E72D41 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic.swift */; };
@@ -47,6 +51,12 @@
 		F37F0AD32CA6FAFF00FD99F2 /* Video Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video Thumbnail.swift"; sourceTree = "<group>"; };
 		F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sheet Enable Policy.swift"; sourceTree = "<group>"; };
+		F3B25E942CBFD97C000C8795 /* macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F3B25EA62CBFD9BB000C8795 /* Content View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content View.swift"; sourceTree = "<group>"; };
+		F3B25EA72CBFD9BB000C8795 /* Dickpic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dickpic.entitlements; sourceTree = "<group>"; };
+		F3B25EA82CBFD9BB000C8795 /* Dickpic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dickpic.swift; sourceTree = "<group>"; };
+		F3B25EB12CBFDA08000C8795 /* Dickpic-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Dickpic-macOS.plist"; sourceTree = "<group>"; };
 		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3ECFE652CA58A8000E72D41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
@@ -60,6 +70,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F3B25E912CBFD97C000C8795 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3B25EB02CBFD9F2000C8795 /* ScrechKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F3ECFE4E2CA58A7100E72D41 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,10 +118,31 @@
 			path = Nav;
 			sourceTree = "<group>";
 		};
+		F3B25EA92CBFD9BB000C8795 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				F3B25EA82CBFD9BB000C8795 /* Dickpic.swift */,
+				F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */,
+				F3B25EB12CBFDA08000C8795 /* Dickpic-macOS.plist */,
+				F3B25EA72CBFD9BB000C8795 /* Dickpic.entitlements */,
+				F3B25EA62CBFD9BB000C8795 /* Content View.swift */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		F3B25EAE2CBFD9F2000C8795 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F3ECFE482CA58A7100E72D41 = {
 			isa = PBXGroup;
 			children = (
 				F3ECFE692CA58A8000E72D41 /* Dickpic */,
+				F3B25EA92CBFD9BB000C8795 /* macOS */,
+				F3B25EAE2CBFD9F2000C8795 /* Frameworks */,
 				F3ECFE522CA58A7100E72D41 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				F3ECFE512CA58A7100E72D41 /* Dickpic.app */,
+				F3B25E942CBFD97C000C8795 /* macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +185,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F3B25E932CBFD97C000C8795 /* macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3B25EA22CBFD97D000C8795 /* Build configuration list for PBXNativeTarget "macOS" */;
+			buildPhases = (
+				F3B25E902CBFD97C000C8795 /* Sources */,
+				F3B25E912CBFD97C000C8795 /* Frameworks */,
+				F3B25E922CBFD97C000C8795 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = macOS;
+			packageProductDependencies = (
+				F3B25EAF2CBFD9F2000C8795 /* ScrechKit */,
+			);
+			productName = "Dickpic macos";
+			productReference = F3B25E942CBFD97C000C8795 /* macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F3ECFE502CA58A7100E72D41 /* Dickpic */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F3ECFE602CA58A7100E72D41 /* Build configuration list for PBXNativeTarget "Dickpic" */;
@@ -176,6 +236,9 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					F3B25E932CBFD97C000C8795 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					F3ECFE502CA58A7100E72D41 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -201,11 +264,20 @@
 			projectRoot = "";
 			targets = (
 				F3ECFE502CA58A7100E72D41 /* Dickpic */,
+				F3B25E932CBFD97C000C8795 /* macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F3B25E922CBFD97C000C8795 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3B25EAB2CBFD9BB000C8795 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F3ECFE4F2CA58A7100E72D41 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -218,6 +290,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F3B25E902CBFD97C000C8795 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F3B25EAC2CBFD9BB000C8795 /* Content View.swift in Sources */,
+				F3B25EAD2CBFD9BB000C8795 /* Dickpic.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F3ECFE4D2CA58A7100E72D41 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -247,6 +328,66 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		F3B25EA02CBFD97D000C8795 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/Dickpic.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8FQUA2F388;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS/Dickpic-macOS.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.9;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.topscrech.Dickpic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F3B25EA12CBFD97D000C8795 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/Dickpic.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8FQUA2F388;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS/Dickpic-macOS.plist";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.9;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.topscrech.Dickpic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		F3ECFE5E2CA58A7100E72D41 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -452,6 +593,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F3B25EA22CBFD97D000C8795 /* Build configuration list for PBXNativeTarget "macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3B25EA02CBFD97D000C8795 /* Debug */,
+				F3B25EA12CBFD97D000C8795 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F3ECFE4C2CA58A7100E72D41 /* Build configuration list for PBXProject "Dickpic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -501,6 +651,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F37F0AC22CA5D8F000FD99F2 /* XCRemoteSwiftPackageReference "QuickLooking" */;
 			productName = QuickLooking;
+		};
+		F3B25EAF2CBFD9F2000C8795 /* ScrechKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F37F0AB12CA5A2E800FD99F2 /* XCRemoteSwiftPackageReference "ScrechKit" */;
+			productName = ScrechKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
