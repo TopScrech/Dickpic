@@ -24,7 +24,7 @@
 		F37F0AD62CA758A400FD99F2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */; };
 		F37F0AD82CA7FFDE00FD99F2 /* Sheet Enable Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */; };
 		F3B25EAB2CBFD9BB000C8795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */; };
-		F3B25EAC2CBFD9BB000C8795 /* Content View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B25EA62CBFD9BB000C8795 /* Content View.swift */; };
+		F3B25EAC2CBFD9BB000C8795 /* Home View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B25EA62CBFD9BB000C8795 /* Home View.swift */; };
 		F3B25EAD2CBFD9BB000C8795 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B25EA82CBFD9BB000C8795 /* Dickpic.swift */; };
 		F3B25EB02CBFD9F2000C8795 /* ScrechKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3B25EAF2CBFD9F2000C8795 /* ScrechKit */; };
 		F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3ECFE652CA58A8000E72D41 /* Assets.xcassets */; };
@@ -53,7 +53,7 @@
 		F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sheet Enable Policy.swift"; sourceTree = "<group>"; };
 		F3B25E942CBFD97C000C8795 /* macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F3B25EA62CBFD9BB000C8795 /* Content View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Content View.swift"; sourceTree = "<group>"; };
+		F3B25EA62CBFD9BB000C8795 /* Home View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home View.swift"; sourceTree = "<group>"; };
 		F3B25EA72CBFD9BB000C8795 /* Dickpic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dickpic.entitlements; sourceTree = "<group>"; };
 		F3B25EA82CBFD9BB000C8795 /* Dickpic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dickpic.swift; sourceTree = "<group>"; };
 		F3B25EB12CBFDA08000C8795 /* Dickpic-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Dickpic-macOS.plist"; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 				F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */,
 				F3B25EB12CBFDA08000C8795 /* Dickpic-macOS.plist */,
 				F3B25EA72CBFD9BB000C8795 /* Dickpic.entitlements */,
-				F3B25EA62CBFD9BB000C8795 /* Content View.swift */,
+				F3B25EA62CBFD9BB000C8795 /* Home View.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -294,7 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3B25EAC2CBFD9BB000C8795 /* Content View.swift in Sources */,
+				F3B25EAC2CBFD9BB000C8795 /* Home View.swift in Sources */,
 				F3B25EAD2CBFD9BB000C8795 /* Dickpic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

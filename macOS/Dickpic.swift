@@ -4,7 +4,7 @@ import ScrechKit
 struct Dickpic: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }
