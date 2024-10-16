@@ -18,6 +18,9 @@ struct SheetEnablePolicy: View {
                     .title3(.semibold)
                     .padding(.vertical)
                 
+#if os(macOS)
+                Text("1. Open Settings")
+#else
                 Button {
                     openSettings()
                 } label: {
@@ -27,6 +30,7 @@ struct SheetEnablePolicy: View {
                         .underline()
                 }
                 .foregroundStyle(.foreground)
+#endif
                 
                 Text("2. Navigate to **Privacy & Security**, scroll down and select **Sensetive Content Warning**")
                 

@@ -7,10 +7,10 @@ struct HomeView: View {
     
     var body: some View {
         TabView {
-            //            PhotoLibraryView()
-            //                .tabItem {
-            //                    Label("Analysis", systemImage: "eye.slash")
-            //                }
+            PhotoLibraryView()
+                .tabItem {
+                    Label("Analysis", systemImage: "eye.slash")
+                }
             
             SettingsView($fullScreenCover)
                 .tabItem {
