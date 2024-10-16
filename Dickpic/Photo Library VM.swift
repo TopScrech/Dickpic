@@ -144,52 +144,6 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     // MARK: Image
-    private func fetchImage(for asset: PHAsset) async throws -> UIImage? {
-        try await withCheckedThrowingContinuation { continuation in
-            let manager = PHImageManager.default()
-            let options = PHImageRequestOptions()
-            
-            options.deliveryMode = .highQualityFormat
-            options.isSynchronous = false
-            options.resizeMode = .none
-            options.isNetworkAccessAllowed = SettingsStorage().downloadOriginals
-            
-            manager.requestImage(
-                for: asset,
-                targetSize: PHImageManagerMaximumSize,
-                contentMode: .aspectFit,
-                options: options
-            ) { result, info in
-                if let info, let error = info[PHImageErrorKey] as? Error {
-                    continuation.resume(throwing: error)
-                    return
-                }
-                
-                continuation.resume(returning: result)
-            }
-        }
-    }
-    
-    private func analyse(_ image: UIImage?) async {
-        guard let cgImage = image?.cgImage else {
-            await incrementProcessedPhotos()
-            return
-        }
-        
-#if targetEnvironment(simulator)
-        let isSensitive = true
-#else
-        let isSensitive = await checkImage(cgImage)
-#endif
-        
-        if isSensitive {
-            await MainActor.run {
-                self.sensitiveAssets.append(cgImage)
-            }
-        }
-        
-        await incrementProcessedPhotos()
-    }
     
     func checkImage(_ image: CGImage) async -> Bool {
         do {
@@ -262,4 +216,105 @@ final class PhotoLibraryVM: ObservableObject {
             self.progress = Double(self.processedPhotos) / Double(self.totalPhotos)
         }
     }
+}
+
+#warning("Extract")
+extension PhotoLibraryVM {
+#if os(macOS)
+    private func analyse(_ image: NSImage?) async {
+        guard let cgImage = image?.cgImage else {
+            await incrementProcessedPhotos()
+            return
+        }
+        
+#if targetEnvironment(simulator)
+        let isSensitive = true
+#else
+        let isSensitive = await checkImage(cgImage as! CGImage)
+#endif
+        
+        if isSensitive {
+            await MainActor.run {
+                self.sensitiveAssets.append(cgImage as! CGImage)
+            }
+        }
+        
+        await incrementProcessedPhotos()
+    }
+#else
+    private func analyse(_ image: UIImage?) async {
+        guard let cgImage = image?.cgImage else {
+            await incrementProcessedPhotos()
+            return
+        }
+        
+#if targetEnvironment(simulator)
+        let isSensitive = true
+#else
+        let isSensitive = await checkImage(cgImage)
+#endif
+        
+        if isSensitive {
+            await MainActor.run {
+                self.sensitiveAssets.append(cgImage)
+            }
+        }
+        
+        await incrementProcessedPhotos()
+    }
+#endif
+    
+#if os(macOS)
+    private func fetchImage(for asset: PHAsset) async throws -> NSImage? {
+        try await withCheckedThrowingContinuation { continuation in
+            let manager = PHImageManager.default()
+            let options = PHImageRequestOptions()
+            
+            options.deliveryMode = .highQualityFormat
+            options.isSynchronous = false
+            options.resizeMode = .none
+            options.isNetworkAccessAllowed = SettingsStorage().downloadOriginals
+            
+            manager.requestImage(
+                for: asset,
+                targetSize: PHImageManagerMaximumSize,
+                contentMode: .aspectFit,
+                options: options
+            ) { result, info in
+                if let info, let error = info[PHImageErrorKey] as? Error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+                
+                continuation.resume(returning: result)
+            }
+        }
+    }
+#else
+    private func fetchImage(for asset: PHAsset) async throws -> UIImage? {
+        try await withCheckedThrowingContinuation { continuation in
+            let manager = PHImageManager.default()
+            let options = PHImageRequestOptions()
+            
+            options.deliveryMode = .highQualityFormat
+            options.isSynchronous = false
+            options.resizeMode = .none
+            options.isNetworkAccessAllowed = SettingsStorage().downloadOriginals
+            
+            manager.requestImage(
+                for: asset,
+                targetSize: PHImageManagerMaximumSize,
+                contentMode: .aspectFit,
+                options: options
+            ) { result, info in
+                if let info, let error = info[PHImageErrorKey] as? Error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+                
+                continuation.resume(returning: result)
+            }
+        }
+    }
+#endif
 }
