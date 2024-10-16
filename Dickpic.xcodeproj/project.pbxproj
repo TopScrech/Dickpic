@@ -25,7 +25,7 @@
 		F37F0AD82CA7FFDE00FD99F2 /* Sheet Enable Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */; };
 		F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3ECFE652CA58A8000E72D41 /* Assets.xcassets */; };
 		F3ECFE6C2CA58A8000E72D41 /* Photo Library View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */; };
-		F3ECFE6D2CA58A8000E72D41 /* Dickpic App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic App.swift */; };
+		F3ECFE6D2CA58A8000E72D41 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic.swift */; };
 		F3ECFE702CA5960200E72D41 /* Image Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE6F2CA5960200E72D41 /* Image Row.swift */; };
 		F3ECFE722CA5961400E72D41 /* Photo Library VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE712CA5961400E72D41 /* Photo Library VM.swift */; };
 		F3ECFE742CA5967C00E72D41 /* App Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE732CA5967C00E72D41 /* App Container.swift */; };
@@ -51,7 +51,7 @@
 		F3ECFE652CA58A8000E72D41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
 		F3ECFE672CA58A8000E72D41 /* Dickpic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dickpic.entitlements; sourceTree = "<group>"; };
-		F3ECFE682CA58A8000E72D41 /* Dickpic App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dickpic App.swift"; sourceTree = "<group>"; };
+		F3ECFE682CA58A8000E72D41 /* Dickpic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dickpic.swift; sourceTree = "<group>"; };
 		F3ECFE6E2CA58CFB00E72D41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3ECFE6F2CA5960200E72D41 /* Image Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image Row.swift"; sourceTree = "<group>"; };
 		F3ECFE712CA5961400E72D41 /* Photo Library VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library VM.swift"; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 		F3ECFE692CA58A8000E72D41 /* Dickpic */ = {
 			isa = PBXGroup;
 			children = (
-				F3ECFE682CA58A8000E72D41 /* Dickpic App.swift */,
+				F3ECFE682CA58A8000E72D41 /* Dickpic.swift */,
 				F3ECFE732CA5967C00E72D41 /* App Container.swift */,
 				F3ECFE6E2CA58CFB00E72D41 /* Info.plist */,
 				F3ECFE652CA58A8000E72D41 /* Assets.xcassets */,
@@ -227,7 +227,7 @@
 				F37F0ACE2CA6AA2B00FD99F2 /* Progress Button.swift in Sources */,
 				F37F0ABE2CA5CDF000FD99F2 /* Settings View.swift in Sources */,
 				F37F0AB82CA5BFF500FD99F2 /* Intro Screen 2.swift in Sources */,
-				F3ECFE6D2CA58A8000E72D41 /* Dickpic App.swift in Sources */,
+				F3ECFE6D2CA58A8000E72D41 /* Dickpic.swift in Sources */,
 				F3ECFE702CA5960200E72D41 /* Image Row.swift in Sources */,
 				F3ECFE762CA5976000E72D41 /* Sensitivity Analyzer.swift in Sources */,
 				F37F0AB52CA5B7E900FD99F2 /* Intro Screen.swift in Sources */,
