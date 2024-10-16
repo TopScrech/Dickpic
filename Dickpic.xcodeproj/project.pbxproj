@@ -24,12 +24,19 @@
 		F37F0AD62CA758A400FD99F2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */; };
 		F37F0AD82CA7FFDE00FD99F2 /* Sheet Enable Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */; };
 		F3B25EAB2CBFD9BB000C8795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */; };
-		F3B25EAC2CBFD9BB000C8795 /* Home View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B25EA62CBFD9BB000C8795 /* Home View.swift */; };
-		F3B25EAD2CBFD9BB000C8795 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B25EA82CBFD9BB000C8795 /* Dickpic.swift */; };
 		F3B25EB02CBFD9F2000C8795 /* ScrechKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3B25EAF2CBFD9F2000C8795 /* ScrechKit */; };
 		F3B25EB22CBFDAB4000C8795 /* Photo Library VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE712CA5961400E72D41 /* Photo Library VM.swift */; };
 		F3B25EB32CBFDABD000C8795 /* Sensitivity Analyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE752CA5976000E72D41 /* Sensitivity Analyzer.swift */; };
 		F3B25EB42CBFDAD3000C8795 /* Settings Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACB2CA6821800FD99F2 /* Settings Storage.swift */; };
+		F3B25EB52CBFDC2C000C8795 /* Intro Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB42CA5B7E900FD99F2 /* Intro Screen.swift */; };
+		F3B25EB62CBFDC2C000C8795 /* Big Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB92CA5C58400FD99F2 /* Big Button.swift */; };
+		F3B25EB72CBFDC2C000C8795 /* Intro Screen 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB72CA5BFF500FD99F2 /* Intro Screen 2.swift */; };
+		F3B25EB82CBFDC2C000C8795 /* Progress Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACD2CA6AA2B00FD99F2 /* Progress Button.swift */; };
+		F3B25EB92CBFDC2C000C8795 /* Big Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ABF2CA5D13200FD99F2 /* Big Link.swift */; };
+		F3B25EBD2CBFDC6E000C8795 /* Home View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B25EBC2CBFDC6E000C8795 /* Home View.swift */; };
+		F3B25EBE2CBFDC84000C8795 /* Settings View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ABD2CA5CDF000FD99F2 /* Settings View.swift */; };
+		F3B25EBF2CBFDD05000C8795 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic.swift */; };
+		F3B25EC02CBFDD14000C8795 /* App Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE732CA5967C00E72D41 /* App Container.swift */; };
 		F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3ECFE652CA58A8000E72D41 /* Assets.xcassets */; };
 		F3ECFE6C2CA58A8000E72D41 /* Photo Library View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */; };
 		F3ECFE6D2CA58A8000E72D41 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic.swift */; };
@@ -56,10 +63,9 @@
 		F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sheet Enable Policy.swift"; sourceTree = "<group>"; };
 		F3B25E942CBFD97C000C8795 /* macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F3B25EA62CBFD9BB000C8795 /* Home View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home View.swift"; sourceTree = "<group>"; };
 		F3B25EA72CBFD9BB000C8795 /* Dickpic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dickpic.entitlements; sourceTree = "<group>"; };
-		F3B25EA82CBFD9BB000C8795 /* Dickpic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dickpic.swift; sourceTree = "<group>"; };
 		F3B25EB12CBFDA08000C8795 /* Dickpic-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Dickpic-macOS.plist"; sourceTree = "<group>"; };
+		F3B25EBC2CBFDC6E000C8795 /* Home View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home View.swift"; sourceTree = "<group>"; };
 		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3ECFE652CA58A8000E72D41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
@@ -124,11 +130,10 @@
 		F3B25EA92CBFD9BB000C8795 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				F3B25EA82CBFD9BB000C8795 /* Dickpic.swift */,
 				F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */,
 				F3B25EB12CBFDA08000C8795 /* Dickpic-macOS.plist */,
 				F3B25EA72CBFD9BB000C8795 /* Dickpic.entitlements */,
-				F3B25EA62CBFD9BB000C8795 /* Home View.swift */,
+				F3B25EBC2CBFDC6E000C8795 /* Home View.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -298,10 +303,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3B25EB42CBFDAD3000C8795 /* Settings Storage.swift in Sources */,
-				F3B25EAC2CBFD9BB000C8795 /* Home View.swift in Sources */,
 				F3B25EB22CBFDAB4000C8795 /* Photo Library VM.swift in Sources */,
+				F3B25EB52CBFDC2C000C8795 /* Intro Screen.swift in Sources */,
+				F3B25EBF2CBFDD05000C8795 /* Dickpic.swift in Sources */,
+				F3B25EB62CBFDC2C000C8795 /* Big Button.swift in Sources */,
+				F3B25EBE2CBFDC84000C8795 /* Settings View.swift in Sources */,
+				F3B25EBD2CBFDC6E000C8795 /* Home View.swift in Sources */,
+				F3B25EB72CBFDC2C000C8795 /* Intro Screen 2.swift in Sources */,
+				F3B25EB82CBFDC2C000C8795 /* Progress Button.swift in Sources */,
+				F3B25EB92CBFDC2C000C8795 /* Big Link.swift in Sources */,
+				F3B25EC02CBFDD14000C8795 /* App Container.swift in Sources */,
 				F3B25EB32CBFDABD000C8795 /* Sensitivity Analyzer.swift in Sources */,
-				F3B25EAD2CBFD9BB000C8795 /* Dickpic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +361,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS/Dickpic-macOS.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -379,6 +393,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS/Dickpic-macOS.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

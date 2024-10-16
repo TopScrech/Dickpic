@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct DickpicApp: App {
+struct Dickpic: App {
     @StateObject private var storage = SettingsStorage()
     
     var body: some Scene {
