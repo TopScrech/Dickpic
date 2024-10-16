@@ -222,7 +222,7 @@ final class PhotoLibraryVM: ObservableObject {
 extension PhotoLibraryVM {
 #if os(macOS)
     private func analyse(_ image: NSImage?) async {
-        guard let cgImage = image?.cgImage else {
+        guard let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
             await incrementProcessedPhotos()
             return
         }
@@ -230,12 +230,12 @@ extension PhotoLibraryVM {
 #if targetEnvironment(simulator)
         let isSensitive = true
 #else
-        let isSensitive = await checkImage(cgImage as! CGImage)
+        let isSensitive = await checkImage(cgImage)
 #endif
         
         if isSensitive {
             await MainActor.run {
-                self.sensitiveAssets.append(cgImage as! CGImage)
+                self.sensitiveAssets.append(cgImage)
             }
         }
         

@@ -24,11 +24,11 @@ struct PhotoLibraryView: View {
                 ScrollView {
                     LazyVGrid(columns: gridColumns) {
                         ForEach(vm.sensitiveAssets, id: \.self) { asset in
-//                            ImageRow(asset)
+                            ImageRow(asset)
                         }
                         
                         ForEach(vm.sensitiveVideos, id: \.self) { videoURL in
-//                            VideoRow(videoURL)
+                            //                            VideoRow(videoURL)
                         }
                     }
                     .animation(.default, value: vm.sensitiveAssets)
