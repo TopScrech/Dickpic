@@ -17,7 +17,7 @@ struct HomeView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }
-        .fullScreenCover(isPresented: $fullScreenCover) {
+        .fullScreenCover($fullScreenCover) {
             NavigationView {
                 IntroScreen($fullScreenCover)
             }

@@ -25,7 +25,7 @@ struct HomeView: View {
             }
         }
 #else
-        .fullScreenCover(isPresented: $fullScreenCover) {
+        .fullScreenCover($fullScreenCover) {
             NavigationView {
                 IntroScreen($fullScreenCover)
             }

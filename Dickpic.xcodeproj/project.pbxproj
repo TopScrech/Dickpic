@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -88,20 +88,16 @@
 /* Begin PBXFrameworksBuildPhase section */
 		F3B25E912CBFD97C000C8795 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				F3B25EB02CBFD9F2000C8795 /* ScrechKit in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F3ECFE4E2CA58A7100E72D41 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				F37F0AC42CA5D8F000FD99F2 /* QuickLooking in Frameworks */,
 				F37F0AB32CA5A2E800FD99F2 /* ScrechKit in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -221,8 +217,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = macOS;
 			packageProductDependencies = (
 				F3B25EAF2CBFD9F2000C8795 /* ScrechKit */,
@@ -241,8 +235,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = Dickpic;
 			packageProductDependencies = (
 				F37F0AB22CA5A2E800FD99F2 /* ScrechKit */,
@@ -260,7 +252,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					F3B25E932CBFD97C000C8795 = {
 						CreatedOnToolsVersion = 16.0;
@@ -284,7 +276,7 @@
 				F37F0AB12CA5A2E800FD99F2 /* XCRemoteSwiftPackageReference "ScrechKit" */,
 				F37F0AC22CA5D8F000FD99F2 /* XCRemoteSwiftPackageReference "QuickLooking" */,
 			);
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = F3ECFE522CA58A7100E72D41 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -298,27 +290,22 @@
 /* Begin PBXResourcesBuildPhase section */
 		F3B25E922CBFD97C000C8795 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				F3B25EAB2CBFD9BB000C8795 /* Assets.xcassets in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F3ECFE4F2CA58A7100E72D41 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				F37F0AD62CA758A400FD99F2 /* Localizable.xcstrings in Resources */,
 				F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F3B25E902CBFD97C000C8795 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				F3B25EB42CBFDAD3000C8795 /* Settings Storage.swift in Sources */,
 				F3B25EB22CBFDAB4000C8795 /* Photo Library VM.swift in Sources */,
@@ -337,11 +324,9 @@
 				F3B25EC02CBFDD14000C8795 /* App Container.swift in Sources */,
 				F3B25EB32CBFDABD000C8795 /* Sensitivity Analyzer.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F3ECFE4D2CA58A7100E72D41 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				F37F0AC82CA5DBA700FD99F2 /* Image Row VM.swift in Sources */,
 				F37F0AC02CA5D13200FD99F2 /* Big Link.swift in Sources */,
@@ -363,12 +348,11 @@
 				F37F0AD82CA7FFDE00FD99F2 /* Sheet Enable Policy.swift in Sources */,
 				F37F0ABA2CA5C58400FD99F2 /* Big Button.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		F3B25EA02CBFD97D000C8795 /* Debug */ = {
+		F3B25EA02CBFD97D000C8795 /* Debug configuration for PBXNativeTarget "macOS" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -377,8 +361,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 0;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -393,7 +377,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topscrech.Dickpic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -402,7 +385,7 @@
 			};
 			name = Debug;
 		};
-		F3B25EA12CBFD97D000C8795 /* Release */ = {
+		F3B25EA12CBFD97D000C8795 /* Release configuration for PBXNativeTarget "macOS" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -411,8 +394,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 0;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
-				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -427,7 +410,6 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topscrech.Dickpic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -436,11 +418,12 @@
 			};
 			name = Release;
 		};
-		F3ECFE5E2CA58A7100E72D41 /* Debug */ = {
+		F3ECFE5E2CA58A7100E72D41 /* Debug configuration for PBXProject "Dickpic" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -470,7 +453,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -489,6 +474,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 0.9;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -498,11 +484,12 @@
 			};
 			name = Debug;
 		};
-		F3ECFE5F2CA58A7100E72D41 /* Release */ = {
+		F3ECFE5F2CA58A7100E72D41 /* Release configuration for PBXProject "Dickpic" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -532,7 +519,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -545,6 +534,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 0.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -552,7 +542,7 @@
 			};
 			name = Release;
 		};
-		F3ECFE612CA58A7100E72D41 /* Debug */ = {
+		F3ECFE612CA58A7100E72D41 /* Debug configuration for PBXNativeTarget "Dickpic" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -560,7 +550,7 @@
 				CODE_SIGN_ENTITLEMENTS = Dickpic/Dickpic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = 8FQUA2F388;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -582,7 +572,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topscrech.Dickpic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -595,7 +584,7 @@
 			};
 			name = Debug;
 		};
-		F3ECFE622CA58A7100E72D41 /* Release */ = {
+		F3ECFE622CA58A7100E72D41 /* Release configuration for PBXNativeTarget "Dickpic" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -603,7 +592,7 @@
 				CODE_SIGN_ENTITLEMENTS = Dickpic/Dickpic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
-				DEVELOPMENT_TEAM = 8FQUA2F388;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -625,7 +614,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topscrech.Dickpic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -644,28 +632,25 @@
 		F3B25EA22CBFD97D000C8795 /* Build configuration list for PBXNativeTarget "macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F3B25EA02CBFD97D000C8795 /* Debug */,
-				F3B25EA12CBFD97D000C8795 /* Release */,
+				F3B25EA02CBFD97D000C8795 /* Debug configuration for PBXNativeTarget "macOS" */,
+				F3B25EA12CBFD97D000C8795 /* Release configuration for PBXNativeTarget "macOS" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		F3ECFE4C2CA58A7100E72D41 /* Build configuration list for PBXProject "Dickpic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F3ECFE5E2CA58A7100E72D41 /* Debug */,
-				F3ECFE5F2CA58A7100E72D41 /* Release */,
+				F3ECFE5E2CA58A7100E72D41 /* Debug configuration for PBXProject "Dickpic" */,
+				F3ECFE5F2CA58A7100E72D41 /* Release configuration for PBXProject "Dickpic" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		F3ECFE602CA58A7100E72D41 /* Build configuration list for PBXNativeTarget "Dickpic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F3ECFE612CA58A7100E72D41 /* Debug */,
-				F3ECFE622CA58A7100E72D41 /* Release */,
+				F3ECFE612CA58A7100E72D41 /* Debug configuration for PBXNativeTarget "Dickpic" */,
+				F3ECFE622CA58A7100E72D41 /* Release configuration for PBXNativeTarget "Dickpic" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
