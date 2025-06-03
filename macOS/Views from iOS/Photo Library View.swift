@@ -1,11 +1,3 @@
-//
-//  PhotoLibraryView.swift
-//  Dickpic
-//
-//  Created by Sergei Saliukov on 16/10/24.
-//
-
-
 import SwiftUI
 
 struct PhotoLibraryView: View {
@@ -28,7 +20,7 @@ struct PhotoLibraryView: View {
                         }
                         
                         ForEach(vm.sensitiveVideos, id: \.self) { videoURL in
-                            //                            VideoRow(videoURL)
+                            // VideoRow(videoURL)
                         }
                     }
                     .animation(.default, value: vm.sensitiveAssets)
@@ -46,6 +38,7 @@ struct PhotoLibraryView: View {
                 Text("Total Photos: `\(vm.totalPhotos)` (`\(vm.processedPhotos)` processed)")
                     .animation(.default, value: vm.totalPhotos)
                     .animation(.default, value: vm.processedPhotos)
+                    .numericTransition()
 #endif
                 ProgressButton("Analyze", progress: vm.progress) {
                     vm.fetchAssets()
