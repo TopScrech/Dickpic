@@ -1,4 +1,4 @@
-import SwiftUI
+import ScrechKit
 import QuickLooking
 
 struct QuickLookFile: View {
@@ -28,12 +28,10 @@ struct QuickLookFile: View {
             }
             
             if isHidden {
-                Button {
+                SFButton("eye.slash") {
                     withAnimation {
                         isHidden = false
                     }
-                } label: {
-                    Image(systemName: "eye.slash")
                 }
             }
         }
