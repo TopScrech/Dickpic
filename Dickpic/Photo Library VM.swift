@@ -13,15 +13,11 @@ final class PhotoLibraryVM: ObservableObject {
     var totalPhotos = 0
     var progress = 0.0
     
-    init() {
-        checkPermission()
-    }
-    
     var totalAssets: Int {
         sensitiveAssets.count + sensitiveVideos.count
     }
     
-    private func checkPermission() {
+    func checkPermission() {
         let status = PHPhotoLibrary.authorizationStatus()
         
         switch status {

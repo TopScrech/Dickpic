@@ -31,6 +31,9 @@ struct PhotoLibraryView: View {
             }
         }
         .navigationTitle("Photo Library")
+        .onFirstAppear {
+            vm.checkPermission()
+        }
         .sheet($vm.sheetEnablePolicy) {
             SheetEnablePolicy()
         }
