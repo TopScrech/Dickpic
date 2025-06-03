@@ -117,6 +117,16 @@
     "To enable this feature, follow these steps:" : {
 
     },
+    "Total Assets: `%lld` (`%lld` processed)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Total Assets: `%1$lld` (`%2$lld` processed)"
+          }
+        }
+      }
+    },
     "Why would I trust this app?" : {
 
     },

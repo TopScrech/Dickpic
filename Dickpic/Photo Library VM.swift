@@ -44,7 +44,9 @@ final class PhotoLibraryVM: ObservableObject {
     
     private func requestPermission() {
         PHPhotoLibrary.requestAuthorization { status in
-            guard status == .authorized || status == .limited else {
+            guard
+                status == .authorized || status == .limited
+            else {
                 main {
                     self.deniedAccess = true
                 }
@@ -194,7 +196,8 @@ final class PhotoLibraryVM: ObservableObject {
                 if let urlAsset = avAsset as? AVURLAsset {
                     continuation.resume(returning: urlAsset.url)
                 } else {
-                    continuation.resume(throwing: NSError(domain: "Invalid AVAsset", code: -1, userInfo: nil))
+                    let error = NSError(domain: "Invalid AVAsset", code: -1, userInfo: nil)
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -234,9 +237,7 @@ extension PhotoLibraryVM {
         let isSensitive = await checkImage(cgImage)
 #endif
         if isSensitive {
-            await MainActor.run {
-                self.sensitiveAssets.append(cgImage)
-            }
+            self.sensitiveAssets.append(cgImage)
         }
         
         await incrementProcessedPhotos()
