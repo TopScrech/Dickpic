@@ -43,12 +43,13 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     private func requestPermission() {
-        PHPhotoLibrary.requestAuthorization { newStatus in
-            main {
-                guard newStatus == .authorized || newStatus == .limited else {
+        PHPhotoLibrary.requestAuthorization { status in
+            guard status == .authorized || status == .limited else {
+                main {
                     self.deniedAccess = true
-                    return
                 }
+                
+                return
             }
         }
     }
@@ -144,7 +145,6 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     // MARK: Image
-    
     func checkImage(_ image: CGImage) async -> Bool {
         do {
             return try await analyzer.checkImage(image)
