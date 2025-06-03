@@ -16,7 +16,7 @@
 //            throw NSError(
 //                domain: "ImageConversionError",
 //                code: 1001,
-//                userInfo: [NSLocalizedDescriptionKey: "Failed to convert UIImage to PNG data."]
+//                userInfo: [NSLocalizedDescriptionKey: "Failed to convert UIImage to PNG data"]
 //            )
 //        }
 //        
