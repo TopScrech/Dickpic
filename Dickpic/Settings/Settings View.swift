@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject private var storage: SettingsStorage
+    @EnvironmentObject private var storage: ValueStore
     
     @Binding private var fullScreenCover: Bool
     
@@ -46,5 +46,5 @@ struct SettingsView: View {
     @Previewable @State var fullScreenCover = false
     
     SettingsView($fullScreenCover)
-        .environmentObject(SettingsStorage())
+        .environmentObject(ValueStore())
 }

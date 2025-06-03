@@ -72,7 +72,7 @@ final class PhotoLibraryVM: ObservableObject {
         
         var allPhotos: PHFetchResult<PHAsset>
         
-        if SettingsStorage().analyzeVideos {
+        if ValueStore().analyzeVideos {
             allPhotos = PHAsset.fetchAssets(with: fetchOptions)
         } else {
             allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
@@ -101,7 +101,7 @@ final class PhotoLibraryVM: ObservableObject {
             
             let maxConcurrentTasks: Int
             
-            if SettingsStorage().analyzeConcurrently {
+            if ValueStore().analyzeConcurrently {
                 maxConcurrentTasks = ProcessInfo.processInfo.activeProcessorCount
             } else {
                 maxConcurrentTasks = 1
@@ -273,7 +273,7 @@ extension PhotoLibraryVM {
             options.deliveryMode = .highQualityFormat
             options.isSynchronous = false
             options.resizeMode = .none
-            options.isNetworkAccessAllowed = SettingsStorage().downloadOriginals
+            options.isNetworkAccessAllowed = ValueStore().downloadOriginals
             
             manager.requestImage(
                 for: asset,

@@ -2,11 +2,14 @@ import SwiftUI
 
 struct PhotoLibraryView: View {
     @State private var vm = PhotoLibraryVM()
-    @EnvironmentObject private var storage: SettingsStorage
+    @EnvironmentObject private var storage: ValueStore
     
     private static let initialColumns = 3
     
-    @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
+    @State private var gridColumns = Array(
+        repeating: GridItem(.flexible()),
+        count: initialColumns
+    )
     
     var body: some View {
         VStack {
@@ -53,5 +56,5 @@ struct PhotoLibraryView: View {
 
 #Preview {
     PhotoLibraryView()
-        .environmentObject(SettingsStorage())
+        .environmentObject(ValueStore())
 }
