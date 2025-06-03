@@ -129,10 +129,10 @@ final class PhotoLibraryVM: ObservableObject {
         switch asset.mediaType {
         case .image:
             do {
-                let image = try await fetchImage(for: asset)
+                let image = try await fetchAsset(asset)
                 await analyse(image)
             } catch {
-                print("Error fetching image: \(error.localizedDescription)")
+                print("Error fetching image:", error.localizedDescription)
             }
             
         case .video:
@@ -158,20 +158,18 @@ final class PhotoLibraryVM: ObservableObject {
     private func analyzeVideo(_ asset: PHAsset) async {
         do {
             let url = try await fetchVideoURL(asset)
-            
 #if targetEnvironment(simulator)
             let isSensitive = true
 #else
             let isSensitive = await checkVideo(url)
 #endif
-            
             if isSensitive {
                 await MainActor.run {
                     self.sensitiveVideos.append(url)
                 }
             }
         } catch {
-            print("Error fetching video: \(error.localizedDescription)")
+            print("Error fetching video:", error.localizedDescription)
         }
         
         await incrementProcessedPhotos()
@@ -205,7 +203,7 @@ final class PhotoLibraryVM: ObservableObject {
             let isSensitive = try await analyzer.checkVideo(url)
             return isSensitive
         } catch {
-            print("Failed to check video: \(error.localizedDescription)")
+            print("Failed to check video:", error.localizedDescription)
             return false
         }
     }
@@ -218,11 +216,14 @@ final class PhotoLibraryVM: ObservableObject {
     }
 }
 
-#warning("Extract")
 extension PhotoLibraryVM {
+    private func analyse(_ image: UniversalImage?) async {
 #if os(macOS)
-    private func analyse(_ image: NSImage?) async {
-        guard let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
+        let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil)
+#else
+        let cgImage = image?.cgImage
+#endif
+        guard let cgImage else {
             await incrementProcessedPhotos()
             return
         }
@@ -232,7 +233,6 @@ extension PhotoLibraryVM {
 #else
         let isSensitive = await checkImage(cgImage)
 #endif
-        
         if isSensitive {
             await MainActor.run {
                 self.sensitiveAssets.append(cgImage)
@@ -241,57 +241,8 @@ extension PhotoLibraryVM {
         
         await incrementProcessedPhotos()
     }
-#else
-    private func analyse(_ image: UIImage?) async {
-        guard let cgImage = image?.cgImage else {
-            await incrementProcessedPhotos()
-            return
-        }
-        
-#if targetEnvironment(simulator)
-        let isSensitive = true
-#else
-        let isSensitive = await checkImage(cgImage)
-#endif
-        
-        if isSensitive {
-            await MainActor.run {
-                self.sensitiveAssets.append(cgImage)
-            }
-        }
-        
-        await incrementProcessedPhotos()
-    }
-#endif
     
-#if os(macOS)
-    private func fetchImage(for asset: PHAsset) async throws -> NSImage? {
-        try await withCheckedThrowingContinuation { continuation in
-            let manager = PHImageManager.default()
-            let options = PHImageRequestOptions()
-            
-            options.deliveryMode = .highQualityFormat
-            options.isSynchronous = false
-            options.resizeMode = .none
-            options.isNetworkAccessAllowed = ValueStore().downloadOriginals
-            
-            manager.requestImage(
-                for: asset,
-                targetSize: PHImageManagerMaximumSize,
-                contentMode: .aspectFit,
-                options: options
-            ) { result, info in
-                if let info, let error = info[PHImageErrorKey] as? Error {
-                    continuation.resume(throwing: error)
-                    return
-                }
-                
-                continuation.resume(returning: result)
-            }
-        }
-    }
-#else
-    private func fetchImage(for asset: PHAsset) async throws -> UIImage? {
+    private func fetchAsset(_ asset: PHAsset) async throws -> UniversalImage? {
         try await withCheckedThrowingContinuation { continuation in
             let manager = PHImageManager.default()
             let options = PHImageRequestOptions()
@@ -317,5 +268,4 @@ extension PhotoLibraryVM {
             }
         }
     }
-#endif
 }

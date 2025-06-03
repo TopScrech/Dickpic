@@ -22,7 +22,7 @@ struct ImageRow: View {
                 do {
                     try vm.saveImageToTemporaryDirectory(uiImage)
                 } catch {
-                    print("Saving failed: \(error.localizedDescription)")
+                    print("Saving failed:", error.localizedDescription)
                 }
             }
         } label: {
