@@ -16,18 +16,21 @@ final class ImageRowVM {
             throw NSError(
                 domain: "ImageConversionError",
                 code: 1001,
-                userInfo: [NSLocalizedDescriptionKey: "Failed to convert UIImage to PNG data."]
+                userInfo: [
+                    NSLocalizedDescriptionKey: "Failed to convert UIImage to PNG data"
+                ]
             )
         }
         
         do {
             try imageData.write(to: fileURL, options: .atomic)
-            
         } catch {
             throw NSError(
                 domain: "FileWriteError",
                 code: 1002,
-                userInfo: [NSLocalizedDescriptionKey: "Failed to write image data to temporary directory. \(error.localizedDescription)"]
+                userInfo: [
+                    NSLocalizedDescriptionKey: "Failed to write image data to temporary directory: \(error.localizedDescription)"
+                ]
             )
         }
         

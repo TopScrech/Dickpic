@@ -307,6 +307,7 @@ extension PhotoLibraryVM {
                 contentMode: .aspectFit,
                 options: options
             ) { result, info in
+                
                 if let info, let error = info[PHImageErrorKey] as? Error {
                     continuation.resume(throwing: error)
                     return
