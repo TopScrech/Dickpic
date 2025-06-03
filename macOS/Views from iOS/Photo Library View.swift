@@ -39,12 +39,11 @@ struct PhotoLibraryView: View {
         }
         .safeAreaInset(edge: .bottom) {
             VStack {
-#if DEBUG
-                Text("Total Photos: `\(vm.totalPhotos)` (`\(vm.processedAssets)` processed)")
+                Text("Total Assets: `\(vm.totalPhotos)` (`\(vm.processedAssets)` processed)")
                     .animation(.default, value: vm.totalPhotos)
                     .animation(.default, value: vm.processedAssets)
                     .numericTransition()
-#endif
+                
                 ProgressButton("Analyze", progress: vm.progress) {
                     Task {
                         await vm.fetchAssets()
