@@ -69,16 +69,16 @@
 		F3A072702CBFE3900080C51D /* Image Row VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image Row VM.swift"; sourceTree = "<group>"; };
 		F3B25E942CBFD97C000C8795 /* macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F3B25EA72CBFD9BB000C8795 /* Dickpic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dickpic.entitlements; sourceTree = "<group>"; };
-		F3B25EB12CBFDA08000C8795 /* Dickpic-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Dickpic-macOS.plist"; sourceTree = "<group>"; };
+		F3B25EA72CBFD9BB000C8795 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		F3B25EB12CBFDA08000C8795 /* macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = macOS.plist; sourceTree = "<group>"; };
 		F3B25EBC2CBFDC6E000C8795 /* Home View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home View.swift"; sourceTree = "<group>"; };
 		F3B25EC12CBFDD55000C8795 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
 		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3ECFE652CA58A8000E72D41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
-		F3ECFE672CA58A8000E72D41 /* Dickpic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dickpic.entitlements; sourceTree = "<group>"; };
+		F3ECFE672CA58A8000E72D41 /* iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOS.entitlements; sourceTree = "<group>"; };
 		F3ECFE682CA58A8000E72D41 /* Dickpic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dickpic.swift; sourceTree = "<group>"; };
-		F3ECFE6E2CA58CFB00E72D41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3ECFE6E2CA58CFB00E72D41 /* iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iOS.plist; sourceTree = "<group>"; };
 		F3ECFE6F2CA5960200E72D41 /* Image Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image Row.swift"; sourceTree = "<group>"; };
 		F3ECFE712CA5961400E72D41 /* Photo Library VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library VM.swift"; sourceTree = "<group>"; };
 		F3ECFE732CA5967C00E72D41 /* App Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App Container.swift"; sourceTree = "<group>"; };
@@ -133,9 +133,9 @@
 		F3B25EA92CBFD9BB000C8795 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				F3B25EB12CBFDA08000C8795 /* macOS.plist */,
+				F3B25EA72CBFD9BB000C8795 /* macOS.entitlements */,
 				F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */,
-				F3B25EB12CBFDA08000C8795 /* Dickpic-macOS.plist */,
-				F3B25EA72CBFD9BB000C8795 /* Dickpic.entitlements */,
 				F3B25EC32CBFDD5D000C8795 /* Views from iOS */,
 			);
 			path = macOS;
@@ -184,9 +184,9 @@
 				F3ECFE682CA58A8000E72D41 /* Dickpic.swift */,
 				F37F0ACB2CA6821800FD99F2 /* Settings Storage.swift */,
 				F3B25E8F2CBFD5C9000C8795 /* Nav */,
+				F3ECFE6E2CA58CFB00E72D41 /* iOS.plist */,
+				F3ECFE672CA58A8000E72D41 /* iOS.entitlements */,
 				F3ECFE652CA58A8000E72D41 /* Assets.xcassets */,
-				F3ECFE6E2CA58CFB00E72D41 /* Info.plist */,
-				F3ECFE672CA58A8000E72D41 /* Dickpic.entitlements */,
 				F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */,
 				F37F0ABB2CA5CD9100FD99F2 /* Home View.swift */,
 				F37F0AB62CA5B7F400FD99F2 /* Intro */,
@@ -357,7 +357,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/Dickpic.entitlements;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 0;
@@ -366,7 +366,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "macOS/Dickpic-macOS.plist";
+				INFOPLIST_FILE = macOS/macOS.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
@@ -390,7 +390,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/Dickpic.entitlements;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 0;
@@ -399,7 +399,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "macOS/Dickpic-macOS.plist";
+				INFOPLIST_FILE = macOS/macOS.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
@@ -547,14 +547,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Dickpic/Dickpic.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Dickpic/iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Dickpic/Info.plist;
+				INFOPLIST_FILE = Dickpic/iOS.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
@@ -589,14 +589,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Dickpic/Dickpic.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Dickpic/iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 0;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Dickpic/Info.plist;
+				INFOPLIST_FILE = Dickpic/iOS.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
