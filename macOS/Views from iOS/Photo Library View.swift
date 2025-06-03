@@ -14,7 +14,7 @@ struct PhotoLibraryView: View {
     var body: some View {
         VStack {
             if vm.deniedAccess {
-                Text("Access to the photo library has been denied. Please enable access in settings.")
+                Text("Access to the photo library has been denied. Please enable access in settings")
             } else {
                 ScrollView {
                     LazyVGrid(columns: gridColumns) {
