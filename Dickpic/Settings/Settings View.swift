@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject private var storage: ValueStore
+    @EnvironmentObject private var store: ValueStore
     
     @Binding private var fullScreenCover: Bool
     
@@ -11,7 +11,7 @@ struct SettingsView: View {
     
     var body: some View {
         List {
-            Toggle(isOn: $storage.analyzeVideos) {
+            Toggle(isOn: $store.analyzeVideos) {
                 Text("Analyze videos")
             }
             
@@ -20,12 +20,12 @@ struct SettingsView: View {
             //                Text("Include hidden assets")
             //            }
             
-            Toggle(isOn: $storage.downloadOriginals) {
+            Toggle(isOn: $store.downloadOriginals) {
                 Text("Download original images")
                 Text("In case the images are offloaded to iCloud")
             }
             
-            Toggle(isOn: $storage.analyzeConcurrently) {
+            Toggle(isOn: $store.analyzeConcurrently) {
                 Text("Analyze concurrently")
                 Text("Speeds up the analysis")
             }

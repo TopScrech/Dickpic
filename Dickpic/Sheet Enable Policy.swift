@@ -17,7 +17,6 @@ struct SheetEnablePolicy: View {
                 Text("To enable this feature, follow these steps:")
                     .title3(.semibold)
                     .padding(.vertical)
-                
 #if os(macOS)
                 Text("1. Open Settings")
 #else
@@ -31,7 +30,6 @@ struct SheetEnablePolicy: View {
                 }
                 .foregroundStyle(.foreground)
 #endif
-                
                 Text("2. Navigate to **Privacy & Security**, scroll down and select **Sensetive Content Warning**")
                 
                 Text("3. Turn on the switch and return to the app")

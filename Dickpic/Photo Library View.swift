@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PhotoLibraryView: View {
     @State private var vm = PhotoLibraryVM()
-    @EnvironmentObject private var storage: SettingsStorage
+    @EnvironmentObject private var store: ValueStore
     
     private static let initialColumns = 3
     @State private var gridColumns = Array(repeating: GridItem(.flexible()), count: initialColumns)
@@ -38,7 +38,6 @@ struct PhotoLibraryView: View {
                     .animation(.default, value: vm.totalPhotos)
                     .animation(.default, value: vm.processedPhotos)
 #endif
-                
                 ProgressButton("Analyze", progress: vm.progress) {
                     vm.fetchAssets()
                 }
@@ -50,5 +49,5 @@ struct PhotoLibraryView: View {
 
 #Preview {
     PhotoLibraryView()
-        .environmentObject(SettingsStorage())
+        .environmentObject(ValueStore())
 }

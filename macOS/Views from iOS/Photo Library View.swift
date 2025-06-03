@@ -2,7 +2,7 @@ import SwiftUI
 
 struct PhotoLibraryView: View {
     @State private var vm = PhotoLibraryVM()
-    @EnvironmentObject private var storage: ValueStore
+    @EnvironmentObject private var store: ValueStore
     
     private static let initialColumns = 3
     

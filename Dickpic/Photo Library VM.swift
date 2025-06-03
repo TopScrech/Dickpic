@@ -299,7 +299,7 @@ extension PhotoLibraryVM {
             options.deliveryMode = .highQualityFormat
             options.isSynchronous = false
             options.resizeMode = .none
-            options.isNetworkAccessAllowed = SettingsStorage().downloadOriginals
+            options.isNetworkAccessAllowed = ValueStore().downloadOriginals
             
             manager.requestImage(
                 for: asset,
