@@ -9,12 +9,16 @@ final class PhotoLibraryVM: ObservableObject {
     var sensitiveVideos: [URL] = []
     var deniedAccess = false
     var sheetEnablePolicy = false
-    var processedPhotos = 0
+    var processedAssets = 0
     var totalPhotos = 0
     var progress = 0.0
     
     init() {
         checkPermission()
+    }
+    
+    var totalAssets: Int {
+        sensitiveAssets.count + sensitiveVideos.count
     }
     
     private func checkPermission() {
@@ -54,7 +58,7 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    func fetchAssets() {
+    func fetchAssets() async {
         guard analyzer.checkPolicy() else {
             sheetEnablePolicy = true
             return
@@ -62,16 +66,16 @@ final class PhotoLibraryVM: ObservableObject {
         
         progress = 0
         totalPhotos = 0
-        processedPhotos = 0
+        processedAssets = 0
         sensitiveAssets.removeAll()
         sensitiveVideos.removeAll()
         
         let fetchOptions = PHFetchOptions()
+        var allPhotos: PHFetchResult<PHAsset>
+        
         fetchOptions.sortDescriptors = [
             NSSortDescriptor(key: "creationDate", ascending: false)
         ]
-        
-        var allPhotos: PHFetchResult<PHAsset>
         
         if ValueStore().analyzeVideos {
             allPhotos = PHAsset.fetchAssets(with: fetchOptions)
@@ -91,9 +95,7 @@ final class PhotoLibraryVM: ObservableObject {
             assets.append(asset)
         }
         
-        Task {
-            await processAssets(assets)
-        }
+        await processAssets(assets)
     }
     
     private func processAssets(_ assets: [PHAsset]) async {
@@ -183,7 +185,11 @@ final class PhotoLibraryVM: ObservableObject {
             options.isNetworkAccessAllowed = false
             options.version = .current
             
-            manager.requestAVAsset(forVideo: asset, options: options) { avAsset, _, info in
+            manager.requestAVAsset(
+                forVideo: asset,
+                options: options
+            ) { avAsset, _, info in
+                
                 if let info, let error = info[PHImageErrorKey] as? Error {
                     continuation.resume(throwing: error)
                     return
@@ -209,10 +215,8 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     private func incrementProcessedPhotos() async {
-        await MainActor.run {
-            self.processedPhotos += 1
-            self.progress = Double(self.processedPhotos) / Double(self.totalPhotos)
-        }
+        processedAssets += 1
+        progress = Double(processedAssets) / Double(totalPhotos)
     }
 }
 

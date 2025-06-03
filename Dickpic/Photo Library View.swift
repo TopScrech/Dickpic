@@ -18,12 +18,11 @@ struct PhotoLibraryView: View {
                             ImageRow(asset)
                         }
                         
-                        ForEach(vm.sensitiveVideos, id: \.self) { videoURL in
-                            VideoRow(videoURL)
+                        ForEach(vm.sensitiveVideos, id: \.self) { videoUrl in
+                            VideoRow(videoUrl)
                         }
                     }
-                    .animation(.default, value: vm.sensitiveAssets)
-                    .animation(.default, value: vm.sensitiveVideos)
+                    .animation(.default, value: vm.totalAssets)
                 }
             }
         }
@@ -34,12 +33,14 @@ struct PhotoLibraryView: View {
         .safeAreaInset(edge: .bottom) {
             VStack {
 #if DEBUG
-                Text("Total Photos: `\(vm.totalPhotos)` (`\(vm.processedPhotos)` processed)")
+                Text("Total Assets: `\(vm.totalPhotos)` (`\(vm.processedAssets)` processed)")
                     .animation(.default, value: vm.totalPhotos)
-                    .animation(.default, value: vm.processedPhotos)
+                    .animation(.default, value: vm.processedAssets)
 #endif
                 ProgressButton("Analyze", progress: vm.progress) {
-                    vm.fetchAssets()
+                    Task {
+                        await vm.fetchAssets()
+                    }
                 }
             }
             .padding(.bottom, 5)
