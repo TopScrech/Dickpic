@@ -47,12 +47,13 @@ struct PhotoLibraryView: View {
                     .animation(.default, value: vm.totalPhotos)
                     .animation(.default, value: vm.processedPhotos)
 #endif
-                
                 ProgressButton("Analyze", progress: vm.progress) {
                     vm.fetchAssets()
                 }
             }
-            .padding(.bottom, 5)
+            .padding(8)
+            .padding(.vertical, 8)
+            .buttonStyle(.plain)
         }
     }
 }
