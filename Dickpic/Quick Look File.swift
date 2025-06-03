@@ -18,7 +18,7 @@ struct QuickLookFile: View {
                     .animation(.default, value: url)
             }
         }
-        //                .navigationTitle(name)
+        //        .navigationTitle(name)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .blur(radius: isHidden ? 10 : 0)
         .ignoresSafeArea(edges: .bottom)
