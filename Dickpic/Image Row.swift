@@ -19,11 +19,7 @@ struct ImageRow: View {
     var body: some View {
         Menu {
             Button("Preview") {
-                do {
-                    try vm.saveImageToTemporaryDirectory(uiImage)
-                } catch {
-                    print("Saving failed:", error.localizedDescription)
-                }
+                preview()
             }
         } label: {
             Rectangle()
@@ -46,5 +42,12 @@ struct ImageRow: View {
             QuickLookFile(vm.url)
         }
     }
+    
+    private func preview() {
+        do {
+            try vm.saveImageToTemporaryDirectory(uiImage)
+        } catch {
+            print("Saving failed:", error.localizedDescription)
+        }
+    }
 }
-

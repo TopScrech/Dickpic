@@ -35,7 +35,6 @@ final class ImageRowVM {
         }
         
         url = fileURL
-        
         showPreview = true
     }
 }
