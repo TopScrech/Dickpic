@@ -72,7 +72,9 @@ struct PhotoLibraryView: View {
                         vm.cancelProcessing()
                     } else {
                         Task {
-                            await vm.fetchAssets()
+                            await vm.fetchAssets(
+                                analyzeConcurrently: store.analyzeConcurrently
+                            )
                         }
                     }
                 }

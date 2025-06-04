@@ -68,7 +68,7 @@ final class PhotoLibraryVM: ObservableObject {
         isProcessing = true
     }
     
-    func fetchAssets() async {
+    func fetchAssets(analyzeConcurrently: Bool) async {
         isProcessing = true
         
         // Cancel previous task
@@ -110,20 +110,20 @@ final class PhotoLibraryVM: ObservableObject {
             assets.append(asset)
         }
         
+        let maxConcurrentTasks = analyzeConcurrently
+        ? ProcessInfo.processInfo.activeProcessorCount
+        : 1
+        
         processAssetsTask = Task {
-            await processAssets(assets)
+            await processAssets(assets, maxConcurrentTasks: maxConcurrentTasks)
             
             isProcessing = false
         }
     }
     
-    private func processAssets(_ assets: [PHAsset]) async {
+    private func processAssets(_ assets: [PHAsset], maxConcurrentTasks: Int) async {
         await withTaskGroup(of: Void.self) { group in
             var iterator = assets.makeIterator()
-            
-            let maxConcurrentTasks = ValueStore().analyzeConcurrently
-            ? ProcessInfo.processInfo.activeProcessorCount
-            : 1
             
             for _ in 0..<maxConcurrentTasks {
                 if let asset = iterator.next() {
