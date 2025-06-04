@@ -218,7 +218,10 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    private func fetchVideoURL(_ asset: PHAsset) async throws -> URL {
+    private func fetchVideoURL(
+        _ asset: PHAsset
+    ) async throws -> URL {
+        
         try await withCheckedThrowingContinuation { continuation in
             let manager = PHImageManager.default()
             let options = PHVideoRequestOptions()
