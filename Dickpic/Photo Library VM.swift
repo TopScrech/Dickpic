@@ -143,7 +143,7 @@ final class PhotoLibraryVM: ObservableObject {
                             return
                         }
                         
-                        await self?.fetchAndAnalyze(asset)
+                        await self?.analyzeAsset(asset)
                     }
                 }
             }
@@ -160,13 +160,13 @@ final class PhotoLibraryVM: ObservableObject {
                         return
                     }
                     
-                    await self?.fetchAndAnalyze(asset)
+                    await self?.analyzeAsset(asset)
                 }
             }
         }
     }
     
-    private func fetchAndAnalyze(_ asset: PHAsset) async {
+    private func analyzeAsset(_ asset: PHAsset) async {
         guard !Task.isCancelled else {
             return
         }
