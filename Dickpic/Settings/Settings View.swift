@@ -22,11 +22,13 @@ struct SettingsView: View {
             
             Toggle(isOn: $store.downloadOriginals) {
                 Text("Download original images")
+                
                 Text("In case the images are offloaded to iCloud")
             }
             
             Toggle(isOn: $store.analyzeConcurrently) {
                 Text("Analyze concurrently")
+                
                 Text("Speeds up the analysis")
             }
 #if DEBUG
