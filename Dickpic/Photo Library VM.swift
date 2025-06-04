@@ -184,7 +184,7 @@ final class PhotoLibraryVM: ObservableObject {
             await analyzeVideo(asset)
             
         default:
-            await incrementProcessedPhotos()
+            await incrementProcessedPhotos(false)
         }
     }
     
@@ -210,11 +210,12 @@ final class PhotoLibraryVM: ObservableObject {
             if isSensitive {
                 sensitiveVideos.append(url)
             }
+            
+            await incrementProcessedPhotos()
         } catch {
+            await incrementProcessedPhotos(false)
             print("Error fetching video:", error.localizedDescription)
         }
-        
-        await incrementProcessedPhotos()
     }
     
     private func fetchVideoURL(_ asset: PHAsset) async throws -> URL {
@@ -255,8 +256,11 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    private func incrementProcessedPhotos() async {
-        processedAssets += 1
+    private func incrementProcessedPhotos(_ isSuccess: Bool = true) async {
+        if isSuccess {
+            processedAssets += 1
+        }
+        
         progress = Double(processedAssets) / Double(assetCount)
     }
 }
@@ -269,7 +273,7 @@ extension PhotoLibraryVM {
         let cgImage = image?.cgImage
 #endif
         guard let cgImage else {
-            await incrementProcessedPhotos()
+            await incrementProcessedPhotos(false)
             return
         }
         
