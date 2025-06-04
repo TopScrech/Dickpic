@@ -8,11 +8,13 @@ struct HomeView: View {
     var body: some View {
         TabView(selection: $store.selectedTab) {
             PhotoLibraryView()
+                .tag(0)
                 .tabItem {
                     Label("Analysis", systemImage: "eye.slash")
                 }
             
             SettingsView($fullScreenCover)
+                .tag(1)
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
