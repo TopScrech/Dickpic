@@ -7,14 +7,14 @@ struct PhotoLibraryView: View {
     private static let initialColumns = 3
     
 #if os(macOS)
-    private var gridColumns: [GridItem] {[
-        GridItem(.adaptive(minimum: 160, maximum: 160))
-    ]}
+    private let gridItemSize = 160.0
 #else
-    private var gridColumns: [GridItem] {[
-        GridItem(.adaptive(minimum: 120, maximum: 120))
-    ]}
+    private let gridItemSize = 120.0
 #endif
+    
+    private var gridColumns: [GridItem] {[
+        GridItem(.adaptive(minimum: gridItemSize, maximum: gridItemSize))
+    ]}
     
     var body: some View {
         VStack {
