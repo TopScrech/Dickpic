@@ -56,11 +56,20 @@ struct PhotoLibraryView: View {
                     .animation(.default, value: vm.processedAssets)
                     .numericTransition()
                 
-                ProgressButton("Analyze", progress: vm.progress) {
-                    Task {
-                        await vm.fetchAssets()
+                ProgressButton(
+                    vm.isProcessing ? "Cancel" : "Analyze",
+                    color: vm.isProcessing ? .red : .blue,
+                    progress: vm.progress
+                ) {
+                    if vm.isProcessing {
+                        vm.cancelProcessing()
+                    } else {
+                        Task {
+                            await vm.fetchAssets()
+                        }
                     }
                 }
+                .disabled(vm.isProcessing && vm.progress > 0.95)
             }
 #if os(macOS)
             .padding(8)

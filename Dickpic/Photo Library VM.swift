@@ -13,9 +13,13 @@ final class PhotoLibraryVM: ObservableObject {
     var totalPhotos = 0
     var progress = 0.0
     
+    var processAssetsTask: Task<Void, Never>?
+    
     var totalAssets: Int {
         sensitiveAssets.count + sensitiveVideos.count
     }
+    
+    var isProcessing = false
     
     func checkPermission() async {
         let status = PHPhotoLibrary.authorizationStatus()
@@ -56,7 +60,17 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
+    func cancelProcessing() {
+        processAssetsTask?.cancel()
+        isProcessing = true
+    }
+    
     func fetchAssets() async {
+        isProcessing = true
+        
+        // Cancel any previous task
+        processAssetsTask?.cancel()
+        
         guard analyzer.checkPolicy() else {
             sheetEnablePolicy = true
             return
@@ -93,33 +107,45 @@ final class PhotoLibraryVM: ObservableObject {
             assets.append(asset)
         }
         
-        await processAssets(assets)
+        processAssetsTask = Task {
+            await processAssets(assets)
+            
+            isProcessing = false
+        }
     }
     
     private func processAssets(_ assets: [PHAsset]) async {
         await withTaskGroup(of: Void.self) { group in
             var iterator = assets.makeIterator()
             
-            let maxConcurrentTasks: Int
-            
-            if ValueStore().analyzeConcurrently {
-                maxConcurrentTasks = ProcessInfo.processInfo.activeProcessorCount
-            } else {
-                maxConcurrentTasks = 1
-            }
+            let maxConcurrentTasks = ValueStore().analyzeConcurrently
+            ? ProcessInfo.processInfo.activeProcessorCount
+            : 1
             
             for _ in 0..<maxConcurrentTasks {
                 if let asset = iterator.next() {
                     group.addTask(priority: .userInitiated) { [weak self] in
+                        guard !Task.isCancelled else {
+                            return
+                        }
+                        
                         await self?.fetchAndAnalyze(asset)
                     }
                 }
             }
             
             while let asset = iterator.next() {
+                guard !Task.isCancelled else {
+                    break
+                }
+                
                 await group.next()
                 
                 group.addTask(priority: .userInitiated) { [weak self] in
+                    guard !Task.isCancelled else {
+                        return
+                    }
+                    
                     await self?.fetchAndAnalyze(asset)
                 }
             }
@@ -127,6 +153,10 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     private func fetchAndAnalyze(_ asset: PHAsset) async {
+        guard !Task.isCancelled else {
+            return
+        }
+        
         switch asset.mediaType {
         case .image:
             do {
