@@ -25,7 +25,7 @@ struct IntroScreen2: View {
                     Text("🙈")
                         .fontSize(32)
                     
-                    Text("Assets from the **hidden** folder are not scanned unless you explicitly opt-in")
+                    Text("Assets from the **hidden** album are not scanned")
                 }
                 .secondary()
                 .padding(.horizontal)
