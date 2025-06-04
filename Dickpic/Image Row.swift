@@ -1,4 +1,4 @@
-import SwiftUI
+import ScrechKit
 import QuickLooking
 
 struct ImageRow: View {
@@ -10,8 +10,8 @@ struct ImageRow: View {
         self.image = image
     }
     
-    private var uiImage: UIImage {
-        UIImage(cgImage: image)
+    private var uiImage: UniversalImage {
+        UniversalImage(cgImage: image)
     }
     
     @State private var isHidden = true

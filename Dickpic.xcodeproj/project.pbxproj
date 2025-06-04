@@ -24,7 +24,6 @@
 		F37F0AD62CA758A400FD99F2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */; };
 		F37F0AD82CA7FFDE00FD99F2 /* Sheet Enable Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */; };
 		F3A0726E2CBFE3510080C51D /* Image Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A0726D2CBFE3510080C51D /* Image Row.swift */; };
-		F3A072712CBFE3900080C51D /* Image Row VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A072702CBFE3900080C51D /* Image Row VM.swift */; };
 		F3B25EAB2CBFD9BB000C8795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */; };
 		F3B25EB02CBFD9F2000C8795 /* ScrechKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3B25EAF2CBFD9F2000C8795 /* ScrechKit */; };
 		F3B25EB22CBFDAB4000C8795 /* Photo Library VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE712CA5961400E72D41 /* Photo Library VM.swift */; };
@@ -66,7 +65,6 @@
 		F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sheet Enable Policy.swift"; sourceTree = "<group>"; };
 		F3A0726D2CBFE3510080C51D /* Image Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image Row.swift"; sourceTree = "<group>"; };
-		F3A072702CBFE3900080C51D /* Image Row VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image Row VM.swift"; sourceTree = "<group>"; };
 		F3B25E942CBFD97C000C8795 /* macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3B25EA72CBFD9BB000C8795 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 				F3B25EBC2CBFDC6E000C8795 /* Home View.swift */,
 				F3B25EC12CBFDD55000C8795 /* Photo Library View.swift */,
 				F3A0726D2CBFE3510080C51D /* Image Row.swift */,
-				F3A072702CBFE3900080C51D /* Image Row VM.swift */,
 			);
 			path = "Views from iOS";
 			sourceTree = "<group>";
@@ -316,7 +313,6 @@
 				F3B25EB62CBFDC2C000C8795 /* Big Button.swift in Sources */,
 				F3B25EBE2CBFDC84000C8795 /* Settings View.swift in Sources */,
 				F3B25EBD2CBFDC6E000C8795 /* Home View.swift in Sources */,
-				F3A072712CBFE3900080C51D /* Image Row VM.swift in Sources */,
 				F3B25EB72CBFDC2C000C8795 /* Intro Screen 2.swift in Sources */,
 				F3B25EB82CBFDC2C000C8795 /* Progress Button.swift in Sources */,
 				F3B25EC22CBFDD55000C8795 /* Photo Library View.swift in Sources */,
