@@ -58,10 +58,14 @@ struct PhotoLibraryView: View {
                 HStack(spacing: 0) {
                     Text("Processed: \(vm.processedAssets)")
                     
-                    Text("(\(vm.processedPercent)%)")
+                    Text(" / \(vm.processedPercent)%")
                 }
                 .animation(.default, value: vm.processedAssets)
                 .numericTransition()
+                
+                if let processingTime = vm.processingTime {
+                    Text("Processing time: \(processingTime)s")
+                }
                 
                 ProgressButton(
                     vm.isProcessing ? "Cancel" : "Analyze",

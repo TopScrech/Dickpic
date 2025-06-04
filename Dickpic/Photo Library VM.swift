@@ -12,6 +12,7 @@ final class PhotoLibraryVM: ObservableObject {
     var processedAssets = 0
     var assetCount = 0
     var progress = 0.0
+    var processingTime: Int?
     
     var processAssetsTask: Task<Void, Never>?
     
@@ -70,6 +71,7 @@ final class PhotoLibraryVM: ObservableObject {
     
     func fetchAssets(analyzeConcurrently: Bool) async {
         isProcessing = true
+        processingTime = nil
         
         // Cancel previous task
         processAssetsTask?.cancel()
