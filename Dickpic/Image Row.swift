@@ -10,8 +10,18 @@ struct ImageRow: View {
         self.image = image
     }
     
-    private var uiImage: UniversalImage {
+    private var universalImage: UniversalImage {
+#if os(iOS)
         UniversalImage(cgImage: image)
+#elseif os(macOS)
+        UniversalImage(
+            cgImage: image,
+            size: NSSize(
+                width: 256,
+                height: 256
+            )
+        )
+#endif
     }
     
     @State private var isHidden = true
@@ -26,11 +36,18 @@ struct ImageRow: View {
                 .aspectRatio(1, contentMode: .fit)
                 .foregroundColor(.clear)
                 .overlay {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFill()
-                        .clipped()
-                        .cornerRadius(8)
+                    Group {
+#if os(macOS)
+                        Image(nsImage: universalImage)
+                            .resizable()
+#else
+                        Image(uiImage: uiImage)
+                            .resizable()
+#endif
+                    }
+                    .scaledToFill()
+                    .clipped()
+                    .cornerRadius(8)
                 }
                 .cornerRadius(8)
                 .blur(radius: isHidden ? 5 : 0)
@@ -38,14 +55,19 @@ struct ImageRow: View {
         } primaryAction: {
             isHidden.toggle()
         }
+#if os(macOS)
+        .quickLookPreview($vm.showPreview, url: vm.url, blur: false)
+        //        .quickLookPreview($showPreview, url: vm.url, blur: isHidden)
+#else
         .sheet($vm.showPreview) {
             QuickLookFile(vm.url)
         }
+#endif
     }
     
     private func preview() {
         do {
-            try vm.saveImageToTemporaryDirectory(uiImage)
+            try vm.saveImageToTemporaryDirectory(universalImage)
         } catch {
             print("Saving failed:", error.localizedDescription)
         }
