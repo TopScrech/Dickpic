@@ -66,9 +66,11 @@ struct ImageRow: View {
             .onTapGesture {
                 isHidden.toggle()
             }
+#if os(macOS)
             .onLongPressGesture {
                 preview()
             }
+#endif
             .contextMenu {
                 Button("Preview") {
                     preview()
