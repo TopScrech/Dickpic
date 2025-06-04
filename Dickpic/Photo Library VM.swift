@@ -17,7 +17,7 @@ final class PhotoLibraryVM: ObservableObject {
         sensitiveAssets.count + sensitiveVideos.count
     }
     
-    func checkPermission() {
+    func checkPermission() async {
         let status = PHPhotoLibrary.authorizationStatus()
         
         switch status {
@@ -28,21 +28,21 @@ final class PhotoLibraryVM: ObservableObject {
             print("Limited")
             
         case .denied, .restricted:
-            main {
-                self.deniedAccess = true
+            await MainActor.run {
+                deniedAccess = true
             }
             
         case .notDetermined:
             print("Not determined")
             
-            requestPermission()
+            await requestPermission()
             
         default:
             break
         }
     }
     
-    private func requestPermission() {
+    private func requestPermission() async {
         PHPhotoLibrary.requestAuthorization { status in
             guard
                 status == .authorized || status == .limited
@@ -165,7 +165,7 @@ final class PhotoLibraryVM: ObservableObject {
 #endif
             if isSensitive {
                 await MainActor.run {
-                    self.sensitiveVideos.append(url)
+                    sensitiveVideos.append(url)
                 }
             }
         } catch {
@@ -237,7 +237,7 @@ extension PhotoLibraryVM {
         let isSensitive = await checkImage(cgImage)
 #endif
         if isSensitive {
-            self.sensitiveAssets.append(cgImage)
+            sensitiveAssets.append(cgImage)
         }
         
         await incrementProcessedPhotos()
