@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F34F7D642DF018F900F0D0F5 /* Image Row VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AC72CA5DBA700FD99F2 /* Image Row VM.swift */; };
 		F37F0AB32CA5A2E800FD99F2 /* ScrechKit in Frameworks */ = {isa = PBXBuildFile; productRef = F37F0AB22CA5A2E800FD99F2 /* ScrechKit */; };
 		F37F0AB52CA5B7E900FD99F2 /* Intro Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB42CA5B7E900FD99F2 /* Intro Screen.swift */; };
 		F37F0AB82CA5BFF500FD99F2 /* Intro Screen 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB72CA5BFF500FD99F2 /* Intro Screen 2.swift */; };
@@ -309,6 +310,7 @@
 				F3B25EB52CBFDC2C000C8795 /* Intro Screen.swift in Sources */,
 				F3B25EBF2CBFDD05000C8795 /* Dickpic.swift in Sources */,
 				F3B25EC42CBFDD72000C8795 /* Sheet Enable Policy.swift in Sources */,
+				F34F7D642DF018F900F0D0F5 /* Image Row VM.swift in Sources */,
 				F3A0726E2CBFE3510080C51D /* Image Row.swift in Sources */,
 				F3B25EB62CBFDC2C000C8795 /* Big Button.swift in Sources */,
 				F3B25EBE2CBFDC84000C8795 /* Settings View.swift in Sources */,
