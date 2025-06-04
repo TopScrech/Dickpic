@@ -70,6 +70,7 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     func fetchAssets(analyzeConcurrently: Bool) async {
+        let startTime = Date()
         isProcessing = true
         processingTime = nil
         
@@ -118,6 +119,9 @@ final class PhotoLibraryVM: ObservableObject {
         
         processAssetsTask = Task {
             await processAssets(assets, maxConcurrentTasks: maxConcurrentTasks)
+            
+            let elapsed = Date().timeIntervalSince(startTime)
+            processingTime = Int(elapsed)
             
             isProcessing = false
         }
