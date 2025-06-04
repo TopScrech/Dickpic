@@ -51,8 +51,8 @@ struct PhotoLibraryView: View {
         }
         .safeAreaInset(edge: .bottom) {
             VStack {
-                Text("Total Assets: \(vm.totalPhotos)")
-                    .animation(.default, value: vm.totalPhotos)
+                Text("Total Assets: \(vm.assetCount)")
+                    .animation(.default, value: vm.assetCount)
                     .numericTransition()
                 
                 HStack(spacing: 0) {

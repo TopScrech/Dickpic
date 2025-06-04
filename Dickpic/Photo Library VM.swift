@@ -10,7 +10,7 @@ final class PhotoLibraryVM: ObservableObject {
     var deniedAccess = false
     var sheetEnablePolicy = false
     var processedAssets = 0
-    var totalPhotos = 0
+    var assetCount = 0
     var progress = 0.0
     
     var processAssetsTask: Task<Void, Never>?
@@ -37,9 +37,7 @@ final class PhotoLibraryVM: ObservableObject {
             print("Limited")
             
         case .denied, .restricted:
-            await MainActor.run {
-                deniedAccess = true
-            }
+            deniedAccess = true
             
         case .notDetermined:
             print("Not determined")
@@ -73,7 +71,7 @@ final class PhotoLibraryVM: ObservableObject {
     func fetchAssets() async {
         isProcessing = true
         
-        // Cancel any previous task
+        // Cancel previous task
         processAssetsTask?.cancel()
         
         guard analyzer.checkPolicy() else {
@@ -82,33 +80,33 @@ final class PhotoLibraryVM: ObservableObject {
         }
         
         progress = 0
-        totalPhotos = 0
+        assetCount = 0
         processedAssets = 0
         sensitiveAssets.removeAll()
         sensitiveVideos.removeAll()
         
         let fetchOptions = PHFetchOptions()
-        var allPhotos: PHFetchResult<PHAsset>
+        var allAssets: PHFetchResult<PHAsset>
         
         fetchOptions.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: false)
+            //NSSortDescriptor(key: "creationDate", ascending: true) // Begin with old
+            NSSortDescriptor(key: "creationDate", ascending: false) // Begin with new
         ]
         
         if ValueStore().analyzeVideos {
-            allPhotos = PHAsset.fetchAssets(with: fetchOptions)
+            allAssets = PHAsset.fetchAssets(with: fetchOptions)
         } else {
-            allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+            allAssets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         }
         
         var assets: [PHAsset] = []
         
-        totalPhotos = allPhotos.count
-        
-        guard totalPhotos > 0 else {
+        assetCount = allAssets.count
+        guard assetCount > 0 else {
             return
         }
         
-        allPhotos.enumerateObjects { asset, _, _ in
+        allAssets.enumerateObjects { asset, _, _ in
             assets.append(asset)
         }
         
@@ -166,7 +164,7 @@ final class PhotoLibraryVM: ObservableObject {
         case .image:
             do {
                 let image = try await fetchAsset(asset)
-                await analyse(image)
+                await analyseAsset(image)
             } catch {
                 print("Error fetching image:", error.localizedDescription)
             }
@@ -199,9 +197,7 @@ final class PhotoLibraryVM: ObservableObject {
             let isSensitive = await checkVideo(url)
 #endif
             if isSensitive {
-                await MainActor.run {
-                    sensitiveVideos.append(url)
-                }
+                sensitiveVideos.append(url)
             }
         } catch {
             print("Error fetching video:", error.localizedDescription)
@@ -250,12 +246,12 @@ final class PhotoLibraryVM: ObservableObject {
     
     private func incrementProcessedPhotos() async {
         processedAssets += 1
-        progress = Double(processedAssets) / Double(totalPhotos)
+        progress = Double(processedAssets) / Double(assetCount)
     }
 }
 
 extension PhotoLibraryVM {
-    private func analyse(_ image: UniversalImage?) async {
+    private func analyseAsset(_ image: UniversalImage?) async {
 #if os(macOS)
         let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil)
 #else
