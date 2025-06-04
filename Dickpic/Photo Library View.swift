@@ -6,10 +6,15 @@ struct PhotoLibraryView: View {
     
     private static let initialColumns = 3
     
-    @State private var gridColumns = Array(
-        repeating: GridItem(.flexible()),
-        count: initialColumns
-    )
+#if os(macOS)
+    private var gridColumns: [GridItem] {[
+        GridItem(.adaptive(minimum: 160, maximum: 160))
+    ]}
+#else
+    private var gridColumns: [GridItem] {[
+        GridItem(.adaptive(minimum: 120, maximum: 120))
+    ]}
+#endif
     
     var body: some View {
         VStack {
@@ -30,6 +35,7 @@ struct PhotoLibraryView: View {
 #endif
                         }
                     }
+                    .padding(8)
                     .animation(.default, value: vm.totalAssets)
                 }
             }
