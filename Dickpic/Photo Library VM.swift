@@ -127,7 +127,12 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    private func processAssets(_ assets: [PHAsset], maxConcurrentTasks: Int) async {
+    private func processAssets(
+        _ assets: [PHAsset],
+        maxConcurrentTasks: Int
+    ) async {
+        print("maxConcurrentTasks:", maxConcurrentTasks)
+        
         await withTaskGroup(of: Void.self) { group in
             var iterator = assets.makeIterator()
             
