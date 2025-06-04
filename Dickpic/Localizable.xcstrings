@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " / %lld%%" : {
+
+    },
     "⏳" : {
       "shouldTranslate" : false
     },
@@ -52,10 +55,19 @@
     "Analyze concurrently" : {
 
     },
+    "Analyze Concurrently" : {
+
+    },
+    "Analyze Sequentually" : {
+
+    },
     "Analyze videos" : {
 
     },
     "Assets from the **hidden** folder are not scanned unless you explicitly opt-in" : {
+
+    },
+    "Cancel" : {
 
     },
     "Dickpic utilizes **offline on-device** processing, ensuring that no data is transmitted to the cloud" : {
@@ -95,6 +107,12 @@
     "Preview" : {
 
     },
+    "Processed: %lld" : {
+
+    },
+    "Processing time: %llds" : {
+
+    },
     "Sensitive Content Warnings are disabled" : {
 
     },
@@ -117,15 +135,8 @@
     "To enable this feature, follow these steps:" : {
 
     },
-    "Total Assets: `%lld` (`%lld` processed)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Total Assets: `%1$lld` (`%2$lld` processed)"
-          }
-        }
-      }
+    "Total Assets: %lld" : {
+
     },
     "Why would I trust this app?" : {
 
