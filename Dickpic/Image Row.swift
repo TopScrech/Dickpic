@@ -61,7 +61,7 @@ struct ImageRow: View {
             }
             .buttonStyle(.plain)
             .cornerRadius(8)
-            .blur(radius: isHidden ? 5 : 0)
+            .blur(radius: isHidden ? 8 : 0)
             .animation(.default, value: isHidden)
             .onTapGesture {
                 isHidden.toggle()
