@@ -11,6 +11,7 @@
 		F34F7D652DF0191200F0D0F5 /* Image Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE6F2CA5960200E72D41 /* Image Row.swift */; };
 		F34F7D672DF019C100F0D0F5 /* QuickLooking in Frameworks */ = {isa = PBXBuildFile; productRef = F34F7D662DF019C100F0D0F5 /* QuickLooking */; };
 		F34F7D682DF0217E00F0D0F5 /* Photo Library View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */; };
+		F34F7D692DF0352200F0D0F5 /* Home View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ABB2CA5CD9100FD99F2 /* Home View.swift */; };
 		F37F0AB32CA5A2E800FD99F2 /* ScrechKit in Frameworks */ = {isa = PBXBuildFile; productRef = F37F0AB22CA5A2E800FD99F2 /* ScrechKit */; };
 		F37F0AB52CA5B7E900FD99F2 /* Intro Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB42CA5B7E900FD99F2 /* Intro Screen.swift */; };
 		F37F0AB82CA5BFF500FD99F2 /* Intro Screen 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB72CA5BFF500FD99F2 /* Intro Screen 2.swift */; };
@@ -37,7 +38,6 @@
 		F3B25EB72CBFDC2C000C8795 /* Intro Screen 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB72CA5BFF500FD99F2 /* Intro Screen 2.swift */; };
 		F3B25EB82CBFDC2C000C8795 /* Progress Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACD2CA6AA2B00FD99F2 /* Progress Button.swift */; };
 		F3B25EB92CBFDC2C000C8795 /* Big Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ABF2CA5D13200FD99F2 /* Big Link.swift */; };
-		F3B25EBD2CBFDC6E000C8795 /* Home View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B25EBC2CBFDC6E000C8795 /* Home View.swift */; };
 		F3B25EBE2CBFDC84000C8795 /* Settings View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ABD2CA5CDF000FD99F2 /* Settings View.swift */; };
 		F3B25EBF2CBFDD05000C8795 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic.swift */; };
 		F3B25EC02CBFDD14000C8795 /* App Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE732CA5967C00E72D41 /* App Container.swift */; };
@@ -70,7 +70,6 @@
 		F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3B25EA72CBFD9BB000C8795 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		F3B25EB12CBFDA08000C8795 /* macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = macOS.plist; sourceTree = "<group>"; };
-		F3B25EBC2CBFDC6E000C8795 /* Home View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Home View.swift"; sourceTree = "<group>"; };
 		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3ECFE652CA58A8000E72D41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
@@ -135,7 +134,6 @@
 				F3B25EB12CBFDA08000C8795 /* macOS.plist */,
 				F3B25EA72CBFD9BB000C8795 /* macOS.entitlements */,
 				F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */,
-				F3B25EC32CBFDD5D000C8795 /* Views from iOS */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -145,14 +143,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F3B25EC32CBFDD5D000C8795 /* Views from iOS */ = {
-			isa = PBXGroup;
-			children = (
-				F3B25EBC2CBFDC6E000C8795 /* Home View.swift */,
-			);
-			path = "Views from iOS";
 			sourceTree = "<group>";
 		};
 		F3ECFE482CA58A7100E72D41 = {
@@ -313,12 +303,12 @@
 				F3B25EB62CBFDC2C000C8795 /* Big Button.swift in Sources */,
 				F34F7D652DF0191200F0D0F5 /* Image Row.swift in Sources */,
 				F3B25EBE2CBFDC84000C8795 /* Settings View.swift in Sources */,
-				F3B25EBD2CBFDC6E000C8795 /* Home View.swift in Sources */,
 				F3B25EB72CBFDC2C000C8795 /* Intro Screen 2.swift in Sources */,
 				F3B25EB82CBFDC2C000C8795 /* Progress Button.swift in Sources */,
 				F3B25EB92CBFDC2C000C8795 /* Big Link.swift in Sources */,
 				F34F7D682DF0217E00F0D0F5 /* Photo Library View.swift in Sources */,
 				F3B25EC02CBFDD14000C8795 /* App Container.swift in Sources */,
+				F34F7D692DF0352200F0D0F5 /* Home View.swift in Sources */,
 				F3B25EB32CBFDABD000C8795 /* Sensitivity Analyzer.swift in Sources */,
 			);
 		};

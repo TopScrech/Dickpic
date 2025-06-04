@@ -17,11 +17,19 @@ struct HomeView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }
+#if os(macOS)
+        .popover(isPresented: $fullScreenCover) {
+            NavigationView {
+                IntroScreen($fullScreenCover)
+            }
+        }
+#else
         .fullScreenCover($fullScreenCover) {
             NavigationView {
                 IntroScreen($fullScreenCover)
             }
         }
+#endif
         .task {
             if showIntro {
                 fullScreenCover = true
