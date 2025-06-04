@@ -59,6 +59,7 @@ struct ImageRow: View {
                 .clipped()
                 .cornerRadius(8)
             }
+            .buttonStyle(.plain)
             .cornerRadius(8)
             .blur(radius: isHidden ? 5 : 0)
             .animation(.default, value: isHidden)
@@ -68,7 +69,6 @@ struct ImageRow: View {
             .onLongPressGesture {
                 preview()
             }
-            .buttonStyle(.plain)
             .contextMenu {
                 Button("Preview") {
                     preview()
