@@ -59,7 +59,6 @@ struct PhotoLibraryView: View {
                     Text("Processed: \(vm.processedAssets)")
                     
                     Text("(\(vm.processedPercent)%)")
-//                    Text("(\(String(format: "%.1f", vm.processedPercent))%)")
                 }
                 .animation(.default, value: vm.processedAssets)
                 .numericTransition()
