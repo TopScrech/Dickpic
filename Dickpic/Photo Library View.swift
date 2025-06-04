@@ -51,10 +51,18 @@ struct PhotoLibraryView: View {
         }
         .safeAreaInset(edge: .bottom) {
             VStack {
-                Text("Total Assets: `\(vm.totalPhotos)` (`\(vm.processedAssets)` processed)")
+                Text("Total Assets: \(vm.totalPhotos)")
                     .animation(.default, value: vm.totalPhotos)
-                    .animation(.default, value: vm.processedAssets)
                     .numericTransition()
+                
+                HStack(spacing: 0) {
+                    Text("Processed: \(vm.processedAssets)")
+                    
+                    Text("(\(vm.processedPercent)%)")
+//                    Text("(\(String(format: "%.1f", vm.processedPercent))%)")
+                }
+                .animation(.default, value: vm.processedAssets)
+                .numericTransition()
                 
                 ProgressButton(
                     vm.isProcessing ? "Cancel" : "Analyze",
@@ -71,6 +79,7 @@ struct PhotoLibraryView: View {
                 }
                 .disabled(vm.isProcessing && vm.progress > 0.95)
             }
+            .monospacedDigit()
 #if os(macOS)
             .padding(8)
             .padding(.vertical, 8)

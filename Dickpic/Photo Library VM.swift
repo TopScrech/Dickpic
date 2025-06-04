@@ -19,6 +19,11 @@ final class PhotoLibraryVM: ObservableObject {
         sensitiveAssets.count + sensitiveVideos.count
     }
     
+    var processedPercent: Int {
+        let percent = progress * 100
+        return Int((percent / 5.0).rounded() * 5)
+    }
+    
     var isProcessing = false
     
     func checkPermission() async {
