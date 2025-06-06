@@ -42,6 +42,7 @@
 		F3B25EBF2CBFDD05000C8795 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic.swift */; };
 		F3B25EC02CBFDD14000C8795 /* App Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE732CA5967C00E72D41 /* App Container.swift */; };
 		F3B25EC42CBFDD72000C8795 /* Sheet Enable Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */; };
+		F3EC94872DF3A1BF008F974E /* Scan Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC94862DF3A1BF008F974E /* Scan Folder.swift */; };
 		F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3ECFE652CA58A8000E72D41 /* Assets.xcassets */; };
 		F3ECFE6C2CA58A8000E72D41 /* Photo Library View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */; };
 		F3ECFE6D2CA58A8000E72D41 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic.swift */; };
@@ -70,6 +71,7 @@
 		F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3B25EA72CBFD9BB000C8795 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		F3B25EB12CBFDA08000C8795 /* macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = macOS.plist; sourceTree = "<group>"; };
+		F3EC94862DF3A1BF008F974E /* Scan Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scan Folder.swift"; sourceTree = "<group>"; };
 		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3ECFE652CA58A8000E72D41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				F3B25EB12CBFDA08000C8795 /* macOS.plist */,
 				F3B25EA72CBFD9BB000C8795 /* macOS.entitlements */,
 				F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */,
+				F3EC94862DF3A1BF008F974E /* Scan Folder.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				F3B25EB52CBFDC2C000C8795 /* Intro Screen.swift in Sources */,
 				F3B25EBF2CBFDD05000C8795 /* Dickpic.swift in Sources */,
 				F3B25EC42CBFDD72000C8795 /* Sheet Enable Policy.swift in Sources */,
+				F3EC94872DF3A1BF008F974E /* Scan Folder.swift in Sources */,
 				F34F7D642DF018F900F0D0F5 /* Image Row VM.swift in Sources */,
 				F3B25EB62CBFDC2C000C8795 /* Big Button.swift in Sources */,
 				F34F7D652DF0191200F0D0F5 /* Image Row.swift in Sources */,

@@ -1,4 +1,4 @@
-import SwiftUI
+import ScrechKit
 
 struct PhotoLibraryView: View {
     @State private var vm = PhotoLibraryVM()
@@ -48,6 +48,22 @@ struct PhotoLibraryView: View {
         }
         .sheet($vm.sheetEnablePolicy) {
             SheetEnablePolicy()
+        }
+        .toolbar {
+            SFButton("folder") {
+                vm.analyzeFolder()
+            }
+            
+            Menu {
+                Button {
+                    vm.sensitiveAssets = []
+                    vm.sensitiveVideos = []
+                } label: {
+                    Label("Reset", systemImage: "xmark")
+                }
+            } label: {
+                Image(systemName: "ellipsis.circle")
+            }
         }
         .safeAreaInset(edge: .bottom) {
             VStack {
