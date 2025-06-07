@@ -201,7 +201,7 @@ final class PhotoLibraryVM: ObservableObject {
     // MARK: Video
     private func analyzeVideo(_ asset: PHAsset) async {
         do {
-            let url = try await fetchVideoURL(asset)
+            let url = try await fetchVideoUrl(asset)
 #if targetEnvironment(simulator)
             let isSensitive = true
 #else
@@ -218,7 +218,7 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    private func fetchVideoURL(
+    private func fetchVideoUrl(
         _ asset: PHAsset
     ) async throws -> URL {
         

@@ -46,13 +46,14 @@ extension PhotoLibraryVM {
         
         let analyzer = SensitivityAnalyzer()
         
+#warning("sequentual processing")
+        
         Task {
             for url in imageFiles {
                 if try await analyzer.checkImage(url) {
                     imageUrlToCgImage(url)
                 }
             }
-            
         }
     }
     
