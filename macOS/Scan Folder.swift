@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension PhotoLibraryVM {
-    func analyzeFolder() {
+    func analyzeFolder(_ analyzeConcurrently: Bool) {
         let panel = NSOpenPanel()
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
@@ -37,27 +37,90 @@ extension PhotoLibraryVM {
             }
         }
         
+        isProcessing = true
+        
         guard !imageFiles.isEmpty else {
             print("No image files found in the selected folder or its subfolders")
             return
         }
         
         print("Image files found:", imageFiles.count)
+        assetCount = imageFiles.count
         
-        let analyzer = SensitivityAnalyzer()
+        processAssetsTask = Task {
+            await processAssets(imageFiles, maxConcurrentTasks: maxConcurrentTasks(analyzeConcurrently))
+            
+            //            let elapsed = Date().timeIntervalSince(startTime)
+            //            processingTime = Int(elapsed)
+            
+            isProcessing = false
+        }
+    }
+    
+    private func processAssets(
+        _ assets: [URL],
+        maxConcurrentTasks: Int
+    ) async {
+        print("maxConcurrentTasks:", maxConcurrentTasks)
         
-#warning("sequentual processing")
-        
-        Task {
-            for url in imageFiles {
-                if try await analyzer.checkImage(url) {
-                    imageUrlToCgImage(url)
+        await withTaskGroup(of: Void.self) { group in
+            var iterator = assets.makeIterator()
+            
+            for _ in 0..<maxConcurrentTasks {
+                if let asset = iterator.next() {
+                    group.addTask(priority: .userInitiated) { [weak self] in
+                        guard !Task.isCancelled else {
+                            return
+                        }
+                        
+                        await self?.analyzeAsset(asset)
+                    }
+                }
+            }
+            
+            while let asset = iterator.next() {
+                guard !Task.isCancelled else {
+                    break
+                }
+                
+                await group.next()
+                
+                group.addTask(priority: .userInitiated) { [weak self] in
+                    guard !Task.isCancelled else {
+                        return
+                    }
+                    
+                    await self?.analyzeAsset(asset)
                 }
             }
         }
     }
     
-    func imageUrlToCgImage(_ url: URL) {
+    func analyzeAsset(_ url: URL) async {
+        guard !Task.isCancelled else {
+            return
+        }
+        
+        let cgImage = imageUrlToCgImage(url)
+        
+        guard let cgImage else {
+            await incrementProcessedPhotos(false)
+            return
+        }
+        
+#if targetEnvironment(simulator)
+        let isSensitive = true
+#else
+        let isSensitive = await checkImage(cgImage)
+#endif
+        if isSensitive {
+            sensitiveAssets.append(cgImage)
+        }
+        
+        await incrementProcessedPhotos()
+    }
+    
+    func imageUrlToCgImage(_ url: URL) -> CGImage? {
         let imageSourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
         
         guard
@@ -65,9 +128,9 @@ extension PhotoLibraryVM {
             let cgImage = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
         else {
             print("Error loading image:", url)
-            return
+            return nil
         }
         
-        sensitiveAssets.append(cgImage)
+        return cgImage
     }
 }

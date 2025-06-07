@@ -51,7 +51,7 @@ struct PhotoLibraryView: View {
         }
         .toolbar {
             SFButton("folder") {
-                vm.analyzeFolder()
+                vm.analyzeFolder(store.analyzeConcurrently)
             }
             
             Menu {

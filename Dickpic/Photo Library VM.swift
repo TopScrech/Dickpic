@@ -27,6 +27,10 @@ final class PhotoLibraryVM: ObservableObject {
     
     var isProcessing = false
     
+    func maxConcurrentTasks(_ analyzeConcurrently: Bool) -> Int {
+        analyzeConcurrently ? ProcessInfo.processInfo.activeProcessorCount : 1
+    }
+    
     func checkPermission() async {
         let status = PHPhotoLibrary.authorizationStatus()
         
@@ -113,12 +117,8 @@ final class PhotoLibraryVM: ObservableObject {
             assets.append(asset)
         }
         
-        let maxConcurrentTasks = analyzeConcurrently
-        ? ProcessInfo.processInfo.activeProcessorCount
-        : 1
-        
         processAssetsTask = Task {
-            await processAssets(assets, maxConcurrentTasks: maxConcurrentTasks)
+            await processAssets(assets, maxConcurrentTasks: maxConcurrentTasks(analyzeConcurrently))
             
             let elapsed = Date().timeIntervalSince(startTime)
             processingTime = Int(elapsed)
@@ -259,7 +259,7 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    private func incrementProcessedPhotos(_ isSuccess: Bool = true) async {
+    func incrementProcessedPhotos(_ isSuccess: Bool = true) async {
         if isSuccess {
             processedAssets += 1
         }
