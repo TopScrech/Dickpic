@@ -58,6 +58,9 @@ struct PhotoLibraryView: View {
                 Button {
                     vm.sensitiveAssets = []
                     vm.sensitiveVideos = []
+                    vm.assetCount = 0
+                    vm.progress = 0
+                    vm.processedAssets = 0
                 } label: {
                     Label("Reset", systemImage: "xmark")
                 }
