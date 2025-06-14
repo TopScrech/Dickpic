@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    " / %lld%%" : {
+
+    },
     "⏳" : {
       "shouldTranslate" : false
     },
@@ -26,7 +29,7 @@
       "shouldTranslate" : false
     },
     "1. " : {
-
+      "shouldTranslate" : false
     },
     "2. Navigate to **Privacy & Security**, scroll down and select **Sensetive Content Warning**" : {
 
@@ -37,7 +40,7 @@
     "A single scan that ensures your peace of mind" : {
 
     },
-    "Access to the photo library has been denied. Please enable access in settings." : {
+    "Access to the photo library has been denied. Please enable access in settings" : {
 
     },
     "Alright" : {
@@ -52,10 +55,19 @@
     "Analyze concurrently" : {
 
     },
+    "Analyze Concurrently" : {
+
+    },
+    "Analyze Sequentually" : {
+
+    },
     "Analyze videos" : {
 
     },
-    "Assets from the **hidden** folder are not scanned unless you explicitly opt-in" : {
+    "Assets from the **hidden** album are not scanned" : {
+
+    },
+    "Cancel" : {
 
     },
     "Dickpic utilizes **offline on-device** processing, ensuring that no data is transmitted to the cloud" : {
@@ -95,6 +107,12 @@
     "Preview" : {
 
     },
+    "Processed: %lld" : {
+
+    },
+    "Processing time: %llds" : {
+
+    },
     "Sensitive Content Warnings are disabled" : {
 
     },
@@ -108,9 +126,6 @@
         }
       }
     },
-    "Show intro" : {
-
-    },
     "Speeds up the analysis" : {
 
     },
@@ -120,15 +135,8 @@
     "To enable this feature, follow these steps:" : {
 
     },
-    "Total Photos: `%lld` (`%lld` processed)" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Total Photos: `%1$lld` (`%2$lld` processed)"
-          }
-        }
-      }
+    "Total Assets: %lld" : {
+
     },
     "Why would I trust this app?" : {
 

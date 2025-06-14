@@ -4,15 +4,13 @@ final class SensitivityAnalyzer {
     private let analyzer = SCSensitivityAnalyzer()
     
     func checkImage(_ url: URL) async throws -> Bool {
-        let handler = try await analyzer.analyzeImage(at: url)
-        
-        return handler.isSensitive
+        try await analyzer.analyzeImage(at: url)
+            .isSensitive
     }
     
     func checkImage(_ image: CGImage) async throws -> Bool {
-        let handler = try await analyzer.analyzeImage(image)
-        
-        return handler.isSensitive
+        try await analyzer.analyzeImage(image)
+            .isSensitive
     }
     
     func checkVideo(_ url: URL) async throws -> Bool {

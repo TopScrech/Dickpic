@@ -1,4 +1,4 @@
-import SwiftUI
+import ScrechKit
 import QuickLooking
 
 struct QuickLookFile: View {
@@ -18,7 +18,7 @@ struct QuickLookFile: View {
                     .animation(.default, value: url)
             }
         }
-        //                .navigationTitle(name)
+        //        .navigationTitle(name)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .blur(radius: isHidden ? 10 : 0)
         .ignoresSafeArea(edges: .bottom)
@@ -28,12 +28,10 @@ struct QuickLookFile: View {
             }
             
             if isHidden {
-                Button {
+                SFButton("eye.slash") {
                     withAnimation {
                         isHidden = false
                     }
-                } label: {
-                    Image(systemName: "eye.slash")
                 }
             }
         }

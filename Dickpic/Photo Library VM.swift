@@ -9,15 +9,29 @@ final class PhotoLibraryVM: ObservableObject {
     var sensitiveVideos: [URL] = []
     var deniedAccess = false
     var sheetEnablePolicy = false
-    var processedPhotos = 0
-    var totalPhotos = 0
+    var processedAssets = 0
+    var assetCount = 0
     var progress = 0.0
+    var processingTime: Int?
     
-    init() {
-        checkPermission()
+    var processAssetsTask: Task<Void, Never>?
+    
+    var totalAssets: Int {
+        sensitiveAssets.count + sensitiveVideos.count
     }
     
-    private func checkPermission() {
+    var processedPercent: Int {
+        let percent = progress * 100
+        return Int((percent / 5.0).rounded() * 5)
+    }
+    
+    var isProcessing = false
+    
+    func maxConcurrentTasks(_ analyzeConcurrently: Bool) -> Int {
+        analyzeConcurrently ? ProcessInfo.processInfo.activeProcessorCount : 1
+    }
+    
+    func checkPermission() async {
         let status = PHPhotoLibrary.authorizationStatus()
         
         switch status {
@@ -28,169 +42,153 @@ final class PhotoLibraryVM: ObservableObject {
             print("Limited")
             
         case .denied, .restricted:
-            main {
-                self.deniedAccess = true
-            }
+            deniedAccess = true
             
         case .notDetermined:
             print("Not determined")
             
-            requestPermission()
+            await requestPermission()
             
         default:
             break
         }
     }
     
-    private func requestPermission() {
-        PHPhotoLibrary.requestAuthorization { newStatus in
-            main {
-                guard newStatus == .authorized || newStatus == .limited else {
+    private func requestPermission() async {
+        PHPhotoLibrary.requestAuthorization { status in
+            guard
+                status == .authorized || status == .limited
+            else {
+                main {
                     self.deniedAccess = true
-                    return
                 }
+                
+                return
             }
         }
     }
     
-    func fetchAssets() {
+    func cancelProcessing() {
+        processAssetsTask?.cancel()
+        isProcessing = true
+    }
+    
+    func fetchAssets(analyzeConcurrently: Bool) async {
+        let startTime = Date()
+        isProcessing = true
+        processingTime = nil
+        
+        // Cancel previous task
+        processAssetsTask?.cancel()
+        
         guard analyzer.checkPolicy() else {
             sheetEnablePolicy = true
             return
         }
         
         progress = 0
-        totalPhotos = 0
-        processedPhotos = 0
+        assetCount = 0
+        processedAssets = 0
         sensitiveAssets.removeAll()
         sensitiveVideos.removeAll()
         
         let fetchOptions = PHFetchOptions()
+        var allAssets: PHFetchResult<PHAsset>
+        
         fetchOptions.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: false)
+            //NSSortDescriptor(key: "creationDate", ascending: true) // Begin with old
+            NSSortDescriptor(key: "creationDate", ascending: false) // Begin with new
         ]
         
-        var allPhotos: PHFetchResult<PHAsset>
-        
-        if SettingsStorage().analyzeVideos {
-            allPhotos = PHAsset.fetchAssets(with: fetchOptions)
+        if ValueStore().analyzeVideos {
+            allAssets = PHAsset.fetchAssets(with: fetchOptions)
         } else {
-            allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+            allAssets = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         }
         
         var assets: [PHAsset] = []
         
-        totalPhotos = allPhotos.count
-        
-        guard totalPhotos > 0 else {
+        assetCount = allAssets.count
+        guard assetCount > 0 else {
             return
         }
         
-        allPhotos.enumerateObjects { asset, _, _ in
+        allAssets.enumerateObjects { asset, _, _ in
             assets.append(asset)
         }
         
-        Task {
-            await processAssets(assets)
+        processAssetsTask = Task {
+            await processAssets(assets, maxConcurrentTasks: maxConcurrentTasks(analyzeConcurrently))
+            
+            let elapsed = Date().timeIntervalSince(startTime)
+            processingTime = Int(elapsed)
+            
+            isProcessing = false
         }
     }
     
-    private func processAssets(_ assets: [PHAsset]) async {
+    private func processAssets(
+        _ assets: [PHAsset],
+        maxConcurrentTasks: Int
+    ) async {
+        print("maxConcurrentTasks:", maxConcurrentTasks)
+        
         await withTaskGroup(of: Void.self) { group in
             var iterator = assets.makeIterator()
-            
-            let maxConcurrentTasks: Int
-            
-            if SettingsStorage().analyzeConcurrently {
-                maxConcurrentTasks = ProcessInfo.processInfo.activeProcessorCount
-            } else {
-                maxConcurrentTasks = 1
-            }
             
             for _ in 0..<maxConcurrentTasks {
                 if let asset = iterator.next() {
                     group.addTask(priority: .userInitiated) { [weak self] in
-                        await self?.fetchAndAnalyze(asset)
+                        guard !Task.isCancelled else {
+                            return
+                        }
+                        
+                        await self?.analyzeAsset(asset)
                     }
                 }
             }
             
             while let asset = iterator.next() {
+                guard !Task.isCancelled else {
+                    break
+                }
+                
                 await group.next()
                 
                 group.addTask(priority: .userInitiated) { [weak self] in
-                    await self?.fetchAndAnalyze(asset)
+                    guard !Task.isCancelled else {
+                        return
+                    }
+                    
+                    await self?.analyzeAsset(asset)
                 }
             }
         }
     }
     
-    private func fetchAndAnalyze(_ asset: PHAsset) async {
+    private func analyzeAsset(_ asset: PHAsset) async {
+        guard !Task.isCancelled else {
+            return
+        }
+        
         switch asset.mediaType {
         case .image:
             do {
-                let image = try await fetchImage(for: asset)
-                await analyse(image)
+                let image = try await fetchAsset(asset)
+                await analyseAsset(image)
             } catch {
-                print("Error fetching image: \(error.localizedDescription)")
+                print("Error fetching image:", error.localizedDescription)
             }
             
         case .video:
             await analyzeVideo(asset)
             
         default:
-            await incrementProcessedPhotos()
+            await incrementProcessedPhotos(false)
         }
     }
     
     // MARK: Image
-    private func fetchImage(for asset: PHAsset) async throws -> UIImage? {
-        try await withCheckedThrowingContinuation { continuation in
-            let manager = PHImageManager.default()
-            let options = PHImageRequestOptions()
-            
-            options.deliveryMode = .highQualityFormat
-            options.isSynchronous = false
-            options.resizeMode = .none
-            options.isNetworkAccessAllowed = SettingsStorage().downloadOriginals
-            
-            manager.requestImage(
-                for: asset,
-                targetSize: PHImageManagerMaximumSize,
-                contentMode: .aspectFit,
-                options: options
-            ) { result, info in
-                if let info, let error = info[PHImageErrorKey] as? Error {
-                    continuation.resume(throwing: error)
-                    return
-                }
-                
-                continuation.resume(returning: result)
-            }
-        }
-    }
-    
-    private func analyse(_ image: UIImage?) async {
-        guard let cgImage = image?.cgImage else {
-            await incrementProcessedPhotos()
-            return
-        }
-        
-#if targetEnvironment(simulator)
-        let isSensitive = true
-#else
-        let isSensitive = await checkImage(cgImage)
-#endif
-        
-        if isSensitive {
-            await MainActor.run {
-                self.sensitiveAssets.append(cgImage)
-            }
-        }
-        
-        await incrementProcessedPhotos()
-    }
-    
     func checkImage(_ image: CGImage) async -> Bool {
         do {
             return try await analyzer.checkImage(image)
@@ -203,27 +201,27 @@ final class PhotoLibraryVM: ObservableObject {
     // MARK: Video
     private func analyzeVideo(_ asset: PHAsset) async {
         do {
-            let url = try await fetchVideoURL(asset)
-            
+            let url = try await fetchVideoUrl(asset)
 #if targetEnvironment(simulator)
             let isSensitive = true
 #else
             let isSensitive = await checkVideo(url)
 #endif
-            
             if isSensitive {
-                await MainActor.run {
-                    self.sensitiveVideos.append(url)
-                }
+                sensitiveVideos.append(url)
             }
+            
+            await incrementProcessedPhotos()
         } catch {
-            print("Error fetching video: \(error.localizedDescription)")
+            await incrementProcessedPhotos(false)
+            print("Error fetching video:", error.localizedDescription)
         }
-        
-        await incrementProcessedPhotos()
     }
     
-    private func fetchVideoURL(_ asset: PHAsset) async throws -> URL {
+    private func fetchVideoUrl(
+        _ asset: PHAsset
+    ) async throws -> URL {
+        
         try await withCheckedThrowingContinuation { continuation in
             let manager = PHImageManager.default()
             let options = PHVideoRequestOptions()
@@ -231,7 +229,11 @@ final class PhotoLibraryVM: ObservableObject {
             options.isNetworkAccessAllowed = false
             options.version = .current
             
-            manager.requestAVAsset(forVideo: asset, options: options) { avAsset, _, info in
+            manager.requestAVAsset(
+                forVideo: asset,
+                options: options
+            ) { avAsset, _, info in
+                
                 if let info, let error = info[PHImageErrorKey] as? Error {
                     continuation.resume(throwing: error)
                     return
@@ -240,7 +242,8 @@ final class PhotoLibraryVM: ObservableObject {
                 if let urlAsset = avAsset as? AVURLAsset {
                     continuation.resume(returning: urlAsset.url)
                 } else {
-                    continuation.resume(throwing: NSError(domain: "Invalid AVAsset", code: -1, userInfo: nil))
+                    let error = NSError(domain: "Invalid AVAsset", code: -1, userInfo: nil)
+                    continuation.resume(throwing: error)
                 }
             }
         }
@@ -251,15 +254,68 @@ final class PhotoLibraryVM: ObservableObject {
             let isSensitive = try await analyzer.checkVideo(url)
             return isSensitive
         } catch {
-            print("Failed to check video: \(error.localizedDescription)")
+            print("Failed to check video:", error.localizedDescription)
             return false
         }
     }
     
-    private func incrementProcessedPhotos() async {
-        await MainActor.run {
-            self.processedPhotos += 1
-            self.progress = Double(self.processedPhotos) / Double(self.totalPhotos)
+    func incrementProcessedPhotos(_ isSuccess: Bool = true) async {
+        if isSuccess {
+            processedAssets += 1
+        }
+        
+        progress = Double(processedAssets) / Double(assetCount)
+    }
+}
+
+extension PhotoLibraryVM {
+    private func analyseAsset(_ image: UniversalImage?) async {
+#if os(macOS)
+        let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil)
+#else
+        let cgImage = image?.cgImage
+#endif
+        guard let cgImage else {
+            await incrementProcessedPhotos(false)
+            return
+        }
+        
+#if targetEnvironment(simulator)
+        let isSensitive = true
+#else
+        let isSensitive = await checkImage(cgImage)
+#endif
+        if isSensitive {
+            sensitiveAssets.append(cgImage)
+        }
+        
+        await incrementProcessedPhotos()
+    }
+    
+    private func fetchAsset(_ asset: PHAsset) async throws -> UniversalImage? {
+        try await withCheckedThrowingContinuation { continuation in
+            let manager = PHImageManager.default()
+            let options = PHImageRequestOptions()
+            
+            options.deliveryMode = .highQualityFormat
+            options.isSynchronous = false
+            options.resizeMode = .none
+            options.isNetworkAccessAllowed = ValueStore().downloadOriginals
+            
+            manager.requestImage(
+                for: asset,
+                targetSize: PHImageManagerMaximumSize,
+                contentMode: .aspectFit,
+                options: options
+            ) { result, info in
+                
+                if let info, let error = info[PHImageErrorKey] as? Error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+                
+                continuation.resume(returning: result)
+            }
         }
     }
 }

@@ -1,31 +1,41 @@
 import SwiftUI
 
 struct HomeView: View {
-    @AppStorage("show_intro") private var showIntro = true
+    @EnvironmentObject private var store: ValueStore
     
     @State private var fullScreenCover = false
     
     var body: some View {
-        TabView {
+        TabView(selection: $store.selectedTab) {
             PhotoLibraryView()
+                .tag(0)
                 .tabItem {
                     Label("Analysis", systemImage: "eye.slash")
                 }
             
             SettingsView($fullScreenCover)
+                .tag(1)
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
         }
-        .fullScreenCover(isPresented: $fullScreenCover) {
+#if os(macOS)
+        .sheet($fullScreenCover) {
             NavigationView {
                 IntroScreen($fullScreenCover)
             }
         }
+#else
+        .fullScreenCover($fullScreenCover) {
+            NavigationView {
+                IntroScreen($fullScreenCover)
+            }
+        }
+#endif
         .task {
-            if showIntro {
+            if store.showIntro {
                 fullScreenCover = true
-                showIntro = false
+                store.showIntro = false
             }
         }
     }

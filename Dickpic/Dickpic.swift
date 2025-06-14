@@ -2,12 +2,12 @@ import SwiftUI
 
 @main
 struct Dickpic: App {
-    @StateObject private var storage = SettingsStorage()
+    @StateObject private var store = ValueStore()
     
     var body: some Scene {
         WindowGroup {
             AppContainer()
-                .environmentObject(storage)
+                .environmentObject(store)
         }
     }
 }

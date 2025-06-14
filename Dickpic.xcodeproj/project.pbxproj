@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F34F7D642DF018F900F0D0F5 /* Image Row VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AC72CA5DBA700FD99F2 /* Image Row VM.swift */; };
+		F34F7D652DF0191200F0D0F5 /* Image Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE6F2CA5960200E72D41 /* Image Row.swift */; };
+		F34F7D672DF019C100F0D0F5 /* QuickLooking in Frameworks */ = {isa = PBXBuildFile; productRef = F34F7D662DF019C100F0D0F5 /* QuickLooking */; };
+		F34F7D682DF0217E00F0D0F5 /* Photo Library View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */; };
+		F34F7D692DF0352200F0D0F5 /* Home View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ABB2CA5CD9100FD99F2 /* Home View.swift */; };
 		F37F0AB32CA5A2E800FD99F2 /* ScrechKit in Frameworks */ = {isa = PBXBuildFile; productRef = F37F0AB22CA5A2E800FD99F2 /* ScrechKit */; };
 		F37F0AB52CA5B7E900FD99F2 /* Intro Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB42CA5B7E900FD99F2 /* Intro Screen.swift */; };
 		F37F0AB82CA5BFF500FD99F2 /* Intro Screen 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB72CA5BFF500FD99F2 /* Intro Screen 2.swift */; };
@@ -17,15 +22,30 @@
 		F37F0AC42CA5D8F000FD99F2 /* QuickLooking in Frameworks */ = {isa = PBXBuildFile; productRef = F37F0AC32CA5D8F000FD99F2 /* QuickLooking */; };
 		F37F0AC82CA5DBA700FD99F2 /* Image Row VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AC72CA5DBA700FD99F2 /* Image Row VM.swift */; };
 		F37F0ACA2CA5F4FE00FD99F2 /* Quick Look File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AC92CA5F4FE00FD99F2 /* Quick Look File.swift */; };
-		F37F0ACC2CA6821800FD99F2 /* Settings Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACB2CA6821800FD99F2 /* Settings Storage.swift */; };
+		F37F0ACC2CA6821800FD99F2 /* Value Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACB2CA6821800FD99F2 /* Value Store.swift */; };
 		F37F0ACE2CA6AA2B00FD99F2 /* Progress Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACD2CA6AA2B00FD99F2 /* Progress Button.swift */; };
 		F37F0AD02CA6B3B300FD99F2 /* Video Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACF2CA6B3B300FD99F2 /* Video Row.swift */; };
 		F37F0AD42CA6FAFF00FD99F2 /* Video Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD32CA6FAFF00FD99F2 /* Video Thumbnail.swift */; };
 		F37F0AD62CA758A400FD99F2 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */; };
 		F37F0AD82CA7FFDE00FD99F2 /* Sheet Enable Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */; };
+		F3B25EAB2CBFD9BB000C8795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */; };
+		F3B25EB02CBFD9F2000C8795 /* ScrechKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3B25EAF2CBFD9F2000C8795 /* ScrechKit */; };
+		F3B25EB22CBFDAB4000C8795 /* Photo Library VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE712CA5961400E72D41 /* Photo Library VM.swift */; };
+		F3B25EB32CBFDABD000C8795 /* Sensitivity Analyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE752CA5976000E72D41 /* Sensitivity Analyzer.swift */; };
+		F3B25EB42CBFDAD3000C8795 /* Value Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACB2CA6821800FD99F2 /* Value Store.swift */; };
+		F3B25EB52CBFDC2C000C8795 /* Intro Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB42CA5B7E900FD99F2 /* Intro Screen.swift */; };
+		F3B25EB62CBFDC2C000C8795 /* Big Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB92CA5C58400FD99F2 /* Big Button.swift */; };
+		F3B25EB72CBFDC2C000C8795 /* Intro Screen 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AB72CA5BFF500FD99F2 /* Intro Screen 2.swift */; };
+		F3B25EB82CBFDC2C000C8795 /* Progress Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ACD2CA6AA2B00FD99F2 /* Progress Button.swift */; };
+		F3B25EB92CBFDC2C000C8795 /* Big Link.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ABF2CA5D13200FD99F2 /* Big Link.swift */; };
+		F3B25EBE2CBFDC84000C8795 /* Settings View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0ABD2CA5CDF000FD99F2 /* Settings View.swift */; };
+		F3B25EBF2CBFDD05000C8795 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic.swift */; };
+		F3B25EC02CBFDD14000C8795 /* App Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE732CA5967C00E72D41 /* App Container.swift */; };
+		F3B25EC42CBFDD72000C8795 /* Sheet Enable Policy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */; };
+		F3EC94872DF3A1BF008F974E /* Scan Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3EC94862DF3A1BF008F974E /* Scan Folder.swift */; };
 		F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3ECFE652CA58A8000E72D41 /* Assets.xcassets */; };
 		F3ECFE6C2CA58A8000E72D41 /* Photo Library View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */; };
-		F3ECFE6D2CA58A8000E72D41 /* Dickpic App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic App.swift */; };
+		F3ECFE6D2CA58A8000E72D41 /* Dickpic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE682CA58A8000E72D41 /* Dickpic.swift */; };
 		F3ECFE702CA5960200E72D41 /* Image Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE6F2CA5960200E72D41 /* Image Row.swift */; };
 		F3ECFE722CA5961400E72D41 /* Photo Library VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE712CA5961400E72D41 /* Photo Library VM.swift */; };
 		F3ECFE742CA5967C00E72D41 /* App Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ECFE732CA5967C00E72D41 /* App Container.swift */; };
@@ -41,18 +61,23 @@
 		F37F0ABF2CA5D13200FD99F2 /* Big Link.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Big Link.swift"; sourceTree = "<group>"; };
 		F37F0AC72CA5DBA700FD99F2 /* Image Row VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image Row VM.swift"; sourceTree = "<group>"; };
 		F37F0AC92CA5F4FE00FD99F2 /* Quick Look File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Quick Look File.swift"; sourceTree = "<group>"; };
-		F37F0ACB2CA6821800FD99F2 /* Settings Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings Storage.swift"; sourceTree = "<group>"; };
+		F37F0ACB2CA6821800FD99F2 /* Value Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Value Store.swift"; sourceTree = "<group>"; };
 		F37F0ACD2CA6AA2B00FD99F2 /* Progress Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Progress Button.swift"; sourceTree = "<group>"; };
 		F37F0ACF2CA6B3B300FD99F2 /* Video Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video Row.swift"; sourceTree = "<group>"; };
 		F37F0AD32CA6FAFF00FD99F2 /* Video Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Video Thumbnail.swift"; sourceTree = "<group>"; };
 		F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sheet Enable Policy.swift"; sourceTree = "<group>"; };
+		F3B25E942CBFD97C000C8795 /* macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F3B25EA72CBFD9BB000C8795 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		F3B25EB12CBFDA08000C8795 /* macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = macOS.plist; sourceTree = "<group>"; };
+		F3EC94862DF3A1BF008F974E /* Scan Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Scan Folder.swift"; sourceTree = "<group>"; };
 		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3ECFE652CA58A8000E72D41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library View.swift"; sourceTree = "<group>"; };
-		F3ECFE672CA58A8000E72D41 /* Dickpic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dickpic.entitlements; sourceTree = "<group>"; };
-		F3ECFE682CA58A8000E72D41 /* Dickpic App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dickpic App.swift"; sourceTree = "<group>"; };
-		F3ECFE6E2CA58CFB00E72D41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3ECFE672CA58A8000E72D41 /* iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOS.entitlements; sourceTree = "<group>"; };
+		F3ECFE682CA58A8000E72D41 /* Dickpic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dickpic.swift; sourceTree = "<group>"; };
+		F3ECFE6E2CA58CFB00E72D41 /* iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = iOS.plist; sourceTree = "<group>"; };
 		F3ECFE6F2CA5960200E72D41 /* Image Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image Row.swift"; sourceTree = "<group>"; };
 		F3ECFE712CA5961400E72D41 /* Photo Library VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Photo Library VM.swift"; sourceTree = "<group>"; };
 		F3ECFE732CA5967C00E72D41 /* App Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App Container.swift"; sourceTree = "<group>"; };
@@ -60,14 +85,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F3B25E912CBFD97C000C8795 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				F34F7D672DF019C100F0D0F5 /* QuickLooking in Frameworks */,
+				F3B25EB02CBFD9F2000C8795 /* ScrechKit in Frameworks */,
+			);
+		};
 		F3ECFE4E2CA58A7100E72D41 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				F37F0AC42CA5D8F000FD99F2 /* QuickLooking in Frameworks */,
 				F37F0AB32CA5A2E800FD99F2 /* ScrechKit in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -92,10 +122,38 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		F3B25E8F2CBFD5C9000C8795 /* Nav */ = {
+			isa = PBXGroup;
+			children = (
+				F3ECFE732CA5967C00E72D41 /* App Container.swift */,
+			);
+			path = Nav;
+			sourceTree = "<group>";
+		};
+		F3B25EA92CBFD9BB000C8795 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				F3B25EB12CBFDA08000C8795 /* macOS.plist */,
+				F3B25EA72CBFD9BB000C8795 /* macOS.entitlements */,
+				F3B25EA52CBFD9BB000C8795 /* Assets.xcassets */,
+				F3EC94862DF3A1BF008F974E /* Scan Folder.swift */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		F3B25EAE2CBFD9F2000C8795 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F3ECFE482CA58A7100E72D41 = {
 			isa = PBXGroup;
 			children = (
 				F3ECFE692CA58A8000E72D41 /* Dickpic */,
+				F3B25EA92CBFD9BB000C8795 /* macOS */,
+				F3B25EAE2CBFD9F2000C8795 /* Frameworks */,
 				F3ECFE522CA58A7100E72D41 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				F3ECFE512CA58A7100E72D41 /* Dickpic.app */,
+				F3B25E942CBFD97C000C8795 /* macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,23 +170,23 @@
 		F3ECFE692CA58A8000E72D41 /* Dickpic */ = {
 			isa = PBXGroup;
 			children = (
-				F3ECFE682CA58A8000E72D41 /* Dickpic App.swift */,
-				F3ECFE732CA5967C00E72D41 /* App Container.swift */,
-				F3ECFE6E2CA58CFB00E72D41 /* Info.plist */,
+				F3ECFE682CA58A8000E72D41 /* Dickpic.swift */,
+				F37F0ACB2CA6821800FD99F2 /* Value Store.swift */,
+				F3B25E8F2CBFD5C9000C8795 /* Nav */,
+				F3ECFE6E2CA58CFB00E72D41 /* iOS.plist */,
+				F3ECFE672CA58A8000E72D41 /* iOS.entitlements */,
 				F3ECFE652CA58A8000E72D41 /* Assets.xcassets */,
-				F3ECFE672CA58A8000E72D41 /* Dickpic.entitlements */,
 				F37F0AD52CA758A400FD99F2 /* Localizable.xcstrings */,
 				F37F0ABB2CA5CD9100FD99F2 /* Home View.swift */,
 				F37F0AB62CA5B7F400FD99F2 /* Intro */,
-				F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */,
 				F37F0AD72CA7FFDE00FD99F2 /* Sheet Enable Policy.swift */,
+				F3ECFE662CA58A8000E72D41 /* Photo Library View.swift */,
 				F3ECFE712CA5961400E72D41 /* Photo Library VM.swift */,
-				F37F0ACB2CA6821800FD99F2 /* Settings Storage.swift */,
 				F3ECFE6F2CA5960200E72D41 /* Image Row.swift */,
+				F37F0AC72CA5DBA700FD99F2 /* Image Row VM.swift */,
 				F37F0ACF2CA6B3B300FD99F2 /* Video Row.swift */,
 				F37F0AD32CA6FAFF00FD99F2 /* Video Thumbnail.swift */,
 				F37F0AC92CA5F4FE00FD99F2 /* Quick Look File.swift */,
-				F37F0AC72CA5DBA700FD99F2 /* Image Row VM.swift */,
 				F3ECFE752CA5976000E72D41 /* Sensitivity Analyzer.swift */,
 				F37F0AC12CA5D35E00FD99F2 /* Settings */,
 			);
@@ -137,6 +196,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F3B25E932CBFD97C000C8795 /* macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F3B25EA22CBFD97D000C8795 /* Build configuration list for PBXNativeTarget "macOS" */;
+			buildPhases = (
+				F3B25E902CBFD97C000C8795 /* Sources */,
+				F3B25E912CBFD97C000C8795 /* Frameworks */,
+				F3B25E922CBFD97C000C8795 /* Resources */,
+			);
+			buildRules = (
+			);
+			name = macOS;
+			packageProductDependencies = (
+				F3B25EAF2CBFD9F2000C8795 /* ScrechKit */,
+				F34F7D662DF019C100F0D0F5 /* QuickLooking */,
+			);
+			productName = "Dickpic macos";
+			productReference = F3B25E942CBFD97C000C8795 /* macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 		F3ECFE502CA58A7100E72D41 /* Dickpic */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F3ECFE602CA58A7100E72D41 /* Build configuration list for PBXNativeTarget "Dickpic" */;
@@ -146,8 +224,6 @@
 				F3ECFE4F2CA58A7100E72D41 /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			name = Dickpic;
 			packageProductDependencies = (
@@ -166,8 +242,11 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					F3B25E932CBFD97C000C8795 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					F3ECFE502CA58A7100E72D41 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -187,32 +266,58 @@
 				F37F0AB12CA5A2E800FD99F2 /* XCRemoteSwiftPackageReference "ScrechKit" */,
 				F37F0AC22CA5D8F000FD99F2 /* XCRemoteSwiftPackageReference "QuickLooking" */,
 			);
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = F3ECFE522CA58A7100E72D41 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				F3ECFE502CA58A7100E72D41 /* Dickpic */,
+				F3B25E932CBFD97C000C8795 /* macOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F3B25E922CBFD97C000C8795 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+				F3B25EAB2CBFD9BB000C8795 /* Assets.xcassets in Resources */,
+			);
+		};
 		F3ECFE4F2CA58A7100E72D41 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				F37F0AD62CA758A400FD99F2 /* Localizable.xcstrings in Resources */,
 				F3ECFE6B2CA58A8000E72D41 /* Assets.xcassets in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F3B25E902CBFD97C000C8795 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+				F3B25EB42CBFDAD3000C8795 /* Value Store.swift in Sources */,
+				F3B25EB22CBFDAB4000C8795 /* Photo Library VM.swift in Sources */,
+				F3B25EB52CBFDC2C000C8795 /* Intro Screen.swift in Sources */,
+				F3B25EBF2CBFDD05000C8795 /* Dickpic.swift in Sources */,
+				F3B25EC42CBFDD72000C8795 /* Sheet Enable Policy.swift in Sources */,
+				F3EC94872DF3A1BF008F974E /* Scan Folder.swift in Sources */,
+				F34F7D642DF018F900F0D0F5 /* Image Row VM.swift in Sources */,
+				F3B25EB62CBFDC2C000C8795 /* Big Button.swift in Sources */,
+				F34F7D652DF0191200F0D0F5 /* Image Row.swift in Sources */,
+				F3B25EBE2CBFDC84000C8795 /* Settings View.swift in Sources */,
+				F3B25EB72CBFDC2C000C8795 /* Intro Screen 2.swift in Sources */,
+				F3B25EB82CBFDC2C000C8795 /* Progress Button.swift in Sources */,
+				F3B25EB92CBFDC2C000C8795 /* Big Link.swift in Sources */,
+				F34F7D682DF0217E00F0D0F5 /* Photo Library View.swift in Sources */,
+				F3B25EC02CBFDD14000C8795 /* App Container.swift in Sources */,
+				F34F7D692DF0352200F0D0F5 /* Home View.swift in Sources */,
+				F3B25EB32CBFDABD000C8795 /* Sensitivity Analyzer.swift in Sources */,
+			);
+		};
 		F3ECFE4D2CA58A7100E72D41 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				F37F0AC82CA5DBA700FD99F2 /* Image Row VM.swift in Sources */,
 				F37F0AC02CA5D13200FD99F2 /* Big Link.swift in Sources */,
@@ -221,29 +326,95 @@
 				F37F0AD42CA6FAFF00FD99F2 /* Video Thumbnail.swift in Sources */,
 				F37F0AD02CA6B3B300FD99F2 /* Video Row.swift in Sources */,
 				F3ECFE722CA5961400E72D41 /* Photo Library VM.swift in Sources */,
-				F37F0ACC2CA6821800FD99F2 /* Settings Storage.swift in Sources */,
+				F37F0ACC2CA6821800FD99F2 /* Value Store.swift in Sources */,
 				F3ECFE742CA5967C00E72D41 /* App Container.swift in Sources */,
 				F37F0ABC2CA5CD9100FD99F2 /* Home View.swift in Sources */,
 				F37F0ACE2CA6AA2B00FD99F2 /* Progress Button.swift in Sources */,
 				F37F0ABE2CA5CDF000FD99F2 /* Settings View.swift in Sources */,
 				F37F0AB82CA5BFF500FD99F2 /* Intro Screen 2.swift in Sources */,
-				F3ECFE6D2CA58A8000E72D41 /* Dickpic App.swift in Sources */,
+				F3ECFE6D2CA58A8000E72D41 /* Dickpic.swift in Sources */,
 				F3ECFE702CA5960200E72D41 /* Image Row.swift in Sources */,
 				F3ECFE762CA5976000E72D41 /* Sensitivity Analyzer.swift in Sources */,
 				F37F0AB52CA5B7E900FD99F2 /* Intro Screen.swift in Sources */,
 				F37F0AD82CA7FFDE00FD99F2 /* Sheet Enable Policy.swift in Sources */,
 				F37F0ABA2CA5C58400FD99F2 /* Big Button.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		F3ECFE5E2CA58A7100E72D41 /* Debug */ = {
+		F3B25EA02CBFD97D000C8795 /* Debug configuration for PBXNativeTarget "macOS" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = macOS/macOS.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Required in order to perform sensetive photo analysis";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.topscrech.Dickpic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F3B25EA12CBFD97D000C8795 /* Release configuration for PBXNativeTarget "macOS" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 0;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = macOS/macOS.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Required in order to perform sensetive photo analysis";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.topscrech.Dickpic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F3ECFE5E2CA58A7100E72D41 /* Debug configuration for PBXProject "Dickpic" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -273,7 +444,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -292,6 +465,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 0.9;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -301,11 +475,12 @@
 			};
 			name = Debug;
 		};
-		F3ECFE5F2CA58A7100E72D41 /* Release */ = {
+		F3ECFE5F2CA58A7100E72D41 /* Release configuration for PBXProject "Dickpic" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -335,7 +510,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 8FQUA2F388;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -348,6 +525,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 0.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -355,19 +533,19 @@
 			};
 			name = Release;
 		};
-		F3ECFE612CA58A7100E72D41 /* Debug */ = {
+		F3ECFE612CA58A7100E72D41 /* Debug configuration for PBXNativeTarget "Dickpic" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Dickpic/Dickpic.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Dickpic/iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8FQUA2F388;
+				CURRENT_PROJECT_VERSION = 0;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Dickpic/Info.plist;
+				INFOPLIST_FILE = Dickpic/iOS.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
@@ -385,7 +563,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topscrech.Dickpic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -393,24 +570,24 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Debug;
 		};
-		F3ECFE622CA58A7100E72D41 /* Release */ = {
+		F3ECFE622CA58A7100E72D41 /* Release configuration for PBXNativeTarget "Dickpic" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Dickpic/Dickpic.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Dickpic/iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8FQUA2F388;
+				CURRENT_PROJECT_VERSION = 0;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Dickpic/Info.plist;
+				INFOPLIST_FILE = Dickpic/iOS.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
@@ -428,7 +605,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.topscrech.Dickpic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -436,7 +612,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 1.0;
 			};
 			name = Release;
@@ -444,22 +620,28 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F3B25EA22CBFD97D000C8795 /* Build configuration list for PBXNativeTarget "macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F3B25EA02CBFD97D000C8795 /* Debug configuration for PBXNativeTarget "macOS" */,
+				F3B25EA12CBFD97D000C8795 /* Release configuration for PBXNativeTarget "macOS" */,
+			);
+			defaultConfigurationName = Release;
+		};
 		F3ECFE4C2CA58A7100E72D41 /* Build configuration list for PBXProject "Dickpic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F3ECFE5E2CA58A7100E72D41 /* Debug */,
-				F3ECFE5F2CA58A7100E72D41 /* Release */,
+				F3ECFE5E2CA58A7100E72D41 /* Debug configuration for PBXProject "Dickpic" */,
+				F3ECFE5F2CA58A7100E72D41 /* Release configuration for PBXProject "Dickpic" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		F3ECFE602CA58A7100E72D41 /* Build configuration list for PBXNativeTarget "Dickpic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F3ECFE612CA58A7100E72D41 /* Debug */,
-				F3ECFE622CA58A7100E72D41 /* Release */,
+				F3ECFE612CA58A7100E72D41 /* Debug configuration for PBXNativeTarget "Dickpic" */,
+				F3ECFE622CA58A7100E72D41 /* Release configuration for PBXNativeTarget "Dickpic" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
@@ -484,6 +666,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F34F7D662DF019C100F0D0F5 /* QuickLooking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F37F0AC22CA5D8F000FD99F2 /* XCRemoteSwiftPackageReference "QuickLooking" */;
+			productName = QuickLooking;
+		};
 		F37F0AB22CA5A2E800FD99F2 /* ScrechKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F37F0AB12CA5A2E800FD99F2 /* XCRemoteSwiftPackageReference "ScrechKit" */;
@@ -493,6 +680,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F37F0AC22CA5D8F000FD99F2 /* XCRemoteSwiftPackageReference "QuickLooking" */;
 			productName = QuickLooking;
+		};
+		F3B25EAF2CBFD9F2000C8795 /* ScrechKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F37F0AB12CA5A2E800FD99F2 /* XCRemoteSwiftPackageReference "ScrechKit" */;
+			productName = ScrechKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
