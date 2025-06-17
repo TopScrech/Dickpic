@@ -55,12 +55,6 @@
     "Analyze concurrently" : {
 
     },
-    "Analyze Concurrently" : {
-
-    },
-    "Analyze Sequentually" : {
-
-    },
     "Analyze videos" : {
 
     },
@@ -111,6 +105,9 @@
 
     },
     "Processing time: %llds" : {
+
+    },
+    "Reset" : {
 
     },
     "Sensitive Content Warnings are disabled" : {
