@@ -264,6 +264,7 @@
 				en,
 				Base,
 				ru,
+				nl,
 			);
 			mainGroup = F3ECFE482CA58A7100E72D41;
 			minimizedProjectReferenceProxies = 1;
@@ -368,6 +369,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = macOS/macOS.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -404,6 +406,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = macOS/macOS.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
