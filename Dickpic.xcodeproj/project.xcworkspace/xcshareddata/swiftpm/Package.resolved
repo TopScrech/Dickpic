@@ -7,7 +7,7 @@
       "location" : "https://github.com/TopScrech/QuickLooking",
       "state" : {
         "branch" : "main",
-        "revision" : "7d1e23f833513c707eec6ccf536c3ac91024be8c"
+        "revision" : "559bb69febaad7846b78f2fc789dce4e8a36134e"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/TopScrech/ScrechKit",
       "state" : {
         "branch" : "main",
-        "revision" : "28f4be08c8801f324b0c6e107edf5982291296f6"
+        "revision" : "8ac8f70352b4a4b699ea48412e2692e583bb5354"
       }
     }
   ],
