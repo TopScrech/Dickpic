@@ -50,10 +50,11 @@ struct PhotoLibraryView: View {
             SheetEnablePolicy()
         }
         .toolbar {
+#if os(macOS)
             SFButton("folder") {
                 vm.analyzeFolder(store.analyzeConcurrently)
             }
-            
+#endif
             Menu {
                 Button {
                     vm.sensitiveAssets = []
@@ -95,34 +96,39 @@ struct PhotoLibraryView: View {
                         vm.cancelProcessing()
                     } else {
                         Task {
-                            await vm.fetchAssets(
+#if os(iOS)
+                            vm.registerBackgroundTask(
                                 analyzeConcurrently: store.analyzeConcurrently
                             )
+#endif
+//                            await vm.startAnalyze(
+//                                analyzeConcurrently: store.analyzeConcurrently
+//                            )
                         }
                     }
                 }
                 .disabled(vm.isProcessing && vm.progress > 0.95)
-                .contextMenu {
-                    Button {
-                        Task {
-                            await vm.fetchAssets(
-                                analyzeConcurrently: true
-                            )
-                        }
-                    } label: {
-                        Label("Analyze Concurrently", systemImage: "square.grid.3x3")
-                    }
-                    
-                    Button {
-                        Task {
-                            await vm.fetchAssets(
-                                analyzeConcurrently: false
-                            )
-                        }
-                    } label: {
-                        Label("Analyze Sequentually", systemImage: "square")
-                    }
-                }
+//                .contextMenu {
+//                    Button {
+//                        Task {
+//                            await vm.startAnalyze(
+//                                analyzeConcurrently: true
+//                            )
+//                        }
+//                    } label: {
+//                        Label("Analyze Concurrently", systemImage: "square.grid.3x3")
+//                    }
+//                    
+//                    Button {
+//                        Task {
+//                            await vm.startAnalyze(
+//                                analyzeConcurrently: false
+//                            )
+//                        }
+//                    } label: {
+//                        Label("Analyze Sequentually", systemImage: "square")
+//                    }
+//                }
             }
             .monospacedDigit()
 #if os(macOS)

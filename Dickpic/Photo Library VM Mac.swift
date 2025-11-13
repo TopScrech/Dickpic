@@ -1,10 +1,9 @@
 import ScrechKit
 import Photos
-import BackgroundTasks
 
 @Observable
 final class PhotoLibraryVM: ObservableObject {
-    let analyzer = SensitivityAnalyzer()
+    private let analyzer = SensitivityAnalyzer()
     
     var sensitiveAssets: [CGImage] = []
     var sensitiveVideos: [URL] = []
@@ -74,13 +73,46 @@ final class PhotoLibraryVM: ObservableObject {
         isProcessing = true
     }
     
+    func startAnalyze(
+        analyzeConcurrently: Bool
+    ) async {
+        let startTime = Date()
+        isProcessing = true
+        processingTime = nil
+        
+        // Cancel previous task
+        processAssetsTask?.cancel()
+        
+        guard analyzer.checkPolicy() else {
+            sheetEnablePolicy = true
+            return
+        }
+        
+        progress = 0
+        assetCount = 0
+        processedAssets = 0
+        sensitiveAssets.removeAll()
+        sensitiveVideos.removeAll()
+        
+        let assets = await fetchAssets()
+        
+        processAssetsTask = Task {
+            await processAssets(assets, maxConcurrentTasks: maxConcurrentTasks(analyzeConcurrently))
+            
+            let elapsed = Date().timeIntervalSince(startTime)
+            processingTime = Int(elapsed)
+            
+            isProcessing = false
+        }
+    }
+    
     func fetchAssets() async -> [PHAsset] {
         let fetchOptions = PHFetchOptions()
         var allAssets: PHFetchResult<PHAsset>
         
         fetchOptions.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: true) // Start from oldest
-            //            NSSortDescriptor(key: "creationDate", ascending: false) // Start from newest
+            //NSSortDescriptor(key: "creationDate", ascending: true) // Start from oldest
+            NSSortDescriptor(key: "creationDate", ascending: false) // Start from newest
         ]
         
         if ValueStore().analyzeVideos {
@@ -104,10 +136,9 @@ final class PhotoLibraryVM: ObservableObject {
         return assets
     }
     
-    func processAssets(
+    private func processAssets(
         _ assets: [PHAsset],
-        maxConcurrentTasks: Int,
-        task: BGContinuedProcessingTask
+        maxConcurrentTasks: Int
     ) async {
         print("maxConcurrentTasks:", maxConcurrentTasks)
         
@@ -144,10 +175,7 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    private func analyzeAsset(
-        _ asset: PHAsset,
-        task: BGContinuedProcessingTask
-    ) async {
+    private func analyzeAsset(_ asset: PHAsset, task: BGProcessingTask) async {
         guard !Task.isCancelled else {
             return
         }
@@ -167,8 +195,6 @@ final class PhotoLibraryVM: ObservableObject {
         default:
             await incrementProcessedPhotos(false)
         }
-        
-        task.progress.completedUnitCount += 1
     }
     
     // MARK: Image
