@@ -1,5 +1,11 @@
 import Foundation
 import BackgroundTasks
+import OSLog
+
+private let logger = Logger(
+    subsystem: Bundle.main.bundleIdentifier ?? "dev.topscrech.Dickpic",
+    category: "BackgroundTask"
+)
 
 extension PhotoLibraryVM {
     func registerBackgroundTask(analyzeConcurrently: Bool) {
@@ -7,7 +13,7 @@ extension PhotoLibraryVM {
         let taskID = "dev.topscrech.Dickpic.process-assets.\(id)"
         
         BGTaskScheduler.shared.register(forTaskWithIdentifier: taskID, using: nil) { task in
-            print("Registered a background task")
+            logger.info("Registered a background task")
             //self.handleAppRefresh(task: task as! BGProcessingTask)
 #warning("Implement cancelling")
             var shouldContinue = true
@@ -19,7 +25,7 @@ extension PhotoLibraryVM {
             //            task.progress.totalUnitCount = 100
             
             task.expirationHandler = {
-                print("ExpirationHandler")
+                logger.info("Expiration handler called")
                 shouldContinue = false
             }
             
@@ -58,7 +64,7 @@ extension PhotoLibraryVM {
                     
                     self.isProcessing = false
                     
-                    print("Task Completed")
+                    logger.info("Task completed")
                     task.setTaskCompleted(success: true)
                 }
             }
@@ -71,7 +77,7 @@ extension PhotoLibraryVM {
 }
 
 func startBackgroundTask(_ id: UUID) async {
-    print("Start")
+    logger.info("Start")
     
     let req = BGContinuedProcessingTaskRequest(
         identifier: "dev.topscrech.Dickpic.process-assets.\(id)",
@@ -82,6 +88,6 @@ func startBackgroundTask(_ id: UUID) async {
     do {
         try BGTaskScheduler.shared.submit(req)
     } catch {
-        print("Error:", error)
+        logger.error("Error: \(error.localizedDescription, privacy: .public)")
     }
 }

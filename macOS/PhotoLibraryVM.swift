@@ -1,9 +1,14 @@
 import ScrechKit
 import Photos
+import OSLog
 
 @Observable
 final class PhotoLibraryVM: ObservableObject {
     private let analyzer = SensitivityAnalyzer()
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "dev.topscrech.Dickpic",
+        category: "PhotoLibraryVM"
+    )
     
     var sensitiveAssets: [SensitiveAsset] = []
     var sensitiveVideos: [URL] = []
@@ -36,16 +41,16 @@ final class PhotoLibraryVM: ObservableObject {
         
         switch status {
         case .authorized:
-            print("Authorized")
+            logger.info("Authorized")
             
         case .limited:
-            print("Limited")
+            logger.info("Limited")
             
         case .denied, .restricted:
             deniedAccess = true
             
         case .notDetermined:
-            print("Not determined")
+            logger.info("Not determined")
             
             await requestPermission()
             
@@ -56,7 +61,7 @@ final class PhotoLibraryVM: ObservableObject {
     
     private func requestPermission() async {
         let status = await requestAuthorizationStatus()
-
+        
         guard status == .authorized || status == .limited else {
             deniedAccess = true
             return
@@ -98,26 +103,26 @@ final class PhotoLibraryVM: ObservableObject {
             isProcessing = false
         }
     }
-
+    
     @MainActor
     func deleteSensitiveAsset(_ asset: SensitiveAsset) {
         guard let localIdentifier = asset.localIdentifier else {
             return
         }
-
+        
         deleteAssetFromLibrary(localIdentifier: localIdentifier) { [weak self] didSucceed, error in
             if let error {
-                print("Failed to delete sensitive asset:", error.localizedDescription)
+                self?.logger.error("Failed to delete sensitive asset: \(error.localizedDescription, privacy: .public)")
             }
-
+            
             guard didSucceed else {
                 return
             }
-
+            
             self?.sensitiveAssets.removeAll { $0.id == asset.id }
         }
     }
-
+    
     nonisolated private func deleteAssetFromLibrary(
         localIdentifier: String,
         completion: @escaping @MainActor (Bool, Error?) -> Void
@@ -130,7 +135,7 @@ final class PhotoLibraryVM: ObservableObject {
             guard fetchResult.count > 0 else {
                 return
             }
-
+            
             PHAssetChangeRequest.deleteAssets(fetchResult)
         } completionHandler: { didSucceed, error in
             Task { @MainActor in
@@ -170,7 +175,7 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     private func processAssets(_ assets: [PHAsset], maxConcurrentTasks: Int) async {
-        print("maxConcurrentTasks:", maxConcurrentTasks)
+        logger.debug("maxConcurrentTasks: \(maxConcurrentTasks)")
         
         await withTaskGroup(of: Void.self) { group in
             var iterator = assets.makeIterator()
@@ -222,7 +227,7 @@ final class PhotoLibraryVM: ObservableObject {
                     identifier: asset.localIdentifier
                 )
             } catch {
-                print("Error fetching image:", error.localizedDescription)
+                logger.error("Error fetching image: \(error.localizedDescription, privacy: .public)")
             }
             
         case .video:
@@ -238,7 +243,7 @@ final class PhotoLibraryVM: ObservableObject {
         do {
             return try await analyzer.checkImage(image)
         } catch {
-            print(error.localizedDescription)
+            logger.error("\(error.localizedDescription, privacy: .public)")
             return false
         }
     }
@@ -259,7 +264,7 @@ final class PhotoLibraryVM: ObservableObject {
             await incrementProcessedPhotos()
         } catch {
             await incrementProcessedPhotos(false)
-            print("Error fetching video:", error.localizedDescription)
+            logger.error("Error fetching video: \(error.localizedDescription, privacy: .public)")
         }
     }
     
@@ -270,7 +275,7 @@ final class PhotoLibraryVM: ObservableObject {
             }
         }
     }
-
+    
     nonisolated private func fetchVideoUrl(_ asset: PHAsset) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
             let manager = PHImageManager.default()
@@ -308,7 +313,7 @@ final class PhotoLibraryVM: ObservableObject {
             let isSensitive = try await analyzer.checkVideo(url)
             return isSensitive
         } catch {
-            print("Failed to check video:", error.localizedDescription)
+            logger.error("Failed to check video: \(error.localizedDescription, privacy: .public)")
             return false
         }
     }
@@ -372,14 +377,13 @@ extension PhotoLibraryVM {
                 contentMode: .aspectFit,
                 options: options
             ) { result, info in
-                guard !didResume else {
-                    return
-                }
-
+                
+                guard !didResume else { return }
+                
                 if let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool, isDegraded {
                     return
                 }
-
+                
                 if let isCancelled = info?[PHImageCancelledKey] as? Bool, isCancelled {
                     didResume = true
                     continuation.resume(returning: nil)

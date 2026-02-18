@@ -1,4 +1,10 @@
 import SwiftUI
+import OSLog
+
+private let logger = Logger(
+    subsystem: Bundle.main.bundleIdentifier ?? "dev.topscrech.Dickpic",
+    category: "ProgressButton"
+)
 
 struct ProgressButton: View {
     private let name: LocalizedStringKey
@@ -66,7 +72,7 @@ struct ProgressButton: View {
         }
         
         ProgressButton("Complete", progress: 1) {
-            print("Это не будет выполнено, так как кнопка заблокирована")
+            logger.debug("Это не будет выполнено, так как кнопка заблокирована")
         }
     }
 }

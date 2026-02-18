@@ -1,5 +1,11 @@
 import ScrechKit
 import QuickLooking
+import OSLog
+
+private let logger = Logger(
+    subsystem: Bundle.main.bundleIdentifier ?? "dev.topscrech.Dickpic",
+    category: "ImageRow"
+)
 
 struct ImageRow: View {
     @State private var vm = ImageRowVM()
@@ -90,7 +96,7 @@ struct ImageRow: View {
         do {
             try vm.saveImageToTemporaryDirectory(universalImage)
         } catch {
-            print("Saving failed:", error.localizedDescription)
+            logger.error("Saving failed: \(error.localizedDescription, privacy: .public)")
         }
     }
 }

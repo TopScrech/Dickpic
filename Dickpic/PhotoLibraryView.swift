@@ -105,27 +105,27 @@ struct PhotoLibraryView: View {
                     }
                 }
                 .disabled(vm.isProcessing && vm.progress > 0.95)
-//                .contextMenu {
-//                    Button {
-//                        Task {
-//                            await vm.startAnalyze(
-//                                analyzeConcurrently: true
-//                            )
-//                        }
-//                    } label: {
-//                        Label("Analyze Concurrently", systemImage: "square.grid.3x3")
-//                    }
-//                    
-//                    Button {
-//                        Task {
-//                            await vm.startAnalyze(
-//                                analyzeConcurrently: false
-//                            )
-//                        }
-//                    } label: {
-//                        Label("Analyze Sequentually", systemImage: "square")
-//                    }
-//                }
+                //                .contextMenu {
+                //                    Button {
+                //                        Task {
+                //                            await vm.startAnalyze(
+                //                                analyzeConcurrently: true
+                //                            )
+                //                        }
+                //                    } label: {
+                //                        Label("Analyze Concurrently", systemImage: "square.grid.3x3")
+                //                    }
+                //
+                //                    Button {
+                //                        Task {
+                //                            await vm.startAnalyze(
+                //                                analyzeConcurrently: false
+                //                            )
+                //                        }
+                //                    } label: {
+                //                        Label("Analyze Sequentually", systemImage: "square")
+                //                    }
+                //                }
             }
             .monospacedDigit()
 #if os(macOS)

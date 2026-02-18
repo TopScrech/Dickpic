@@ -1,4 +1,10 @@
 import SwiftUI
+import OSLog
+
+private let logger = Logger(
+    subsystem: Bundle.main.bundleIdentifier ?? "dev.topscrech.Dickpic",
+    category: "ScanFolder"
+)
 
 extension PhotoLibraryVM {
     func analyzeFolder(_ analyzeConcurrently: Bool) {
@@ -12,7 +18,7 @@ extension PhotoLibraryVM {
             panel.runModal() == .OK,
             let folderURL = panel.url
         else {
-            print("No folder selected")
+            logger.info("No folder selected")
             exit(1)
         }
         
@@ -39,11 +45,11 @@ extension PhotoLibraryVM {
         isProcessing = true
         
         guard !imageFiles.isEmpty else {
-            print("No image files found in the selected folder or its subfolders")
+            logger.info("No image files found in the selected folder or its subfolders")
             return
         }
         
-        print("Image files found:", imageFiles.count)
+        logger.info("Image files found: \(imageFiles.count)")
         assetCount = imageFiles.count
         
         processAssetsTask = Task {
@@ -60,7 +66,7 @@ extension PhotoLibraryVM {
         _ assets: [URL],
         maxConcurrentTasks: Int
     ) async {
-        print("maxConcurrentTasks:", maxConcurrentTasks)
+        logger.debug("maxConcurrentTasks: \(maxConcurrentTasks)")
         
         await withTaskGroup(of: Void.self) { group in
             var iterator = assets.makeIterator()
@@ -131,7 +137,7 @@ extension PhotoLibraryVM {
             let imageSource = CGImageSourceCreateWithURL(url as CFURL, imageSourceOptions),
             let cgImage = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
         else {
-            print("Error loading image:", url)
+            logger.error("Error loading image: \(url.absoluteString, privacy: .public)")
             return nil
         }
         

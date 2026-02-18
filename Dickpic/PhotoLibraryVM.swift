@@ -1,10 +1,15 @@
 import ScrechKit
 import Photos
 import BackgroundTasks
+import OSLog
 
 @Observable
 final class PhotoLibraryVM: ObservableObject {
     let analyzer = SensitivityAnalyzer()
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "dev.topscrech.Dickpic",
+        category: "PhotoLibraryVM"
+    )
     
     var sensitiveAssets: [SensitiveAsset] = []
     var sensitiveVideos: [URL] = []
@@ -37,16 +42,16 @@ final class PhotoLibraryVM: ObservableObject {
         
         switch status {
         case .authorized:
-            print("Authorized")
+            logger.info("Authorized")
             
         case .limited:
-            print("Limited")
+            logger.info("Limited")
             
         case .denied, .restricted:
             deniedAccess = true
             
         case .notDetermined:
-            print("Not determined")
+            logger.info("Not determined")
             
             await requestPermission()
             
@@ -114,7 +119,7 @@ final class PhotoLibraryVM: ObservableObject {
 
         deleteAssetFromLibrary(localIdentifier: localIdentifier) { [weak self] didSucceed, error in
             if let error {
-                print("Failed to delete sensitive asset:", error.localizedDescription)
+                self?.logger.error("Failed to delete sensitive asset: \(error.localizedDescription, privacy: .public)")
             }
 
             guard didSucceed else {
@@ -181,7 +186,7 @@ final class PhotoLibraryVM: ObservableObject {
         maxConcurrentTasks: Int,
         task: BGContinuedProcessingTask?
     ) async {
-        print("maxConcurrentTasks:", maxConcurrentTasks)
+        logger.debug("maxConcurrentTasks: \(maxConcurrentTasks)")
         _ = maxConcurrentTasks
 
         for asset in assets {
@@ -213,7 +218,7 @@ final class PhotoLibraryVM: ObservableObject {
                     identifier: asset.localIdentifier
                 )
             } catch {
-                print("Error fetching image:", error.localizedDescription)
+                logger.error("Error fetching image: \(error.localizedDescription, privacy: .public)")
             }
             
         case .video:
@@ -231,7 +236,7 @@ final class PhotoLibraryVM: ObservableObject {
         do {
             return try await analyzer.checkImage(image)
         } catch {
-            print(error.localizedDescription)
+            logger.error("\(error.localizedDescription, privacy: .public)")
             return false
         }
     }
@@ -252,7 +257,7 @@ final class PhotoLibraryVM: ObservableObject {
             await incrementProcessedPhotos()
         } catch {
             await incrementProcessedPhotos(false)
-            print("Error fetching video:", error.localizedDescription)
+            logger.error("Error fetching video: \(error.localizedDescription, privacy: .public)")
         }
     }
     
@@ -307,7 +312,7 @@ final class PhotoLibraryVM: ObservableObject {
             let isSensitive = try await analyzer.checkVideo(url)
             return isSensitive
         } catch {
-            print("Failed to check video:", error.localizedDescription)
+            logger.error("Failed to check video: \(error.localizedDescription, privacy: .public)")
             return false
         }
     }
