@@ -12,9 +12,7 @@ struct BigButton: View {
     }
     
     var body: some View {
-        Button {
-            action()
-        } label: {
+        Button(action: action) {
             Text(name)
                 .semibold()
                 .foregroundStyle(.white)

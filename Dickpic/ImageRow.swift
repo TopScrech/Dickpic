@@ -7,10 +7,7 @@ struct ImageRow: View {
     private let asset: SensitiveAsset
     private let onDelete: () -> Void
     
-    init(
-        _ asset: SensitiveAsset,
-        onDelete: @escaping () -> Void
-    ) {
+    init(_ asset: SensitiveAsset, onDelete: @escaping () -> Void) {
         self.asset = asset
         self.onDelete = onDelete
     }
@@ -36,10 +33,7 @@ struct ImageRow: View {
             height: originalHeight * scale
         )
         
-        return UniversalImage(
-            cgImage: asset.image,
-            size: newSize
-        )
+        return UniversalImage(cgImage: asset.image, size: newSize)
 #endif
     }
     
@@ -77,14 +71,10 @@ struct ImageRow: View {
             }
 #endif
             .contextMenu {
-                Button("Preview", systemImage: "eye") {
-                    preview()
-                }
-
+                Button("Preview", systemImage: "eye", action: preview)
+                
                 if asset.localIdentifier != nil {
-                    Button("Delete from Library", systemImage: "trash") {
-                        onDelete()
-                    }
+                    Button("Delete from Library", systemImage: "trash", role: .destructive, action: onDelete)
                 }
             }
 #if os(macOS)
