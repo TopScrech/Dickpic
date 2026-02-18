@@ -31,9 +31,14 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				BackgroundTask.swift,
 				iOS.plist,
 				Localizable.xcstrings,
 				PhotoLibraryVM.swift,
+				QuickLookFile.swift,
+				VideoRow.swift,
+				VideoRowVM.swift,
+				VideoThumbnail.swift,
 			);
 			target = F3B25E932CBFD97C000C8795 /* macOS */;
 		};

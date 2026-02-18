@@ -1,4 +1,3 @@
-#if os(iOS)
 import SwiftUI
 
 struct VideoRow: View {
@@ -44,15 +43,3 @@ struct VideoRow: View {
         }
     }
 }
-
-@Observable
-final class VideoRowVM {
-    var showPreview = false
-    var url: URL?
-    
-    func previewVideo(_ videoURL: URL) {
-        url = videoURL
-        showPreview = true
-    }
-}
-#endif

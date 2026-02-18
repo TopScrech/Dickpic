@@ -19,9 +19,7 @@ struct ProgressButton: View {
     }
     
     var body: some View {
-        Button {
-            action()
-        } label: {
+        Button(action: action) {
             ZStack(alignment: .leading) {
                 // Фон кнопки с пониженной прозрачностью
                 RoundedRectangle(cornerRadius: 16)

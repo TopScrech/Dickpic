@@ -1,23 +1,18 @@
-#if os(iOS)
 import Foundation
 import BackgroundTasks
 
 extension PhotoLibraryVM {
     func registerBackgroundTask(analyzeConcurrently: Bool) {
         let id = UUID()
+        let taskID = "dev.topscrech.Dickpic.process-assets.\(id)"
         
-        BGTaskScheduler.shared.register(
-            forTaskWithIdentifier: "dev.topscrech.Dickpic.process-assets.\(id)",
-            using: nil
-        ) { task in
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: taskID, using: nil) { task in
             print("Registered a background task")
             //self.handleAppRefresh(task: task as! BGProcessingTask)
 #warning("Implement cancelling")
             var shouldContinue = true
             
-            guard
-                let task = task as? BGContinuedProcessingTask
-            else {
+            guard let task = task as? BGContinuedProcessingTask else {
                 fatalError("Unexpected task type")
             }
             
@@ -90,4 +85,3 @@ func startBackgroundTask(_ id: UUID) async {
         print("Error:", error)
     }
 }
-#endif

@@ -1,4 +1,3 @@
-#if os(iOS)
 import ScrechKit
 import QuickLooking
 
@@ -42,4 +41,3 @@ struct QuickLookFile: View {
 //#Preview {
 //    QuickLookFile()
 //}
-#endif
