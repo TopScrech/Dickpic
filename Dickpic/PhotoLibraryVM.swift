@@ -1,4 +1,3 @@
-#if os(iOS)
 import ScrechKit
 import Photos
 import BackgroundTasks
@@ -401,4 +400,3 @@ extension PhotoLibraryVM {
         }
     }
 }
-#endif

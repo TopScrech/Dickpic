@@ -1,4 +1,3 @@
-#if os(macOS)
 import ScrechKit
 import Photos
 
@@ -399,4 +398,3 @@ extension PhotoLibraryVM {
         }
     }
 }
-#endif

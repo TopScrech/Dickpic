@@ -33,6 +33,7 @@
 				Assets.xcassets,
 				iOS.plist,
 				Localizable.xcstrings,
+				PhotoLibraryVM.swift,
 			);
 			target = F3B25E932CBFD97C000C8795 /* macOS */;
 		};
@@ -40,6 +41,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				PhotoLibraryVM.swift,
 				ScanFolder.swift,
 			);
 			target = F3B25E932CBFD97C000C8795 /* macOS */;
