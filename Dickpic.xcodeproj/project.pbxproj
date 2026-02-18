@@ -15,6 +15,7 @@
 
 /* Begin PBXFileReference section */
 		F3B25E942CBFD97C000C8795 /* macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3E05EC22F466342001B77CD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -93,6 +94,7 @@
 		F3ECFE482CA58A7100E72D41 = {
 			isa = PBXGroup;
 			children = (
+				F3E05EC22F466342001B77CD /* README.md */,
 				F3E05DC02F46546D001B77CD /* Dickpic */,
 				F3E05DF72F465495001B77CD /* macOS */,
 				F3B25EAE2CBFD9F2000C8795 /* Frameworks */,
