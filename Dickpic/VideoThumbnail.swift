@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 import AVFoundation
 
@@ -41,3 +42,4 @@ struct VideoThumbnail: View {
 //#Preview {
 //    VideoThumbnail()
 //}
+#endif

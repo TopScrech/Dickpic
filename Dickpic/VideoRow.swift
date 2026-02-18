@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 
 struct VideoRow: View {
@@ -54,3 +55,4 @@ final class VideoRowVM {
         showPreview = true
     }
 }
+#endif

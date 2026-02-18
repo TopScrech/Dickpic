@@ -1,10 +1,9 @@
+#if os(iOS)
 import Foundation
 import BackgroundTasks
 
 extension PhotoLibraryVM {
-    func registerBackgroundTask(
-        analyzeConcurrently: Bool
-    ) {
+    func registerBackgroundTask(analyzeConcurrently: Bool) {
         let id = UUID()
         
         BGTaskScheduler.shared.register(
@@ -91,3 +90,4 @@ func startBackgroundTask(_ id: UUID) async {
         print("Error:", error)
     }
 }
+#endif

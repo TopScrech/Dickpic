@@ -20,10 +20,9 @@ extension PhotoLibraryVM {
             "jpg", "jpeg", "png", "gif", "bmp", "tiff", "heic", "webp"
         ]
         
-        let fm = FileManager.default
         var imageFiles: [URL] = []
         
-        if let enumerator = fm.enumerator(
+        if let enumerator = FileManager.default.enumerator(
             at: folderURL,
             includingPropertiesForKeys: nil,
             options: [.skipsHiddenFiles, .skipsPackageDescendants]
