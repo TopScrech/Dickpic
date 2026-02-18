@@ -26,15 +26,21 @@ struct VideoThumbnail: View {
     }
     
     private func generateThumbnail() {
-        let asset = AVAsset(url: url)
+        let asset = AVURLAsset(url: url)
         
         let generator = AVAssetImageGenerator(asset: asset)
         generator.appliesPreferredTrackTransform = true
         
         let time = CMTime(seconds: 1, preferredTimescale: 60)
         
-        if let cgImage = try? generator.copyCGImage(at: time, actualTime: nil) {
-            thumbnail = UIImage(cgImage: cgImage)
+        generator.generateCGImageAsynchronously(for: time) { cgImage, _, error in
+            guard let cgImage, error == nil else {
+                return
+            }
+            
+            Task { @MainActor in
+                thumbnail = UIImage(cgImage: cgImage)
+            }
         }
     }
 }
