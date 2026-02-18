@@ -445,6 +445,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dickpic/iOS.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Required in order to perform sensetive photo analysis";
@@ -490,6 +491,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Dickpic/iOS.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Dickpic;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Required in order to perform sensetive photo analysis";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Required in order to perform sensetive photo analysis";

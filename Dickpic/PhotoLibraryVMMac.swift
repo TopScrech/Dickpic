@@ -56,11 +56,7 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     private func requestPermission() async {
-        let status = await withCheckedContinuation { continuation in
-            PHPhotoLibrary.requestAuthorization { status in
-                continuation.resume(returning: status)
-            }
-        }
+        let status = await requestAuthorizationStatus()
 
         guard
             status == .authorized || status == .limited
@@ -185,7 +181,10 @@ final class PhotoLibraryVM: ObservableObject {
         switch asset.mediaType {
         case .image:
             do {
-                let image = try await fetchAsset(asset)
+                let image = try await fetchAsset(
+                    asset,
+                    downloadOriginals: ValueStore().downloadOriginals
+                )
                 await analyseAsset(image)
             } catch {
                 print("Error fetching image:", error.localizedDescription)
@@ -229,13 +228,22 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    private func fetchVideoUrl(
+    nonisolated private func requestAuthorizationStatus() async -> PHAuthorizationStatus {
+        await withCheckedContinuation { continuation in
+            PHPhotoLibrary.requestAuthorization { status in
+                continuation.resume(returning: status)
+            }
+        }
+    }
+
+    nonisolated private func fetchVideoUrl(
         _ asset: PHAsset
     ) async throws -> URL {
         
         try await withCheckedThrowingContinuation { continuation in
             let manager = PHImageManager.default()
             let options = PHVideoRequestOptions()
+            var didResume = false
             
             options.isNetworkAccessAllowed = false
             options.version = .current
@@ -244,16 +252,22 @@ final class PhotoLibraryVM: ObservableObject {
                 forVideo: asset,
                 options: options
             ) { avAsset, _, info in
+                guard !didResume else {
+                    return
+                }
                 
                 if let info, let error = info[PHImageErrorKey] as? Error {
+                    didResume = true
                     continuation.resume(throwing: error)
                     return
                 }
                 
                 if let urlAsset = avAsset as? AVURLAsset {
+                    didResume = true
                     continuation.resume(returning: urlAsset.url)
                 } else {
                     let error = NSError(domain: "Invalid AVAsset", code: -1, userInfo: nil)
+                    didResume = true
                     continuation.resume(throwing: error)
                 }
             }
@@ -303,15 +317,19 @@ extension PhotoLibraryVM {
         await incrementProcessedPhotos()
     }
     
-    private func fetchAsset(_ asset: PHAsset) async throws -> UniversalImage? {
+    nonisolated private func fetchAsset(
+        _ asset: PHAsset,
+        downloadOriginals: Bool
+    ) async throws -> UniversalImage? {
         try await withCheckedThrowingContinuation { continuation in
             let manager = PHImageManager.default()
             let options = PHImageRequestOptions()
+            var didResume = false
             
             options.deliveryMode = .highQualityFormat
             options.isSynchronous = false
             options.resizeMode = .none
-            options.isNetworkAccessAllowed = ValueStore().downloadOriginals
+            options.isNetworkAccessAllowed = downloadOriginals
             
             manager.requestImage(
                 for: asset,
@@ -319,12 +337,27 @@ extension PhotoLibraryVM {
                 contentMode: .aspectFit,
                 options: options
             ) { result, info in
+                guard !didResume else {
+                    return
+                }
+
+                if let isDegraded = info?[PHImageResultIsDegradedKey] as? Bool, isDegraded {
+                    return
+                }
+
+                if let isCancelled = info?[PHImageCancelledKey] as? Bool, isCancelled {
+                    didResume = true
+                    continuation.resume(returning: nil)
+                    return
+                }
                 
                 if let info, let error = info[PHImageErrorKey] as? Error {
+                    didResume = true
                     continuation.resume(throwing: error)
                     return
                 }
                 
+                didResume = true
                 continuation.resume(returning: result)
             }
         }
