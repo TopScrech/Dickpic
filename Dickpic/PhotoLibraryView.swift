@@ -97,13 +97,10 @@ struct PhotoLibraryView: View {
                     } else {
                         Task {
 #if os(iOS)
-                            vm.registerBackgroundTask(
+                            await vm.startAnalyze(
                                 analyzeConcurrently: store.analyzeConcurrently
                             )
 #endif
-//                            await vm.startAnalyze(
-//                                analyzeConcurrently: store.analyzeConcurrently
-//                            )
                         }
                     }
                 }

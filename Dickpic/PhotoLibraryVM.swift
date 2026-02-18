@@ -74,6 +74,41 @@ final class PhotoLibraryVM: ObservableObject {
         processAssetsTask?.cancel()
         isProcessing = true
     }
+
+    func startAnalyze(
+        analyzeConcurrently: Bool
+    ) async {
+        let startTime = Date()
+        isProcessing = true
+        processingTime = nil
+
+        processAssetsTask?.cancel()
+
+        guard analyzer.checkPolicy() else {
+            sheetEnablePolicy = true
+            return
+        }
+
+        progress = 0
+        assetCount = 0
+        processedAssets = 0
+        sensitiveAssets.removeAll()
+        sensitiveVideos.removeAll()
+
+        let assets = await fetchAssets()
+
+        processAssetsTask = Task {
+            await self.processAssets(
+                assets,
+                maxConcurrentTasks: self.maxConcurrentTasks(analyzeConcurrently),
+                task: nil
+            )
+
+            let elapsed = Date().timeIntervalSince(startTime)
+            self.processingTime = Int(elapsed)
+            self.isProcessing = false
+        }
+    }
     
     func fetchAssets() async -> [PHAsset] {
         let fetchOptions = PHFetchOptions()
@@ -108,46 +143,23 @@ final class PhotoLibraryVM: ObservableObject {
     func processAssets(
         _ assets: [PHAsset],
         maxConcurrentTasks: Int,
-        task: BGContinuedProcessingTask
+        task: BGContinuedProcessingTask?
     ) async {
         print("maxConcurrentTasks:", maxConcurrentTasks)
-        
-        await withTaskGroup(of: Void.self) { group in
-            var iterator = assets.makeIterator()
-            
-            for _ in 0..<maxConcurrentTasks {
-                if let asset = iterator.next() {
-                    group.addTask(priority: .userInitiated) { [weak self] in
-                        guard !Task.isCancelled else {
-                            return
-                        }
-                        
-                        await self?.analyzeAsset(asset, task: task)
-                    }
-                }
+        _ = maxConcurrentTasks
+
+        for asset in assets {
+            guard !Task.isCancelled else {
+                break
             }
-            
-            while let asset = iterator.next() {
-                guard !Task.isCancelled else {
-                    break
-                }
-                
-                await group.next()
-                
-                group.addTask(priority: .userInitiated) { [weak self] in
-                    guard !Task.isCancelled else {
-                        return
-                    }
-                    
-                    await self?.analyzeAsset(asset, task: task)
-                }
-            }
+
+            await analyzeAsset(asset, task: task)
         }
     }
     
     private func analyzeAsset(
         _ asset: PHAsset,
-        task: BGContinuedProcessingTask
+        task: BGContinuedProcessingTask?
     ) async {
         guard !Task.isCancelled else {
             return
@@ -169,7 +181,7 @@ final class PhotoLibraryVM: ObservableObject {
             await incrementProcessedPhotos(false)
         }
         
-        task.progress.completedUnitCount += 1
+        task?.progress.completedUnitCount += 1
     }
     
     // MARK: Image
