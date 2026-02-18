@@ -56,16 +56,17 @@ final class PhotoLibraryVM: ObservableObject {
     }
     
     private func requestPermission() async {
-        PHPhotoLibrary.requestAuthorization { status in
-            guard
-                status == .authorized || status == .limited
-            else {
-                main {
-                    self.deniedAccess = true
-                }
-                
-                return
+        let status = await withCheckedContinuation { continuation in
+            PHPhotoLibrary.requestAuthorization { status in
+                continuation.resume(returning: status)
             }
+        }
+
+        guard
+            status == .authorized || status == .limited
+        else {
+            deniedAccess = true
+            return
         }
     }
     
