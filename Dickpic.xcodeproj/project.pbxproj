@@ -33,7 +33,6 @@
 				Assets.xcassets,
 				BackgroundTask.swift,
 				iOS.plist,
-				Localizable.xcstrings,
 				PhotoLibraryVM.swift,
 				QuickLookFile.swift,
 				VideoRow.swift,
