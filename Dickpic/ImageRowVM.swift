@@ -9,7 +9,6 @@ final class ImageRowVM {
         let tempDirectory = FileManager.default.temporaryDirectory
         let fileName = UUID().uuidString + ".png"
         let fileURL = tempDirectory.appendingPathComponent(fileName)
-        
 #if os(iOS)
         guard
             let imageData = image.pngData()
