@@ -58,9 +58,7 @@ final class PhotoLibraryVM: ObservableObject {
     private func requestPermission() async {
         let status = await requestAuthorizationStatus()
 
-        guard
-            status == .authorized || status == .limited
-        else {
+        guard status == .authorized || status == .limited else {
             deniedAccess = true
             return
         }
@@ -71,9 +69,7 @@ final class PhotoLibraryVM: ObservableObject {
         isProcessing = true
     }
     
-    func startAnalyze(
-        analyzeConcurrently: Bool
-    ) async {
+    func startAnalyze(analyzeConcurrently: Bool) async {
         let startTime = Date()
         isProcessing = true
         processingTime = nil
@@ -134,10 +130,7 @@ final class PhotoLibraryVM: ObservableObject {
         return assets
     }
     
-    private func processAssets(
-        _ assets: [PHAsset],
-        maxConcurrentTasks: Int
-    ) async {
+    private func processAssets(_ assets: [PHAsset], maxConcurrentTasks: Int) async {
         print("maxConcurrentTasks:", maxConcurrentTasks)
         
         await withTaskGroup(of: Void.self) { group in
@@ -236,10 +229,7 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
 
-    nonisolated private func fetchVideoUrl(
-        _ asset: PHAsset
-    ) async throws -> URL {
-        
+    nonisolated private func fetchVideoUrl(_ asset: PHAsset) async throws -> URL {
         try await withCheckedThrowingContinuation { continuation in
             let manager = PHImageManager.default()
             let options = PHVideoRequestOptions()
@@ -248,10 +238,7 @@ final class PhotoLibraryVM: ObservableObject {
             options.isNetworkAccessAllowed = false
             options.version = .current
             
-            manager.requestAVAsset(
-                forVideo: asset,
-                options: options
-            ) { avAsset, _, info in
+            manager.requestAVAsset(forVideo: asset, options: options) { avAsset, _, info in
                 guard !didResume else {
                     return
                 }
@@ -317,10 +304,7 @@ extension PhotoLibraryVM {
         await incrementProcessedPhotos()
     }
     
-    nonisolated private func fetchAsset(
-        _ asset: PHAsset,
-        downloadOriginals: Bool
-    ) async throws -> UniversalImage? {
+    nonisolated private func fetchAsset(_ asset: PHAsset, downloadOriginals: Bool) async throws -> UniversalImage? {
         try await withCheckedThrowingContinuation { continuation in
             let manager = PHImageManager.default()
             let options = PHImageRequestOptions()
