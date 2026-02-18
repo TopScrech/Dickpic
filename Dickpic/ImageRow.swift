@@ -4,21 +4,26 @@ import QuickLooking
 struct ImageRow: View {
     @State private var vm = ImageRowVM()
     
-    private let image: CGImage
+    private let asset: SensitiveAsset
+    private let onDelete: () -> Void
     
-    init(_ image: CGImage) {
-        self.image = image
+    init(
+        _ asset: SensitiveAsset,
+        onDelete: @escaping () -> Void
+    ) {
+        self.asset = asset
+        self.onDelete = onDelete
     }
     
     private let maxDimension = 64.0
     
     private var universalImage: UniversalImage {
 #if os(iOS)
-        UniversalImage(cgImage: image)
+        UniversalImage(cgImage: asset.image)
 #elseif os(macOS)
         // Original size
-        let originalWidth = CGFloat(image.width)
-        let originalHeight = CGFloat(image.height)
+        let originalWidth = CGFloat(asset.image.width)
+        let originalHeight = CGFloat(asset.image.height)
         
         // Scale factor
         let widthScale = maxDimension / originalWidth
@@ -32,7 +37,7 @@ struct ImageRow: View {
         )
         
         return UniversalImage(
-            cgImage: image,
+            cgImage: asset.image,
             size: newSize
         )
 #endif
@@ -72,8 +77,14 @@ struct ImageRow: View {
             }
 #endif
             .contextMenu {
-                Button("Preview") {
+                Button("Preview", systemImage: "eye") {
                     preview()
+                }
+
+                if asset.localIdentifier != nil {
+                    Button("Delete from Library", systemImage: "trash") {
+                        onDelete()
+                    }
                 }
             }
 #if os(macOS)

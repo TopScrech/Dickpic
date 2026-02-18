@@ -6,7 +6,7 @@ import Photos
 final class PhotoLibraryVM: ObservableObject {
     private let analyzer = SensitivityAnalyzer()
     
-    var sensitiveAssets: [CGImage] = []
+    var sensitiveAssets: [SensitiveAsset] = []
     var sensitiveVideos: [URL] = []
     var deniedAccess = false
     var sheetEnablePolicy = false
@@ -99,6 +99,46 @@ final class PhotoLibraryVM: ObservableObject {
             isProcessing = false
         }
     }
+
+    @MainActor
+    func deleteSensitiveAsset(_ asset: SensitiveAsset) {
+        guard let localIdentifier = asset.localIdentifier else {
+            return
+        }
+
+        deleteAssetFromLibrary(localIdentifier: localIdentifier) { [weak self] didSucceed, error in
+            if let error {
+                print("Failed to delete sensitive asset:", error.localizedDescription)
+            }
+
+            guard didSucceed else {
+                return
+            }
+
+            self?.sensitiveAssets.removeAll { $0.id == asset.id }
+        }
+    }
+
+    nonisolated private func deleteAssetFromLibrary(
+        localIdentifier: String,
+        completion: @escaping @MainActor (Bool, Error?) -> Void
+    ) {
+        PHPhotoLibrary.shared().performChanges {
+            let fetchResult = PHAsset.fetchAssets(
+                withLocalIdentifiers: [localIdentifier],
+                options: nil
+            )
+            guard fetchResult.count > 0 else {
+                return
+            }
+
+            PHAssetChangeRequest.deleteAssets(fetchResult)
+        } completionHandler: { didSucceed, error in
+            Task { @MainActor in
+                completion(didSucceed, error)
+            }
+        }
+    }
     
     func fetchAssets() async -> [PHAsset] {
         let fetchOptions = PHFetchOptions()
@@ -178,7 +218,10 @@ final class PhotoLibraryVM: ObservableObject {
                     asset,
                     downloadOriginals: ValueStore().downloadOriginals
                 )
-                await analyseAsset(image)
+                await analyseAsset(
+                    image,
+                    identifier: asset.localIdentifier
+                )
             } catch {
                 print("Error fetching image:", error.localizedDescription)
             }
@@ -281,7 +324,10 @@ final class PhotoLibraryVM: ObservableObject {
 }
 
 extension PhotoLibraryVM {
-    private func analyseAsset(_ image: UniversalImage?) async {
+    private func analyseAsset(
+        _ image: UniversalImage?,
+        identifier: String
+    ) async {
 #if os(macOS)
         let cgImage = image?.cgImage(forProposedRect: nil, context: nil, hints: nil)
 #else
@@ -298,7 +344,13 @@ extension PhotoLibraryVM {
         let isSensitive = await checkImage(cgImage)
 #endif
         if isSensitive {
-            sensitiveAssets.append(cgImage)
+            sensitiveAssets.append(
+                SensitiveAsset(
+                    id: identifier,
+                    localIdentifier: identifier,
+                    image: cgImage
+                )
+            )
         }
         
         await incrementProcessedPhotos()

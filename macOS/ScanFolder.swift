@@ -113,7 +113,12 @@ extension PhotoLibraryVM {
         let isSensitive = await checkImage(cgImage)
 #endif
         if isSensitive {
-            sensitiveAssets.append(cgImage)
+            sensitiveAssets.append(
+                SensitiveAsset(
+                    id: url.absoluteString,
+                    image: cgImage
+                )
+            )
         }
         
         await incrementProcessedPhotos()

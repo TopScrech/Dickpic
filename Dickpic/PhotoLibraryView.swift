@@ -23,8 +23,10 @@ struct PhotoLibraryView: View {
             } else {
                 ScrollView {
                     LazyVGrid(columns: gridColumns) {
-                        ForEach(vm.sensitiveAssets, id: \.self) { asset in
-                            ImageRow(asset)
+                        ForEach(vm.sensitiveAssets) { asset in
+                            ImageRow(asset) {
+                                vm.deleteSensitiveAsset(asset)
+                            }
                         }
                         
                         ForEach(vm.sensitiveVideos, id: \.self) { videoUrl in
