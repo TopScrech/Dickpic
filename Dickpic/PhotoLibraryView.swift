@@ -96,11 +96,9 @@ struct PhotoLibraryView: View {
                         vm.cancelProcessing()
                     } else {
                         Task {
-#if os(iOS)
                             await vm.startAnalyze(
                                 analyzeConcurrently: store.analyzeConcurrently
                             )
-#endif
                         }
                     }
                 }
