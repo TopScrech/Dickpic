@@ -23,15 +23,11 @@ struct SheetEnablePolicy: View {
                 Button {
                     openSettings()
                 } label: {
-                    Text("1. ") +
-                    
-                    Text("Open Settings")
-                        .underline()
+                    Text("1. \(Text("Open Settings").underline())")
                 }
                 .foregroundStyle(.foreground)
 #endif
                 Text("2. Navigate to **Privacy & Security**, scroll down and select **Sensetive Content Warning**")
-                
                 Text("3. Turn on the switch and return to the app")
                 
                 Spacer()
