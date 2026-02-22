@@ -137,7 +137,7 @@ extension PhotoLibraryVM {
             let imageSource = CGImageSourceCreateWithURL(url as CFURL, imageSourceOptions),
             let cgImage = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
         else {
-            logger.error("Error loading image: \(url.absoluteString, privacy: .public)")
+            logger.error("Error loading image: \(url.absoluteString)")
             return nil
         }
         

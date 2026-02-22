@@ -88,6 +88,6 @@ func startBackgroundTask(_ id: UUID) async {
     do {
         try BGTaskScheduler.shared.submit(req)
     } catch {
-        logger.error("Error: \(error.localizedDescription, privacy: .public)")
+        logger.error("Error: \(error)")
     }
 }

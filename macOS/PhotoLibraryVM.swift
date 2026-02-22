@@ -112,7 +112,7 @@ final class PhotoLibraryVM: ObservableObject {
         
         deleteAssetFromLibrary(localIdentifier: localIdentifier) { [weak self] didSucceed, error in
             if let error {
-                self?.logger.error("Failed to delete sensitive asset: \(error.localizedDescription, privacy: .public)")
+                self?.logger.error("Failed to delete sensitive asset: \(error)")
             }
             
             guard didSucceed else {
@@ -227,7 +227,7 @@ final class PhotoLibraryVM: ObservableObject {
                     identifier: asset.localIdentifier
                 )
             } catch {
-                logger.error("Error fetching image: \(error.localizedDescription, privacy: .public)")
+                logger.error("Error fetching image: \(error)")
             }
             
         case .video:
@@ -243,7 +243,7 @@ final class PhotoLibraryVM: ObservableObject {
         do {
             return try await analyzer.checkImage(image)
         } catch {
-            logger.error("\(error.localizedDescription, privacy: .public)")
+            logger.error("\(error)")
             return false
         }
     }
@@ -264,7 +264,7 @@ final class PhotoLibraryVM: ObservableObject {
             await incrementProcessedPhotos()
         } catch {
             await incrementProcessedPhotos(false)
-            logger.error("Error fetching video: \(error.localizedDescription, privacy: .public)")
+            logger.error("Error fetching video: \(error)")
         }
     }
     
@@ -313,7 +313,7 @@ final class PhotoLibraryVM: ObservableObject {
             let isSensitive = try await analyzer.checkVideo(url)
             return isSensitive
         } catch {
-            logger.error("Failed to check video: \(error.localizedDescription, privacy: .public)")
+            logger.error("Failed to check video: \(error)")
             return false
         }
     }

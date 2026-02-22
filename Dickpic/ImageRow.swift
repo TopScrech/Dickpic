@@ -96,7 +96,7 @@ struct ImageRow: View {
         do {
             try vm.saveImageToTemporaryDirectory(universalImage)
         } catch {
-            logger.error("Saving failed: \(error.localizedDescription, privacy: .public)")
+            logger.error("Saving failed: \(error)")
         }
     }
 }
