@@ -1,6 +1,5 @@
 import ScrechKit
 import Photos
-import BackgroundTasks
 import OSLog
 
 @Observable
@@ -102,7 +101,7 @@ final class PhotoLibraryVM: ObservableObject {
             await self.processAssets(
                 assets,
                 maxConcurrentTasks: self.maxConcurrentTasks(analyzeConcurrently),
-                task: nil
+                onAssetProcessed: nil
             )
 
             let elapsed = Date().timeIntervalSince(startTime)
@@ -184,7 +183,7 @@ final class PhotoLibraryVM: ObservableObject {
     func processAssets(
         _ assets: [PHAsset],
         maxConcurrentTasks: Int,
-        task: BGContinuedProcessingTask?
+        onAssetProcessed: (() -> Void)?
     ) async {
         logger.debug("maxConcurrentTasks: \(maxConcurrentTasks)")
         _ = maxConcurrentTasks
@@ -194,13 +193,13 @@ final class PhotoLibraryVM: ObservableObject {
                 break
             }
 
-            await analyzeAsset(asset, task: task)
+            await analyzeAsset(asset, onAssetProcessed: onAssetProcessed)
         }
     }
     
     private func analyzeAsset(
         _ asset: PHAsset,
-        task: BGContinuedProcessingTask?
+        onAssetProcessed: (() -> Void)?
     ) async {
         guard !Task.isCancelled else {
             return
@@ -228,7 +227,7 @@ final class PhotoLibraryVM: ObservableObject {
             await incrementProcessedPhotos(false)
         }
         
-        task?.progress.completedUnitCount += 1
+        onAssetProcessed?()
     }
     
     // MARK: Image

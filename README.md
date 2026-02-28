@@ -8,5 +8,5 @@ Analyse photo library for sensetive content
 3. Flagged items are shown to let you preview them and delete if needed
 
 ## Supported platforms
-- iOS/iPadOS 26+
+- iOS/iPadOS 17+ (background processing API is only supported on 26+)
 - macOS 14+
