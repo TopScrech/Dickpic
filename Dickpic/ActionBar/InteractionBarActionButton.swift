@@ -4,7 +4,7 @@ struct InteractionBarActionButton: View {
     @Environment(PhotoLibraryVM.self) private var vm
     @EnvironmentObject private var store: ValueStore
     
-    private var actionTitle: String {
+    private var actionTitle: LocalizedStringKey {
         vm.isProcessing ? "Cancel" : "Analyze"
     }
     
