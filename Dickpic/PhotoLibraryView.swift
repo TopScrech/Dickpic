@@ -98,34 +98,11 @@ struct PhotoLibraryView: View {
                         vm.cancelProcessing()
                     } else {
                         Task {
-                            await vm.startAnalyze(
-                                analyzeConcurrently: store.analyzeConcurrently
-                            )
+                            await vm.startAnalyze(analyzeConcurrently: store.analyzeConcurrently)
                         }
                     }
                 }
                 .disabled(vm.isProcessing && vm.progress > 0.95)
-                //                .contextMenu {
-                //                    Button {
-                //                        Task {
-                //                            await vm.startAnalyze(
-                //                                analyzeConcurrently: true
-                //                            )
-                //                        }
-                //                    } label: {
-                //                        Label("Analyze Concurrently", systemImage: "square.grid.3x3")
-                //                    }
-                //
-                //                    Button {
-                //                        Task {
-                //                            await vm.startAnalyze(
-                //                                analyzeConcurrently: false
-                //                            )
-                //                        }
-                //                    } label: {
-                //                        Label("Analyze Sequentually", systemImage: "square")
-                //                    }
-                //                }
             }
             .monospacedDigit()
 #if os(macOS)
