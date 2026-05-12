@@ -3,12 +3,6 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject private var store: ValueStore
     
-    @Binding private var fullScreenCover: Bool
-    
-    init(_ fullScreenCover: Binding<Bool>) {
-        _fullScreenCover = fullScreenCover
-    }
-    
     private var aspectRatioTitle: LocalizedStringKey {
         store.squarePhotoGrid ? "Aspect Ratio Grid" : "Square Photo Grid"
     }
@@ -38,7 +32,7 @@ struct SettingsView: View {
         .toolbarTitleDisplayMode(.inline)
         .toolbar {
             NavigationLink {
-                DebugSettings($fullScreenCover)
+                DebugSettings()
             } label: {
                 Label("Debug", systemImage: "hammer")
             }

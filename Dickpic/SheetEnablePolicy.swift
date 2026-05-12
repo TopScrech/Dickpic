@@ -5,37 +5,31 @@ struct SheetEnablePolicy: View {
     
     var body: some View {
         VStack(spacing: 30) {
-            HStack(spacing: 20) {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundStyle(.red.gradient)
-                
-                Text("Sensitive Content Warnings are disabled")
-            }
-            .title(.bold)
-            
-            VStack(alignment: .leading) {
+            ContentUnavailableView {
+                Label {
+                    Text("Sensitive Content Warnings are disabled")
+                } icon: {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundStyle(.red.gradient)
+                }
+            } description: {
                 Text("To enable this feature, follow these steps:")
-                    .title3(.semibold)
-                    .padding(.vertical)
-#if os(macOS)
-                Text("1. Open Settings")
-#else
-                Button("1. \(Text("Open Settings").underline())") {
-                    openSettings()
-                }
-                .foregroundStyle(.foreground)
-#endif
-                Text("2. Navigate to **Privacy & Security**, scroll down and select **Sensetive Content Warning**")
-                Text("3. Turn on the switch and return to the app")
-                
-                Spacer()
-                
-                BigButton("Dismiss", color: .green) {
-                    dismiss()
-                }
             }
-            .padding(.horizontal, 20)
+            .frame(maxHeight: 160)
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("1. Open Settings")
+                Text("2. Navigate to **Privacy & Security**, scroll down and select **Sensetive Content Warning**")
+                Text("3. Turn on the toggle and return to the app")
+            }
+            .frame(maxWidth: 420, alignment: .leading)
+            .padding(.horizontal)
+            
+            BigButton("Dismiss", color: .green.opacity(0.5)) {
+                dismiss()
+            }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
