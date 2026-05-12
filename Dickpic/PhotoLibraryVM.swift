@@ -62,9 +62,7 @@ final class PhotoLibraryVM: ObservableObject {
     private func requestPermission() async {
         let status = await requestAuthorizationStatus()
 
-        guard
-            status == .authorized || status == .limited
-        else {
+        guard status == .authorized || status == .limited else {
             deniedAccess = true
             return
         }
@@ -75,9 +73,7 @@ final class PhotoLibraryVM: ObservableObject {
         isProcessing = true
     }
 
-    func startAnalyze(
-        analyzeConcurrently: Bool
-    ) async {
+    func startAnalyze(analyzeConcurrently: Bool) async {
         let startTime = Date()
         isProcessing = true
         processingTime = nil
@@ -212,6 +208,7 @@ final class PhotoLibraryVM: ObservableObject {
                     asset,
                     downloadOriginals: ValueStore().downloadOriginals
                 )
+                
                 await analyseAsset(
                     image,
                     identifier: asset.localIdentifier

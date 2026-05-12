@@ -29,11 +29,11 @@ struct PhotoLibraryView: View {
                             }
                         }
                         
-                        ForEach(vm.sensitiveVideos, id: \.self) { videoUrl in
+                        ForEach(vm.sensitiveVideos, id: \.self) {
 #if os(macOS)
-                            Text(videoUrl.description)
+                            Text($0.description)
 #else
-                            VideoRow(videoUrl)
+                            VideoRow($0)
 #endif
                         }
                     }
@@ -70,47 +70,9 @@ struct PhotoLibraryView: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            VStack {
-                Text("Total Assets: \(vm.assetCount)")
-                    .animation(.default, value: vm.assetCount)
-                    .numericTransition()
-                
-                HStack(spacing: 0) {
-                    Text("Processed: \(vm.processedAssets)")
-                    
-                    Text(" / \(vm.processedPercent)%")
-                }
-                .animation(.default, value: vm.processedAssets)
-                .numericTransition()
-                
-                if let processingTime = vm.processingTime {
-                    Text("Processing time: \(processingTime)s")
-                }
-                
-                ProgressButton(
-                    vm.isProcessing ? "Cancel" : "Analyze",
-                    color: vm.isProcessing ? .red : .blue,
-                    progress: vm.progress
-                ) {
-                    if vm.isProcessing {
-                        vm.cancelProcessing()
-                    } else {
-                        Task {
-                            await vm.startAnalyze(analyzeConcurrently: store.analyzeConcurrently)
-                        }
-                    }
-                }
-                .disabled(vm.isProcessing && vm.progress > 0.95)
-            }
-            .monospacedDigit()
-#if os(macOS)
-            .padding(8)
-            .padding(.vertical, 8)
-            .buttonStyle(.plain)
-#else
-            .padding(.bottom, 5)
-#endif
+            PhotoLibraryActionInsetView()
         }
+        .environment(vm)
     }
 }
 
