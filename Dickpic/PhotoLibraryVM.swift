@@ -3,7 +3,7 @@ import Photos
 import OSLog
 
 @Observable
-final class PhotoLibraryVM: ObservableObject {
+final class PhotoLibraryVM {
     let analyzer = SensitivityAnalyzer()
     private let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "dev.topscrech.Dickpic",
