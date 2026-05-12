@@ -1,18 +1,16 @@
 import SwiftUI
 
 struct VideoRow: View {
+    @EnvironmentObject private var store: ValueStore
     @State private var vm = VideoRowVM()
+    @State private var isBlurred = true
     
     private let videoURL: URL
-    private let unblurTrigger: Bool
     
-    init(_ url: URL, unblurTrigger: Bool) {
+    init(_ url: URL) {
         self.videoURL = url
-        self.unblurTrigger = unblurTrigger
     }
-    
-    @State private var isHidden = true
-    
+
     var body: some View {
         Menu {
             Button("Preview") {
@@ -29,13 +27,16 @@ struct VideoRow: View {
                         .cornerRadius(8)
                 }
                 .cornerRadius(8)
-                .blur(radius: isHidden ? 5 : 0)
-                .animation(.default, value: isHidden)
+                .blur(radius: isBlurred ? 5 : 0)
+                .animation(.default, value: isBlurred)
         } primaryAction: {
-            isHidden.toggle()
+            toggleBlur()
         }
-        .onChange(of: unblurTrigger) { _, _ in
-            isHidden = false
+        .task {
+            isBlurred = store.blurSensitiveMedia
+        }
+        .onChange(of: store.blurSensitiveMedia) { _, newValue in
+            isBlurred = newValue
         }
         .overlay(alignment: .bottomTrailing) {
             Image(systemName: "film")
@@ -46,5 +47,9 @@ struct VideoRow: View {
         .sheet($vm.showPreview) {
             QuickLookFile(vm.url)
         }
+    }
+    
+    private func toggleBlur() {
+        isBlurred.toggle()
     }
 }

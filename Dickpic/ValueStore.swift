@@ -5,6 +5,7 @@ final class ValueStore: ObservableObject {
     @AppStorage("analyze_concurrently") var analyzeConcurrently = true
     @AppStorage("analyze_videos") var analyzeVideos = true
     @AppStorage("analyze_newest_first") var analyzeNewestFirst = true
+    @AppStorage("blur_sensitive_media") var blurSensitiveMedia = true
     
     @AppStorage("show_intro") var showIntro = true
 }

@@ -8,15 +8,15 @@ private let logger = Logger(
 )
 
 struct ImageRow: View {
+    @EnvironmentObject private var store: ValueStore
     @State private var vm = ImageRowVM()
+    @State private var isBlurred = true
     
     private let asset: SensitiveAsset
-    private let unblurTrigger: Bool
     private let onDelete: () -> Void
     
-    init(_ asset: SensitiveAsset, unblurTrigger: Bool, onDelete: @escaping () -> Void) {
+    init(_ asset: SensitiveAsset, onDelete: @escaping () -> Void) {
         self.asset = asset
-        self.unblurTrigger = unblurTrigger
         self.onDelete = onDelete
     }
     
@@ -45,36 +45,36 @@ struct ImageRow: View {
 #endif
     }
     
-    @State private var isHidden = true
-    
     var body: some View {
-        Rectangle()
-            .aspectRatio(1, contentMode: .fit)
-            .foregroundColor(.clear)
-            .overlay {
-                Group {
+        Button(action: toggleBlur) {
+            Rectangle()
+                .aspectRatio(1, contentMode: .fit)
+                .foregroundColor(.clear)
+                .overlay {
+                    Group {
 #if os(macOS)
-                    Image(nsImage: universalImage)
-                        .resizable()
+                        Image(nsImage: universalImage)
+                            .resizable()
 #else
-                    Image(uiImage: universalImage)
-                        .resizable()
+                        Image(uiImage: universalImage)
+                            .resizable()
 #endif
+                    }
+                    // .frame(maxWidth: 256, maxHeight: 256)
+                    .scaledToFit()
+                    .clipped()
+                    .cornerRadius(8)
                 }
-                // .frame(maxWidth: 256, maxHeight: 256)
-                .scaledToFit()
-                .clipped()
                 .cornerRadius(8)
-            }
+                .blur(radius: isBlurred ? 8 : 0)
+                .animation(.default, value: isBlurred)
+        }
             .buttonStyle(.plain)
-            .cornerRadius(8)
-            .blur(radius: isHidden ? 8 : 0)
-            .animation(.default, value: isHidden)
-            .onTapGesture {
-                isHidden.toggle()
+            .task {
+                isBlurred = store.blurSensitiveMedia
             }
-            .onChange(of: unblurTrigger) { _, _ in
-                isHidden = false
+            .onChange(of: store.blurSensitiveMedia) { _, newValue in
+                isBlurred = newValue
             }
 #if os(macOS)
             .onLongPressGesture {
@@ -103,5 +103,9 @@ struct ImageRow: View {
         } catch {
             logger.error("Saving failed: \(error)")
         }
+    }
+    
+    private func toggleBlur() {
+        isBlurred.toggle()
     }
 }

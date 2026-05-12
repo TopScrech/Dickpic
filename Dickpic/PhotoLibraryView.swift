@@ -3,7 +3,6 @@ import ScrechKit
 struct PhotoLibraryView: View {
     @Binding private var fullScreenCover: Bool
     @State private var vm = PhotoLibraryVM()
-    @State private var unblurTrigger = false
     
     init(_ fullScreenCover: Binding<Bool>) {
         _fullScreenCover = fullScreenCover
@@ -29,7 +28,7 @@ struct PhotoLibraryView: View {
                 ScrollView {
                     LazyVGrid(columns: gridColumns) {
                         ForEach(vm.sensitiveAssets) { asset in
-                            ImageRow(asset, unblurTrigger: unblurTrigger) {
+                            ImageRow(asset) {
                                 vm.deleteSensitiveAsset(asset)
                             }
                         }
@@ -38,7 +37,7 @@ struct PhotoLibraryView: View {
 #if os(macOS)
                             Text($0.description)
 #else
-                            VideoRow($0, unblurTrigger: unblurTrigger)
+                            VideoRow($0)
 #endif
                         }
                     }
@@ -56,10 +55,7 @@ struct PhotoLibraryView: View {
                 await vm.checkPermission()
             }
         }
-        .photoLibraryToolbar(
-            fullScreenCover: $fullScreenCover,
-            unblurTrigger: $unblurTrigger
-        )
+        .photoLibraryToolbar(fullScreenCover: $fullScreenCover)
         .safeAreaInset(edge: .bottom) {
             PhotoLibraryActionInsetView()
         }
