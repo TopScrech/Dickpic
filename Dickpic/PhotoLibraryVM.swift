@@ -72,6 +72,14 @@ final class PhotoLibraryVM: ObservableObject {
         processAssetsTask?.cancel()
         isProcessing = true
     }
+    
+    func resetResults() {
+        sensitiveAssets = []
+        sensitiveVideos = []
+        assetCount = 0
+        progress = 0
+        processedAssets = 0
+    }
 
     func startAnalyze(
         analyzeConcurrently: Bool,

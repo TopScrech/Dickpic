@@ -4,9 +4,11 @@ struct VideoRow: View {
     @State private var vm = VideoRowVM()
     
     private let videoURL: URL
+    private let unblurTrigger: Bool
     
-    init(_ url: URL) {
+    init(_ url: URL, unblurTrigger: Bool) {
         self.videoURL = url
+        self.unblurTrigger = unblurTrigger
     }
     
     @State private var isHidden = true
@@ -31,6 +33,9 @@ struct VideoRow: View {
                 .animation(.default, value: isHidden)
         } primaryAction: {
             isHidden.toggle()
+        }
+        .onChange(of: unblurTrigger) { _, _ in
+            isHidden = false
         }
         .overlay(alignment: .bottomTrailing) {
             Image(systemName: "film")

@@ -3,6 +3,12 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject private var store: ValueStore
     
+    @Binding private var fullScreenCover: Bool
+    
+    init(_ fullScreenCover: Binding<Bool>) {
+        _fullScreenCover = fullScreenCover
+    }
+    
     var body: some View {
         List {
             Toggle(isOn: $store.downloadOriginals) {
@@ -18,10 +24,17 @@ struct SettingsView: View {
                 Text("Speeds up the analysis")
             }
         }
+        .toolbar {
+            NavigationLink {
+                DebugSettings($fullScreenCover)
+            } label: {
+                Label("Debug", systemImage: "hammer")
+            }
+        }
     }
 }
 
-#Preview {
-    SettingsView()
-        .environmentObject(ValueStore())
-}
+//#Preview {
+//    SettingsView()
+//        .environmentObject(ValueStore())
+//}

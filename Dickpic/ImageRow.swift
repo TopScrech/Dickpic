@@ -11,10 +11,12 @@ struct ImageRow: View {
     @State private var vm = ImageRowVM()
     
     private let asset: SensitiveAsset
+    private let unblurTrigger: Bool
     private let onDelete: () -> Void
     
-    init(_ asset: SensitiveAsset, onDelete: @escaping () -> Void) {
+    init(_ asset: SensitiveAsset, unblurTrigger: Bool, onDelete: @escaping () -> Void) {
         self.asset = asset
+        self.unblurTrigger = unblurTrigger
         self.onDelete = onDelete
     }
     
@@ -70,6 +72,9 @@ struct ImageRow: View {
             .animation(.default, value: isHidden)
             .onTapGesture {
                 isHidden.toggle()
+            }
+            .onChange(of: unblurTrigger) { _, _ in
+                isHidden = false
             }
 #if os(macOS)
             .onLongPressGesture {

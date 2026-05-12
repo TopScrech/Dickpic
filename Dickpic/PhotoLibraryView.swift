@@ -1,8 +1,13 @@
 import ScrechKit
 
 struct PhotoLibraryView: View {
+    @Binding private var fullScreenCover: Bool
     @State private var vm = PhotoLibraryVM()
-    @EnvironmentObject private var store: ValueStore
+    @State private var unblurTrigger = false
+    
+    init(_ fullScreenCover: Binding<Bool>) {
+        _fullScreenCover = fullScreenCover
+    }
     
     private static let initialColumns = 3
     
@@ -24,7 +29,7 @@ struct PhotoLibraryView: View {
                 ScrollView {
                     LazyVGrid(columns: gridColumns) {
                         ForEach(vm.sensitiveAssets) { asset in
-                            ImageRow(asset) {
+                            ImageRow(asset, unblurTrigger: unblurTrigger) {
                                 vm.deleteSensitiveAsset(asset)
                             }
                         }
@@ -33,7 +38,7 @@ struct PhotoLibraryView: View {
 #if os(macOS)
                             Text($0.description)
 #else
-                            VideoRow($0)
+                            VideoRow($0, unblurTrigger: unblurTrigger)
 #endif
                         }
                     }
@@ -43,32 +48,18 @@ struct PhotoLibraryView: View {
                 .scrollIndicators(.never)
             }
         }
+        .sheet($vm.sheetEnablePolicy) {
+            SheetEnablePolicy()
+        }
         .onFirstAppear {
             Task {
                 await vm.checkPermission()
             }
         }
-        .sheet($vm.sheetEnablePolicy) {
-            SheetEnablePolicy()
-        }
-        .toolbar {
-#if os(macOS)
-            SFButton("folder") {
-                vm.analyzeFolder(store.analyzeConcurrently)
-            }
-#endif
-            Menu {
-                Button("Reset", systemImage: "xmark") {
-                    vm.sensitiveAssets = []
-                    vm.sensitiveVideos = []
-                    vm.assetCount = 0
-                    vm.progress = 0
-                    vm.processedAssets = 0
-                }
-            } label: {
-                Image(systemName: "ellipsis.circle")
-            }
-        }
+        .photoLibraryToolbar(
+            fullScreenCover: $fullScreenCover,
+            unblurTrigger: $unblurTrigger
+        )
         .safeAreaInset(edge: .bottom) {
             PhotoLibraryActionInsetView()
         }
@@ -76,7 +67,7 @@ struct PhotoLibraryView: View {
     }
 }
 
-#Preview {
-    PhotoLibraryView()
-        .environmentObject(ValueStore())
-}
+//#Preview {
+//    PhotoLibraryView()
+//        .environmentObject(ValueStore())
+//}
