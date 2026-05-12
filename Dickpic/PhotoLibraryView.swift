@@ -57,7 +57,7 @@ struct PhotoLibraryView: View {
         }
         .photoLibraryToolbar(fullScreenCover: $fullScreenCover)
         .safeAreaInset(edge: .bottom) {
-            PhotoLibraryActionInsetView()
+            InteractionBar()
         }
         .environment(vm)
     }

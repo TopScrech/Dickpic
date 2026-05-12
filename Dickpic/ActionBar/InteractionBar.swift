@@ -1,13 +1,9 @@
 import SwiftUI
 
-struct PhotoLibraryActionInsetView: View {
+struct InteractionBar: View {
     @Environment(PhotoLibraryVM.self) private var vm
-    @EnvironmentObject private var store: ValueStore
-    @State private var elapsedProcessingTime = 0
     
-    private var actionTitle: String {
-        vm.isProcessing ? "Cancel" : "Analyze"
-    }
+    @State private var elapsedProcessingTime = 0
     
     private var buttonTint: Color {
         vm.isProcessing ? .red : .accentColor
@@ -59,7 +55,7 @@ struct PhotoLibraryActionInsetView: View {
                     Spacer()
                 }
                 
-                actionButton
+                InteractionBarActionButton()
                 
                 if !hasAnalyzeStarted {
                     Spacer()
@@ -80,35 +76,6 @@ struct PhotoLibraryActionInsetView: View {
             while vm.isProcessing && !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(1))
                 elapsedProcessingTime += 1
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private var actionButton: some View {
-        if vm.isProcessing {
-            Button(actionTitle, action: performAction)
-                .buttonStyle(.borderedProminent)
-                .controlSize(.regular)
-                .tint(buttonTint)
-                .disabled(vm.progress > 0.95)
-        } else {
-            Button(actionTitle, action: performAction)
-                .buttonStyle(.borderedProminent)
-                .controlSize(.regular)
-                .tint(buttonTint)
-        }
-    }
-    
-    private func performAction() {
-        if vm.isProcessing {
-            vm.cancelProcessing()
-        } else {
-            Task {
-                await vm.startAnalyze(
-                    analyzeConcurrently: store.analyzeConcurrently,
-                    analyzeNewestFirst: store.analyzeNewestFirst
-                )
             }
         }
     }
@@ -144,8 +111,7 @@ struct PhotoLibraryActionInsetView: View {
     
     VStack {
         Spacer()
-        
-        PhotoLibraryActionInsetView()
+        InteractionBar()
     }
     .environment(vm)
     .environmentObject(ValueStore())
