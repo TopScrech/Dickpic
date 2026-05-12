@@ -10,9 +10,7 @@ final class ImageRowVM {
         let fileName = UUID().uuidString + ".png"
         let fileURL = tempDirectory.appendingPathComponent(fileName)
 #if os(iOS)
-        guard
-            let imageData = image.pngData()
-        else {
+        guard let imageData = image.pngData() else {
             throw NSError(
                 domain: "ImageConversionError",
                 code: 1001,
