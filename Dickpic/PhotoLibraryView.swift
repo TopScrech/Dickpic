@@ -40,6 +40,7 @@ struct PhotoLibraryView: View {
                     .padding(8)
                     .animation(.default, value: vm.totalAssets)
                 }
+                .scrollIndicators(.never)
             }
         }
         .onFirstAppear {
