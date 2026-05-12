@@ -5,6 +5,7 @@ import OSLog
 @Observable
 final class PhotoLibraryVM: ObservableObject {
     private let analyzer = SensitivityAnalyzer()
+    
     private let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "dev.topscrech.Dickpic",
         category: "PhotoLibraryVM"
@@ -268,6 +269,14 @@ final class PhotoLibraryVM: ObservableObject {
             await incrementProcessedPhotos(false)
             logger.error("Error fetching video: \(error)")
         }
+    }
+    
+    func resetResults() {
+        sensitiveAssets = []
+        sensitiveVideos = []
+        assetCount = 0
+        progress = 0
+        processedAssets = 0
     }
     
     nonisolated private func requestAuthorizationStatus() async -> PHAuthorizationStatus {
