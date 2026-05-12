@@ -11,28 +11,21 @@ struct SettingsView: View {
     
     var body: some View {
         List {
+            Toggle(isOn: $store.downloadOriginals) {
+                Text("Download original images")
+                Text("In case the images are offloaded to iCloud")
+            }
+            
             Toggle(isOn: $store.analyzeVideos) {
                 Text("Analyze videos")
             }
             
-            // Doesn't work
-            //            Toggle(isOn: $storage.includeHiddenAssets) {
-            //                Text("Include hidden assets")
-            //            }
-            
-            Toggle(isOn: $store.downloadOriginals) {
-                Text("Download original images")
-                
-                Text("In case the images are offloaded to iCloud")
-            }
-            
             Toggle(isOn: $store.analyzeConcurrently) {
                 Text("Analyze concurrently")
-                
                 Text("Speeds up the analysis")
             }
 #if DEBUG
-            Section {
+            Section("Debug") {
                 Button("Show intro") {
                     fullScreenCover = true
                 }
