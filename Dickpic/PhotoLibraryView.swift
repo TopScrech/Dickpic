@@ -1,12 +1,10 @@
 import ScrechKit
 
 struct PhotoLibraryView: View {
-    @Binding private var fullScreenCover: Bool
     @State private var vm = PhotoLibraryVM()
+    @EnvironmentObject private var store: ValueStore
     
-    init(_ fullScreenCover: Binding<Bool>) {
-        _fullScreenCover = fullScreenCover
-    }
+    @State private var fullScreenCover = false
     
     private static let initialColumns = 3
     
@@ -49,6 +47,25 @@ struct PhotoLibraryView: View {
         }
         .sheet($vm.sheetEnablePolicy) {
             SheetEnablePolicy()
+        }
+#if os(macOS)
+        .sheet($fullScreenCover) {
+            NavigationView {
+                IntroScreen($fullScreenCover)
+            }
+        }
+#else
+        .fullScreenCover($fullScreenCover) {
+            NavigationView {
+                IntroScreen($fullScreenCover)
+            }
+        }
+#endif
+        .task {
+            if store.showIntro {
+                fullScreenCover = true
+                store.showIntro = false
+            }
         }
         .onFirstAppear {
             Task {
