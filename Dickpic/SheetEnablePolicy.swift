@@ -25,7 +25,7 @@ struct SheetEnablePolicy: View {
             .frame(maxWidth: 420, alignment: .leading)
             .padding(.horizontal)
             
-            BigButton("Dismiss", color: .green) {
+            BigButton("Dismiss", color: .green.opacity(0.5)) {
                 dismiss()
             }
         }

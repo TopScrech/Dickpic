@@ -11,7 +11,7 @@ struct DebugSettings: View {
             }
             .foregroundStyle(.foreground)
             
-            Button(String("Show permission warning"), systemImage: "exclamationmark.triangle") {
+            Button(String("Show permission warning")) {
                 sheetEnablePolicy = true
             }
             .foregroundStyle(.foreground)
