@@ -10,5 +10,7 @@ Check out my [Bikini-Bottom](https://github.com/TopScrech/Bikini-Bottom) project
 3. Flagged items are shown to let you preview them and delete if needed
 
 ## Supported platforms
-- iOS/iPadOS 17+ (background processing API is only supported on 26+)
+- iOS/iPadOS 17+
 - macOS 14+
+
+Background processing API is only supported on iOS/iPadOS 26+
