@@ -65,7 +65,8 @@ struct InteractionBar: View {
         .footnote()
         .monospacedDigit()
         .padding()
-        .background(.bar)
+        .glassyBackground(20)
+        .scenePadding()
         .task(id: vm.isProcessing) {
             guard vm.isProcessing else {
                 return
