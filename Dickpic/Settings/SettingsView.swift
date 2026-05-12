@@ -9,20 +9,29 @@ struct SettingsView: View {
         _fullScreenCover = fullScreenCover
     }
     
+    private var aspectRatioTitle: LocalizedStringKey {
+        store.squarePhotoGrid ? "Aspect Ratio Grid" : "Square Photo Grid"
+    }
+    
     var body: some View {
         List {
-            Toggle(isOn: $store.downloadOriginals) {
-                Text("Download original images")
-                Text("In case the images are offloaded to iCloud")
+            Section("Analyzing") {
+                Toggle(isOn: $store.downloadOriginals) {
+                    Text("Download original images")
+                    Text("In case the images are offloaded to iCloud")
+                }
+                
+                Toggle("Analyze videos", isOn: $store.analyzeVideos)
+                Toggle("Recent items first", isOn: $store.analyzeNewestFirst)
+                
+                Toggle(isOn: $store.analyzeConcurrently) {
+                    Text("Multi-threading")
+                    Text("Speeds up the analysis")
+                }
             }
             
-            Toggle("Analyze videos", isOn: $store.analyzeVideos)
-            Toggle("Analyze recent items first", isOn: $store.analyzeNewestFirst)
-            Toggle("Square Photo Grid", isOn: $store.squarePhotoGrid)
-            
-            Toggle(isOn: $store.analyzeConcurrently) {
-                Text("Analyze concurrently")
-                Text("Speeds up the analysis")
+            Section("Layout") {
+                Toggle(aspectRatioTitle, isOn: $store.squarePhotoGrid)
             }
         }
         .navigationTitle("Settings")
