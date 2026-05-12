@@ -42,7 +42,6 @@ struct PhotoLibraryView: View {
                 }
             }
         }
-        .navigationTitle("Photo Library")
         .onFirstAppear {
             Task {
                 await vm.checkPermission()

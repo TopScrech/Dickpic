@@ -13,11 +13,21 @@ struct HomeView: View {
                     Label("Analysis", systemImage: "eye.slash")
                 }
             
-            SettingsView($fullScreenCover)
+            SettingsView()
                 .tag(1)
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
+        }
+        .navigationTitle(store.selectedTab == 0 ? "Photo Library" : "Settings")
+        .toolbar {
+            if store.selectedTab == 1 {
+                NavigationLink {
+                    DebugSettings($fullScreenCover)
+                } label: {
+                    Label("Debug", systemImage: "hammer")
+                }
+            }
         }
 #if os(macOS)
         .sheet($fullScreenCover) {
