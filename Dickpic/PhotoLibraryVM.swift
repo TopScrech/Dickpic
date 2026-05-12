@@ -70,7 +70,7 @@ final class PhotoLibraryVM: ObservableObject {
     
     func cancelProcessing() {
         processAssetsTask?.cancel()
-        isProcessing = true
+        isProcessing = false
     }
     
     func resetResults() {

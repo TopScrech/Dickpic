@@ -24,11 +24,18 @@ struct InteractionBarActionButton: View {
         if vm.isProcessing {
             vm.cancelProcessing()
         } else {
-            Task {
-                await vm.startAnalyze(
+            if #available(iOS 26.0, *) {
+                vm.registerBackgroundTask(
                     analyzeConcurrently: store.analyzeConcurrently,
                     analyzeNewestFirst: store.analyzeNewestFirst
                 )
+            } else {
+                Task {
+                    await vm.startAnalyze(
+                        analyzeConcurrently: store.analyzeConcurrently,
+                        analyzeNewestFirst: store.analyzeNewestFirst
+                    )
+                }
             }
         }
     }

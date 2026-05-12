@@ -22,12 +22,28 @@ extension PhotoLibraryVM {
         }
 
         let id = UUID()
-        registerContinuedBackgroundTask(
+        let didRegister = registerContinuedBackgroundTask(
+            id: id,
+            analyzeConcurrently: analyzeConcurrently,
+            analyzeNewestFirst: analyzeNewestFirst
+        ) {
+            Task {
+                await self.startAnalyze(
+                    analyzeConcurrently: analyzeConcurrently,
+                    analyzeNewestFirst: analyzeNewestFirst
+                )
+            }
+        }
+        
+        guard didRegister else {
+            return
+        }
+        
+        submitContinuedBackgroundTask(
             id: id,
             analyzeConcurrently: analyzeConcurrently,
             analyzeNewestFirst: analyzeNewestFirst
         )
-        submitContinuedBackgroundTask(id: id)
     }
 }
 
@@ -71,12 +87,13 @@ private extension PhotoLibraryVM {
     func registerContinuedBackgroundTask(
         id: UUID,
         analyzeConcurrently: Bool,
-        analyzeNewestFirst: Bool
-    ) {
+        analyzeNewestFirst: Bool,
+        fallback: @escaping () -> Void
+    ) -> Bool {
         let taskID = BackgroundTaskIdentifier.continuedProcessingPrefix + id.uuidString
         let didRegister = BGTaskScheduler.shared.register(
             forTaskWithIdentifier: taskID,
-            using: nil
+            using: .main
         ) { task in
             guard let task = task as? BGContinuedProcessingTask else {
                 task.setTaskCompleted(success: false)
@@ -116,21 +133,35 @@ private extension PhotoLibraryVM {
 
         if !didRegister {
             logger.error("Failed to register continued background task")
+            fallback()
         }
+        
+        return didRegister
     }
 
     @available(iOS 26.0, *)
-    func submitContinuedBackgroundTask(id: UUID) {
+    func submitContinuedBackgroundTask(
+        id: UUID,
+        analyzeConcurrently: Bool,
+        analyzeNewestFirst: Bool
+    ) {
         let request = BGContinuedProcessingTaskRequest(
             identifier: BackgroundTaskIdentifier.continuedProcessingPrefix + id.uuidString,
             title: "Analyze Photo Library",
             subtitle: "Scanning photos and videos"
         )
+        request.strategy = .fail
 
         do {
             try BGTaskScheduler.shared.submit(request)
         } catch {
             logger.error("Failed to submit continued background task: \(error)")
+            Task {
+                await startAnalyze(
+                    analyzeConcurrently: analyzeConcurrently,
+                    analyzeNewestFirst: analyzeNewestFirst
+                )
+            }
         }
     }
 }
