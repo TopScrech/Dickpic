@@ -18,6 +18,7 @@ struct SettingsView: View {
             
             Toggle("Analyze videos", isOn: $store.analyzeVideos)
             Toggle("Analyze recent items first", isOn: $store.analyzeNewestFirst)
+            Toggle("Square Photo Grid", isOn: $store.squarePhotoGrid)
             
             Toggle(isOn: $store.analyzeConcurrently) {
                 Text("Analyze concurrently")

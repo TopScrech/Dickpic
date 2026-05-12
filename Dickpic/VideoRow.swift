@@ -21,12 +21,19 @@ struct VideoRow: View {
                 .aspectRatio(1, contentMode: .fit)
                 .foregroundColor(.clear)
                 .overlay {
-                    VideoThumbnail(videoURL)
-                        .scaledToFill()
-                        .clipped()
-                        .cornerRadius(8)
+                    if store.squarePhotoGrid {
+                        VideoThumbnail(videoURL)
+                            .scaledToFill()
+                            .clipped()
+                            .clipShape(.rect(cornerRadius: 8))
+                    } else {
+                        VideoThumbnail(videoURL)
+                            .scaledToFit()
+                            .clipped()
+                            .clipShape(.rect(cornerRadius: 8))
+                    }
                 }
-                .cornerRadius(8)
+                .clipShape(.rect(cornerRadius: 8))
                 .blur(radius: isBlurred ? 5 : 0)
                 .animation(.default, value: isBlurred)
         } primaryAction: {
@@ -47,6 +54,7 @@ struct VideoRow: View {
         .sheet($vm.showPreview) {
             QuickLookFile(vm.url)
         }
+        .padding(4)
     }
     
     private func toggleBlur() {

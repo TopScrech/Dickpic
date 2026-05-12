@@ -10,7 +10,6 @@ private let logger = Logger(
 struct ImageRow: View {
     @EnvironmentObject private var store: ValueStore
     @State private var vm = ImageRowVM()
-    @State private var isBlurred = true
     
     private let asset: SensitiveAsset
     private let onDelete: () -> Void
@@ -19,6 +18,8 @@ struct ImageRow: View {
         self.asset = asset
         self.onDelete = onDelete
     }
+    
+    @State private var isBlurred = true
     
     private let maxDimension = 64.0
     
@@ -51,50 +52,41 @@ struct ImageRow: View {
                 .aspectRatio(1, contentMode: .fit)
                 .foregroundColor(.clear)
                 .overlay {
-                    Group {
-#if os(macOS)
-                        Image(nsImage: universalImage)
-                            .resizable()
-#else
-                        Image(uiImage: universalImage)
-                            .resizable()
-#endif
-                    }
-                    // .frame(maxWidth: 256, maxHeight: 256)
-                    .scaledToFit()
-                    .clipped()
-                    .cornerRadius(8)
+                    ImageRowThumbnailView(universalImage, isSquare: store.squarePhotoGrid)
+                        .clipped()
+                        .clipShape(.rect(cornerRadius: 8))
                 }
-                .cornerRadius(8)
+                .clipShape(.rect(cornerRadius: 8))
                 .blur(radius: isBlurred ? 8 : 0)
                 .animation(.default, value: isBlurred)
         }
-            .buttonStyle(.plain)
-            .task {
-                isBlurred = store.blurSensitiveMedia
-            }
-            .onChange(of: store.blurSensitiveMedia) { _, newValue in
-                isBlurred = newValue
-            }
+        .buttonStyle(.plain)
+        .task {
+            isBlurred = store.blurSensitiveMedia
+        }
+        .onChange(of: store.blurSensitiveMedia) { _, newValue in
+            isBlurred = newValue
+        }
 #if os(macOS)
-            .onLongPressGesture {
-                preview()
-            }
+        .onLongPressGesture {
+            preview()
+        }
 #endif
-            .contextMenu {
-                Button("Preview", systemImage: "eye", action: preview)
-                
-                if asset.localIdentifier != nil {
-                    Button("Delete from Library", systemImage: "trash", role: .destructive, action: onDelete)
-                }
+        .contextMenu {
+            Button("Preview", systemImage: "eye", action: preview)
+            
+            if asset.localIdentifier != nil {
+                Button("Delete from Library", systemImage: "trash", role: .destructive, action: onDelete)
             }
+        }
 #if os(macOS)
-            .quickLookPreview($vm.showPreview, url: vm.url, blur: false)
+        .quickLookPreview($vm.showPreview, url: vm.url, blur: false)
 #else
-            .sheet($vm.showPreview) {
-                QuickLookFile(vm.url)
-            }
+        .sheet($vm.showPreview) {
+            QuickLookFile(vm.url)
+        }
 #endif
+        .padding(4)
     }
     
     private func preview() {
