@@ -13,7 +13,7 @@ struct InteractionBar: View {
         VStack(spacing: 8) {
             if vm.isProcessing {
                 ProgressView(value: vm.progress)
-                    .tint(buttonTint)
+                    .tint(.blue)
             }
             
             HStack {
