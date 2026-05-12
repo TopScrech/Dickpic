@@ -16,24 +16,22 @@ struct SettingsView: View {
                 Text("In case the images are offloaded to iCloud")
             }
             
-            Toggle(isOn: $store.analyzeVideos) {
-                Text("Analyze videos")
-            }
+            Toggle("Analyze videos", isOn: $store.analyzeVideos)
+            Toggle("Analyze recent items first", isOn: $store.analyzeNewestFirst)
             
             Toggle(isOn: $store.analyzeConcurrently) {
                 Text("Analyze concurrently")
                 Text("Speeds up the analysis")
             }
-#if DEBUG
-            Section("Debug") {
-                Button("Show intro") {
-                    fullScreenCover = true
-                }
-                .foregroundStyle(.foreground)
-            }
-#endif
         }
         .navigationTitle("Settings")
+        .toolbar {
+            NavigationLink {
+                DebugSettings($fullScreenCover)
+            } label: {
+                Label("Debug", systemImage: "hammer")
+            }
+        }
     }
 }
 

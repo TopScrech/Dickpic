@@ -12,7 +12,10 @@ private enum BackgroundTaskIdentifier {
 }
 
 extension PhotoLibraryVM {
-    func registerBackgroundTask(analyzeConcurrently: Bool) {
+    func registerBackgroundTask(
+        analyzeConcurrently: Bool,
+        analyzeNewestFirst: Bool
+    ) {
         guard #available(iOS 26.0, *) else {
             logger.info("Skipping background task registration below iOS 26")
             return
@@ -21,7 +24,8 @@ extension PhotoLibraryVM {
         let id = UUID()
         registerContinuedBackgroundTask(
             id: id,
-            analyzeConcurrently: analyzeConcurrently
+            analyzeConcurrently: analyzeConcurrently,
+            analyzeNewestFirst: analyzeNewestFirst
         )
         submitContinuedBackgroundTask(id: id)
     }
@@ -66,7 +70,8 @@ private extension PhotoLibraryVM {
     @available(iOS 26.0, *)
     func registerContinuedBackgroundTask(
         id: UUID,
-        analyzeConcurrently: Bool
+        analyzeConcurrently: Bool,
+        analyzeNewestFirst: Bool
     ) {
         let taskID = BackgroundTaskIdentifier.continuedProcessingPrefix + id.uuidString
         let didRegister = BGTaskScheduler.shared.register(
@@ -90,7 +95,7 @@ private extension PhotoLibraryVM {
                     return
                 }
 
-                let assets = await self.fetchAssets()
+                let assets = await self.fetchAssets(analyzeNewestFirst: analyzeNewestFirst)
                 task.progress.totalUnitCount = Int64(assets.count)
 
                 self.processAssetsTask = Task { @MainActor in

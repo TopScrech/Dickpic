@@ -73,7 +73,10 @@ final class PhotoLibraryVM: ObservableObject {
         isProcessing = true
     }
 
-    func startAnalyze(analyzeConcurrently: Bool) async {
+    func startAnalyze(
+        analyzeConcurrently: Bool,
+        analyzeNewestFirst: Bool
+    ) async {
         let startTime = Date()
         isProcessing = true
         processingTime = nil
@@ -91,7 +94,7 @@ final class PhotoLibraryVM: ObservableObject {
         sensitiveAssets.removeAll()
         sensitiveVideos.removeAll()
 
-        let assets = await fetchAssets()
+        let assets = await fetchAssets(analyzeNewestFirst: analyzeNewestFirst)
 
         processAssetsTask = Task {
             await self.processAssets(
@@ -146,13 +149,12 @@ final class PhotoLibraryVM: ObservableObject {
         }
     }
     
-    func fetchAssets() async -> [PHAsset] {
+    func fetchAssets(analyzeNewestFirst: Bool) async -> [PHAsset] {
         let fetchOptions = PHFetchOptions()
         var allAssets: PHFetchResult<PHAsset>
         
         fetchOptions.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: true) // Start from oldest
-            //            NSSortDescriptor(key: "creationDate", ascending: false) // Start from newest
+            NSSortDescriptor(key: "creationDate", ascending: !analyzeNewestFirst)
         ]
         
         if ValueStore().analyzeVideos {

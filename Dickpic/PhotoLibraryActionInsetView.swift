@@ -105,7 +105,10 @@ struct PhotoLibraryActionInsetView: View {
             vm.cancelProcessing()
         } else {
             Task {
-                await vm.startAnalyze(analyzeConcurrently: store.analyzeConcurrently)
+                await vm.startAnalyze(
+                    analyzeConcurrently: store.analyzeConcurrently,
+                    analyzeNewestFirst: store.analyzeNewestFirst
+                )
             }
         }
     }
