@@ -24,6 +24,8 @@ struct SettingsView: View {
                 Text("Speeds up the analysis")
             }
         }
+        .navigationTitle("Settings")
+        .toolbarTitleDisplayMode(.inline)
         .toolbar {
             NavigationLink {
                 DebugSettings($fullScreenCover)

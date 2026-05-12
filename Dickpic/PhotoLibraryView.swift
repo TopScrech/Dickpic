@@ -45,6 +45,8 @@ struct PhotoLibraryView: View {
                 .scrollIndicators(.never)
             }
         }
+        .navigationTitle("Photo Library")
+        .toolbarTitleDisplayMode(.inline)
         .sheet($vm.sheetEnablePolicy) {
             SheetEnablePolicy()
         }

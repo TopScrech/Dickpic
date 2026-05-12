@@ -14,5 +14,7 @@ struct DebugSettings: View {
             }
             .foregroundStyle(.foreground)
         }
+        .navigationTitle("Debug Settings")
+        .toolbarTitleDisplayMode(.inline)
     }
 }
