@@ -59,6 +59,7 @@ struct ImageRow: View {
                 .clipShape(.rect(cornerRadius: 8))
                 .blur(radius: isBlurred ? 8 : 0)
                 .animation(.default, value: isBlurred)
+                .animation(.default, value: store.squarePhotoGrid)
         }
         .buttonStyle(.plain)
         .task {

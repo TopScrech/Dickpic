@@ -36,6 +36,7 @@ struct VideoRow: View {
                 .clipShape(.rect(cornerRadius: 8))
                 .blur(radius: isBlurred ? 5 : 0)
                 .animation(.default, value: isBlurred)
+                .animation(.default, value: store.squarePhotoGrid)
         } primaryAction: {
             toggleBlur()
         }
