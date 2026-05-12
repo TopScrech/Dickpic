@@ -20,10 +20,8 @@ struct SheetEnablePolicy: View {
 #if os(macOS)
                 Text("1. Open Settings")
 #else
-                Button {
+                Button("1. \(Text("Open Settings").underline())") {
                     openSettings()
-                } label: {
-                    Text("1. \(Text("Open Settings").underline())")
                 }
                 .foregroundStyle(.foreground)
 #endif

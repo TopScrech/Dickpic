@@ -58,14 +58,12 @@ struct PhotoLibraryView: View {
             }
 #endif
             Menu {
-                Button {
+                Button("Reset", systemImage: "xmark") {
                     vm.sensitiveAssets = []
                     vm.sensitiveVideos = []
                     vm.assetCount = 0
                     vm.progress = 0
                     vm.processedAssets = 0
-                } label: {
-                    Label("Reset", systemImage: "xmark")
                 }
             } label: {
                 Image(systemName: "ellipsis.circle")
