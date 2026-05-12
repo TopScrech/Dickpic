@@ -51,15 +51,11 @@ struct PhotoLibraryView: View {
         }
 #if os(macOS)
         .sheet($fullScreenCover) {
-            NavigationView {
-                IntroScreen($fullScreenCover)
-            }
+            IntroScreen()
         }
 #else
         .fullScreenCover($fullScreenCover) {
-            NavigationView {
-                IntroScreen($fullScreenCover)
-            }
+            IntroScreen()
         }
 #endif
         .task {
@@ -73,7 +69,7 @@ struct PhotoLibraryView: View {
                 await vm.checkPermission()
             }
         }
-        .photoLibraryToolbar(fullScreenCover: $fullScreenCover)
+        .photoLibraryToolbar()
         .overlay(alignment: .bottom) {
             InteractionBar()
         }

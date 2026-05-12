@@ -1,11 +1,7 @@
 import SwiftUI
 
 struct IntroScreen: View {
-    @Binding private var fullScreenCover: Bool
-    
-    init(_ fullScreenCover: Binding<Bool>) {
-        _fullScreenCover = fullScreenCover
-    }
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack {
@@ -49,11 +45,11 @@ struct IntroScreen: View {
             Spacer()
             
             BigLink("Why would I trust this app?", color: .red) {
-                IntroScreen2($fullScreenCover)
+                IntroScreen2()
             }
             
             BigButton("Gotcha!") {
-                fullScreenCover = false
+                dismiss()
             }
         }
         .rounded()
