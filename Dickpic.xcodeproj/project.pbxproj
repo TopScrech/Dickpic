@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 100;
+	objectVersion = 110;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,16 +18,16 @@
 		F3B25E942CBFD97C000C8795 /* macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3E05EC22F466342001B77CD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F3E05ECA2F4679B1001B77CD /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		F3ECFE512CA58A7100E72D41 /* Dickpic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dickpic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3ECFE512CA58A7100E72D41 /* iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F3E05DF12F46546D001B77CD /* Exceptions for "Dickpic" folder in "Dickpic" target */ = {
+		F3E05DF12F46546D001B77CD /* Exceptions for "Dickpic" folder in "iOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				iOS.plist,
 			);
-			target = F3ECFE502CA58A7100E72D41 /* Dickpic */;
+			target = F3ECFE502CA58A7100E72D41 /* iOS */;
 		};
 		F3E05DF22F46546D001B77CD /* Exceptions for "Dickpic" folder in "macOS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -58,7 +58,7 @@
 		F3E05DC02F46546D001B77CD /* Dickpic */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				F3E05DF12F46546D001B77CD /* Exceptions for "Dickpic" folder in "Dickpic" target */,
+				F3E05DF12F46546D001B77CD /* Exceptions for "Dickpic" folder in "iOS" target */,
 				F3E05DF22F46546D001B77CD /* Exceptions for "Dickpic" folder in "macOS" target */,
 			);
 			path = Dickpic;
@@ -115,7 +115,7 @@
 		F3ECFE522CA58A7100E72D41 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F3ECFE512CA58A7100E72D41 /* Dickpic.app */,
+				F3ECFE512CA58A7100E72D41 /* iOS.app */,
 				F3B25E942CBFD97C000C8795 /* macOS.app */,
 			);
 			name = Products;
@@ -146,9 +146,9 @@
 			productReference = F3B25E942CBFD97C000C8795 /* macOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F3ECFE502CA58A7100E72D41 /* Dickpic */ = {
+		F3ECFE502CA58A7100E72D41 /* iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F3ECFE602CA58A7100E72D41 /* Build configuration list for PBXNativeTarget "Dickpic" */;
+			buildConfigurationList = F3ECFE602CA58A7100E72D41 /* Build configuration list for PBXNativeTarget "iOS" */;
 			buildPhases = (
 				F3ECFE4D2CA58A7100E72D41 /* Sources */,
 				F3ECFE4E2CA58A7100E72D41 /* Frameworks */,
@@ -159,13 +159,13 @@
 			fileSystemSynchronizedGroups = (
 				F3E05DC02F46546D001B77CD /* Dickpic */,
 			);
-			name = Dickpic;
+			name = iOS;
 			packageProductDependencies = (
 				F37F0AB22CA5A2E800FD99F2 /* ScrechKit */,
 				F37F0AC32CA5D8F000FD99F2 /* QuickLooking */,
 			);
 			productName = Dickpic;
-			productReference = F3ECFE512CA58A7100E72D41 /* Dickpic.app */;
+			productReference = F3ECFE512CA58A7100E72D41 /* iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -201,12 +201,12 @@
 				F37F0AB12CA5A2E800FD99F2 /* XCRemoteSwiftPackageReference "ScrechKit" */,
 				F37F0AC22CA5D8F000FD99F2 /* XCRemoteSwiftPackageReference "QuickLooking" */,
 			);
-			preferredProjectObjectVersion = 100;
+			preferredProjectObjectVersion = 110;
 			productRefGroup = F3ECFE522CA58A7100E72D41 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F3ECFE502CA58A7100E72D41 /* Dickpic */,
+				F3ECFE502CA58A7100E72D41 /* iOS */,
 				F3B25E932CBFD97C000C8795 /* macOS */,
 			);
 		};
@@ -443,7 +443,7 @@
 			};
 			name = Release;
 		};
-		F3ECFE612CA58A7100E72D41 /* Debug configuration for PBXNativeTarget "Dickpic" */ = {
+		F3ECFE612CA58A7100E72D41 /* Debug configuration for PBXNativeTarget "iOS" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -489,7 +489,7 @@
 			};
 			name = Debug;
 		};
-		F3ECFE622CA58A7100E72D41 /* Release configuration for PBXNativeTarget "Dickpic" */ = {
+		F3ECFE622CA58A7100E72D41 /* Release configuration for PBXNativeTarget "iOS" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -554,11 +554,11 @@
 			);
 			defaultConfigurationName = Release;
 		};
-		F3ECFE602CA58A7100E72D41 /* Build configuration list for PBXNativeTarget "Dickpic" */ = {
+		F3ECFE602CA58A7100E72D41 /* Build configuration list for PBXNativeTarget "iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F3ECFE612CA58A7100E72D41 /* Debug configuration for PBXNativeTarget "Dickpic" */,
-				F3ECFE622CA58A7100E72D41 /* Release configuration for PBXNativeTarget "Dickpic" */,
+				F3ECFE612CA58A7100E72D41 /* Debug configuration for PBXNativeTarget "iOS" */,
+				F3ECFE622CA58A7100E72D41 /* Release configuration for PBXNativeTarget "iOS" */,
 			);
 			defaultConfigurationName = Release;
 		};

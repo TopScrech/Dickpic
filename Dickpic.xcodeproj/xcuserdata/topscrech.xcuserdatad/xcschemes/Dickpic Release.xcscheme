@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F3ECFE502CA58A7100E72D41"
-               BuildableName = "Dickpic.app"
-               BlueprintName = "Dickpic"
+               BuildableName = "iOS.app"
+               BlueprintName = "iOS"
                ReferencedContainer = "container:Dickpic.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F3ECFE502CA58A7100E72D41"
-            BuildableName = "Dickpic.app"
-            BlueprintName = "Dickpic"
+            BuildableName = "iOS.app"
+            BlueprintName = "iOS"
             ReferencedContainer = "container:Dickpic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F3ECFE502CA58A7100E72D41"
-            BuildableName = "Dickpic.app"
-            BlueprintName = "Dickpic"
+            BuildableName = "iOS.app"
+            BlueprintName = "iOS"
             ReferencedContainer = "container:Dickpic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
